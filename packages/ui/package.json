@@ -10,5 +10,8 @@
     "config": "*",
     "tsconfig": "*",
     "typescript": "4.5.3"
+  },
+  "dependencies": {
+    "clsx": "1.1.1"
   }
 }
