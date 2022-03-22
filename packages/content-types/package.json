@@ -1,0 +1,19 @@
+{
+  "name": "content-types",
+  "version": "0.0.0",
+  "main": "./index.ts",
+  "types": "./index.ts",
+  "license": "MIT",
+  "scripts": {
+    "generate": "rm -rf generated/* && ts-node utils/generate.ts"
+  },
+  "devDependencies": {
+    "ansi-colors": "4.1.1",
+    "axios": "0.26.0",
+    "config": "*",
+    "dotenv": "16.0.0",
+    "tsconfig": "*",
+    "ts-node": "10.7.0",
+    "typescript": "4.6.2"
+  }
+}
