@@ -12,6 +12,7 @@
     "packages/*"
   ],
   "scripts": {
+    "prepare": "husky install",
     "gen": "HYGEN_TMPLS=templates hygen",
     "build": "turbo run build",
     "dev": "turbo run dev --parallel",
@@ -19,6 +20,9 @@
     "format": "prettier --write '**/*.{ts,tsx,md}'"
   },
   "devDependencies": {
+    "@commitlint/cli": "16.2.3",
+    "@commitlint/config-conventional": "16.2.1",
+    "husky": "7.0.4",
     "hygen": "6.2.0",
     "prettier": "2.6.2",
     "prettier-plugin-tailwindcss": "0.1.8",
