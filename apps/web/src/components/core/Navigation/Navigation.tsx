@@ -49,8 +49,8 @@ export function Navigation(props: NavigationProps) {
         )}
       >
         <Link href="/" passHref>
-          <a className="rounded-full p-2 transition md:-ml-3 md:p-3">
-            <Logo className="h-8 w-8 text-brand-dark dark:text-brand-light md:h-10 md:w-10" />
+          <a className="rounded-full p-2 transition lg:-ml-3 lg:p-3">
+            <Logo className="h-6 w-6 text-brand-dark dark:text-brand-light lg:h-8 lg:w-8" />
           </a>
         </Link>
         <div className="hidden items-center gap-8 self-center md:flex">
