@@ -3,9 +3,11 @@
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"],
   "compilerOptions": {
-    "baseUrl": "./",
+    "types": ["react/next", "react-dom/next"],
+    "baseUrl": ".",
     "paths": {
-      "~/components/*": ["./components/*"]
+      "@/*": ["../../packages/*"],
+      "~/*": ["./src/*"]
     }
   }
 }
