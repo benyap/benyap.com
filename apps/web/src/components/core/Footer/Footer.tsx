@@ -32,7 +32,7 @@ export function Footer(props: FooterProps) {
     <footer
       className={clsx(
         className,
-        "grid w-full justify-center gap-1 py-16 text-gray-400 dark:text-gray-500"
+        "grid w-full place-items-center justify-center gap-2 py-16 text-gray-400 dark:text-gray-500"
       )}
     >
       {links && (
@@ -63,9 +63,7 @@ export function Footer(props: FooterProps) {
           })}
         </ul>
       )}
-      <p className="text-base font-medium">
-        Copyright &copy; {new Date().getFullYear()} Ben Yap
-      </p>
+      <p className="font-medium">Copyright &copy; {new Date().getFullYear()} Ben Yap</p>
       <FooterEmailDialog
         open={showEmailDialog}
         onClose={emailDialog.close}

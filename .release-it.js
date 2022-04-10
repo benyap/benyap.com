@@ -16,6 +16,10 @@ module.exports = {
     "after:bump": ["yarn build"],
   },
   plugins: {
+    "@release-it/bumper": {
+      in: "package.json",
+      out: "apps/web/src/version.json",
+    },
     "@release-it/conventional-changelog": {
       infile: "CHANGELOG.md",
       preset: {
