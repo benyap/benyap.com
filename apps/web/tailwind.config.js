@@ -1,7 +1,10 @@
 const defaultTheme = require("tailwindcss/defaultTheme");
+const plugin = require("tailwindcss/plugin");
+const tailwindRadix = require("tailwindcss-radix");
 
 module.exports = {
-  content: ["./pages/**/*.tsx", "./components/**/*.tsx", "../../packages/ui/components/**/*.tsx"],
+  content: ["./src/**/*.tsx", "../../packages/ui/**/*.tsx"],
+  darkMode: "class",
   theme: {
     extend: {
       fontFamily: {
@@ -17,6 +20,7 @@ module.exports = {
         },
         github: {
           black: "#24292F",
+          white: "#F0F6FC",
         },
         linkedin: {
           blue: "#0A66C2",
@@ -24,5 +28,19 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    // Add utility for disabling transitions during a theme change
+    plugin(({ addUtilities }) => {
+      addUtilities({
+        ".disable-transitions, .disable-transitions *": {
+          transition: "none !important",
+        },
+      });
+    }),
+    // Add utilities for styling with Radix UI
+    tailwindRadix({
+      variantPrefix: "rdx",
+      skipAttributeNames: true,
+    }),
+  ],
 };

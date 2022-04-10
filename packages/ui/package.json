@@ -1,17 +1,19 @@
 {
   "name": "ui",
   "version": "0.0.0",
-  "main": "./index.tsx",
-  "types": "./index.tsx",
+  "main": "./index.ts",
+  "types": "./index.ts",
   "license": "MIT",
   "devDependencies": {
-    "@types/react": "17.0.39",
-    "@types/react-dom": "17.0.13",
+    "@types/loadable__component": "5.13.4",
+    "@types/react": "17.0.42",
+    "@types/react-dom": "17.0.14",
     "config": "*",
     "tsconfig": "*",
-    "typescript": "4.5.3"
+    "typescript": "4.6.2"
   },
   "dependencies": {
+    "@loadable/component": "5.15.2",
     "clsx": "1.1.1"
   }
 }
