@@ -2,7 +2,7 @@ import { forwardRef, MouseEventHandler } from "react";
 import Link from "next/link";
 import clsx from "clsx";
 
-import { IconElement } from "~/icons";
+import { IconElement } from "../../icons";
 
 export interface CTAButtonProps {
   className?: string;
@@ -13,12 +13,15 @@ export interface CTAButtonProps {
   endIcon?: IconElement;
 }
 
-export const CTAButton = forwardRef<HTMLButtonElement, CTAButtonProps>((props, ref) => {
+export const CTAButton = forwardRef<
+  HTMLAnchorElement | HTMLButtonElement,
+  CTAButtonProps
+>((props, ref) => {
   const { className, children, href, disabled, onClick, endIcon: EndIcon } = props;
   const Component = href ? "a" : "button";
   const link = (
     <Component
-      ref={ref}
+      ref={ref as any} // FIXME: type error
       href={href}
       onClick={onClick}
       disabled={disabled}

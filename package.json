@@ -20,13 +20,15 @@
     "format": "prettier --write '**/*.{ts,tsx,md}'",
     "lint": "turbo run lint",
     "dev": "turbo run dev --parallel",
-    "build": "turbo run build"
+    "build": "turbo run build",
+    "release": "env-cmd release-it"
   },
   "devDependencies": {
     "@commitlint/cli": "16.2.3",
     "@commitlint/config-conventional": "16.2.1",
     "@release-it/conventional-changelog": "4.2.2",
     "cross-env": "7.0.3",
+    "env-cmd": "10.1.0",
     "husky": "7.0.4",
     "hygen": "6.2.0",
     "prettier": "2.6.2",

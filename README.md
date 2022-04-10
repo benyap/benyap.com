@@ -13,8 +13,7 @@ My personal portfolio website. Built with [Next.js](https://nextjs.org),
 To build all apps and packages, run the following command:
 
 ```
-cd my-turborepo
-yarn run build
+yarn build
 ```
 
 ### Develop
@@ -22,8 +21,7 @@ yarn run build
 To develop all apps and packages, run the following command:
 
 ```
-cd my-turborepo
-yarn run dev
+yarn dev
 ```
 
 ---
