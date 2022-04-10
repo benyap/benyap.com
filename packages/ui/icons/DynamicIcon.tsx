@@ -13,7 +13,6 @@ import {
   BoltIcon,
   BulbIcon,
   WorldIcon,
-  ChevronRighIcon,
   ChevronRightIcon,
   MenuIcon,
   XIcon,
@@ -38,7 +37,6 @@ const LoadableIcons: Record<string, LoadableComponent<IconProps> | undefined> = 
   Bolt: BoltIcon,
   Bulb: BulbIcon,
   World: WorldIcon,
-  ChevronRigh: ChevronRighIcon,
   ChevronRight: ChevronRightIcon,
   Menu: MenuIcon,
   X: XIcon,
@@ -58,6 +56,6 @@ export interface IconComponentProps extends IconProps {
 
 export function DynamicIcon(props: IconComponentProps) {
   const { icon, ...iconProps } = props;
-  const IconComponent = LoadableIcons[icon] ?? FallbackIcon;
+  const IconComponent: any = LoadableIcons[icon] ?? FallbackIcon; // FIXME: type error
   return <IconComponent {...iconProps} />;
 }
