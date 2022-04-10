@@ -34,7 +34,7 @@ export function ResumeProjectItem(props: ResumeProjectItemProps) {
   } = props;
   return (
     <div className={clsx(className, "flex flex-col gap-2")}>
-      <div className="flex items-end gap-4">
+      <div className="flex items-center gap-4 md:items-end">
         {icon && (
           <DynamicIcon
             className={clsx(
@@ -54,20 +54,20 @@ export function ResumeProjectItem(props: ResumeProjectItemProps) {
             />
           </div>
         )}
-        <div className="flex w-full items-center justify-between">
+        <div className="flex w-full flex-col items-start justify-between md:flex-row md:items-center">
           <div className="flex flex-col">
             <p className="text-sm font-medium uppercase tracking-wide text-gray-500 dark:text-gray-400">
               {subtitle}
             </p>
-            <h3 className="text-lg font-medium">{title}</h3>
+            <h3 className="text-lg font-bold">{title}</h3>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex flex-row-reverse items-center gap-2 md:flex-row">
             {link && (
               <IconButton className="print:rounded-none" href={link.url}>
                 <DynamicIcon className="h-6 w-6 print:hidden" icon={link.icon} />
               </IconButton>
             )}
-            <span className="font-bold">{date}</span>
+            <span className="font-medium md:text-sm">{date}</span>
           </div>
         </div>
       </div>

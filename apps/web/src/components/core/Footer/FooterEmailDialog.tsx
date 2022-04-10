@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { Transition } from "@headlessui/react";
 import * as Dialog from "@radix-ui/react-dialog";
+import { useScrollLock } from "@mantine/hooks";
 
-import { CopyIcon, IconButton, MailSendIcon } from "@/ui";
+import { CopyIcon, IconButton, MailSendIcon, XIcon } from "@/ui";
 
 export interface FooterEmailDialogProps {
   open?: boolean;
@@ -15,12 +16,17 @@ export function FooterEmailDialog(props: FooterEmailDialogProps) {
 
   const email = emailUrl?.split(":")[1]?.split("?")[0];
   const [copied, setCopied] = useState(false);
+  const [, setScrollLock] = useScrollLock();
 
   function handleCopy() {
     if (!email) return;
     navigator.clipboard.writeText(email);
     setCopied(true);
   }
+
+  useEffect(() => {
+    setScrollLock(Boolean(open));
+  }, [setScrollLock, open]);
 
   useEffect(() => {
     if (!copied) return;
@@ -41,13 +47,13 @@ export function FooterEmailDialog(props: FooterEmailDialogProps) {
             enterFrom="opacity-0"
             enterTo="opacity-100"
             as="div"
-            className="fixed top-0 left-0 right-0 bottom-0 z-30 grid place-items-center bg-gray-900 bg-opacity-30"
+            className="fixed inset-0 z-30 grid place-items-center bg-gray-900 bg-opacity-30"
           >
             <Dialog.Content
               onEscapeKeyDown={onClose}
               onPointerDownOutside={onClose}
               onInteractOutside={onClose}
-              className="max-w-xl border border-gray-100 bg-brand-light px-10 py-8 shadow-lg dark:border-gray-800 dark:bg-brand-dark md:px-12 md:py-10"
+              className="relative max-h-[100vh] max-w-xl overflow-auto border border-gray-100 bg-brand-light px-10 py-8 shadow-lg dark:border-gray-800 dark:bg-brand-dark md:px-12 md:py-10"
             >
               <p>
                 If you would like to get in touch, feel free to send me an email!
@@ -111,6 +117,12 @@ export function FooterEmailDialog(props: FooterEmailDialogProps) {
                   </li>
                 ))}
               </ul>
+              <IconButton
+                className="absolute right-2 top-2 md:right-3 md:top-3"
+                onClick={onClose}
+              >
+                <XIcon className="h-6 w-6" />
+              </IconButton>
             </Dialog.Content>
           </Transition>
         </div>
