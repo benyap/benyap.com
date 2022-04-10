@@ -26,6 +26,7 @@
   "devDependencies": {
     "@commitlint/cli": "16.2.3",
     "@commitlint/config-conventional": "16.2.1",
+    "@release-it/bumper": "3.0.1",
     "@release-it/conventional-changelog": "4.2.2",
     "cross-env": "7.0.3",
     "env-cmd": "10.1.0",
