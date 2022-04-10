@@ -10,7 +10,8 @@ export class NodeEnv {}
  */
 export class PublicEnv {
   static get TZ(): string {
-    return process.env.NEXT_PUBLIC_TZ || "Australia/Melbourne";
+    // See https://stackoverflow.com/a/34602679
+    return Intl.DateTimeFormat().resolvedOptions().timeZone || "Australia/Melbourne";
   }
 
   static get FIREBASE_CONFIG(): FirebaseOptions {
