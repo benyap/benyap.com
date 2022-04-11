@@ -29,8 +29,7 @@ const settings = [
 function updateTheme() {
   document.documentElement.classList.add("disable-transitions");
   if (
-    (THEME_MODE_KEY in localStorage &&
-      localStorage[THEME_MODE_KEY] === "dark") ||
+    (THEME_MODE_KEY in localStorage && localStorage[THEME_MODE_KEY] === "dark") ||
     window.matchMedia("(prefers-color-scheme: dark)").matches
   ) {
     document.documentElement.classList.add("dark");
@@ -90,8 +89,7 @@ function useTheme() {
     window.addEventListener("storage", storageHandler);
 
     return () => {
-      if (query.removeEventListener)
-        query.removeEventListener("change", updateTheme);
+      if (query.removeEventListener) query.removeEventListener("change", updateTheme);
       else query.removeListener(updateTheme); // Support for legacy browsers
       window.removeEventListener("storage", storageHandler);
     };
@@ -144,7 +142,7 @@ export function ThemeToggle(props: ThemeToggleProps) {
           as="div"
           className={clsx(
             "flex flex-col border py-1 shadow-md",
-            "dark:bg-brand-dark-300 border-gray-200 bg-white dark:border-gray-600"
+            "border-gray-200 bg-white dark:border-gray-600 dark:bg-brand-dark-300"
           )}
         >
           {settings.map(({ label, value, icon: Icon }) => (
@@ -165,8 +163,7 @@ export function ThemeToggle(props: ThemeToggleProps) {
                 />
                 <span
                   className={clsx("text-sm font-medium", {
-                    "font-medium text-gray-600 dark:text-gray-200":
-                      theme !== value,
+                    "font-medium text-gray-600 dark:text-gray-200": theme !== value,
                     "font-bold text-sky-600 dark:text-sky-500": theme === value,
                   })}
                 >
