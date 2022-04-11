@@ -2,11 +2,11 @@ import clsx from "clsx";
 import { useEffect, useRef, useState } from "react";
 import { Transition } from "@headlessui/react";
 import * as Dropdown from "@radix-ui/react-dropdown-menu";
+import { useIsomorphicEffect } from "@mantine/hooks";
 
 import { LaptopIcon, MoonIcon, SunIcon } from "@/ui";
 
 import { THEME_MODE_KEY } from "~/config/constants";
-import { useIsomorphicLayoutEffect } from "~/hooks/isomorphic";
 
 const settings = [
   {
@@ -29,7 +29,8 @@ const settings = [
 function updateTheme() {
   document.documentElement.classList.add("disable-transitions");
   if (
-    (THEME_MODE_KEY in localStorage && localStorage[THEME_MODE_KEY] === "dark") ||
+    (THEME_MODE_KEY in localStorage &&
+      localStorage[THEME_MODE_KEY] === "dark") ||
     window.matchMedia("(prefers-color-scheme: dark)").matches
   ) {
     document.documentElement.classList.add("dark");
@@ -59,12 +60,12 @@ function useTheme() {
   const [theme, setTheme] = useState<"light" | "dark" | "system">("system");
   const initial = useRef(true);
 
-  useIsomorphicLayoutEffect(() => {
+  useIsomorphicEffect(() => {
     const theme = localStorage[THEME_MODE_KEY];
     if (theme === "light" || theme === "dark") setTheme(theme);
   }, []);
 
-  useIsomorphicLayoutEffect(() => {
+  useIsomorphicEffect(() => {
     switch (theme) {
       case "system":
         localStorage.removeItem(THEME_MODE_KEY);
@@ -89,7 +90,8 @@ function useTheme() {
     window.addEventListener("storage", storageHandler);
 
     return () => {
-      if (query.removeEventListener) query.removeEventListener("change", updateTheme);
+      if (query.removeEventListener)
+        query.removeEventListener("change", updateTheme);
       else query.removeListener(updateTheme); // Support for legacy browsers
       window.removeEventListener("storage", storageHandler);
     };
@@ -142,7 +144,7 @@ export function ThemeToggle(props: ThemeToggleProps) {
           as="div"
           className={clsx(
             "flex flex-col border py-1 shadow-md",
-            "border-gray-200 bg-white dark:border-gray-600 dark:bg-brand-dark-300"
+            "dark:bg-brand-dark-300 border-gray-200 bg-white dark:border-gray-600"
           )}
         >
           {settings.map(({ label, value, icon: Icon }) => (
@@ -163,7 +165,8 @@ export function ThemeToggle(props: ThemeToggleProps) {
                 />
                 <span
                   className={clsx("text-sm font-medium", {
-                    "font-medium text-gray-600 dark:text-gray-200": theme !== value,
+                    "font-medium text-gray-600 dark:text-gray-200":
+                      theme !== value,
                     "font-bold text-sky-600 dark:text-sky-500": theme === value,
                   })}
                 >
