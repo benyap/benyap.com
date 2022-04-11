@@ -15,6 +15,6 @@ export class PublicEnv {
   }
 
   static get FIREBASE_CONFIG(): FirebaseOptions {
-    return JSON.parse(process.env.NEXT_PUBLIC_FIREBASE_CONFIG || "{}");
+    return JSON.parse(process.env.NEXT_PUBLIC_FIREBASE_CONFIG || "null");
   }
 }
