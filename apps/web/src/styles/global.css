@@ -1,0 +1,18 @@
+@import url("https://rsms.me/inter/inter.css");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+button,
+a,
+[role="menuitem"] {
+  @apply outline-4 outline-blue-300 focus-visible:outline dark:outline-sky-700;
+}
+
+@media print {
+  a:after {
+    content: " (" attr(href) ") ";
+    @apply font-medium text-sky-700;
+  }
+}
