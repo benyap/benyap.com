@@ -14,11 +14,15 @@ export function useFirebase(): FirebaseApp | null {
 
   useEffect(() => {
     let app = getApps()[0];
-    if (!app) {
-      app = initializeApp(PublicEnv.FIREBASE_CONFIG);
-      Logger.success("Initialized Firebase App:", app.options.projectId);
+    if (app) setInitialized(true);
+    else {
+      const config = PublicEnv.FIREBASE_CONFIG;
+      if (config) {
+        app = initializeApp(PublicEnv.FIREBASE_CONFIG);
+        setInitialized(true);
+        Logger.success("Initialized Firebase App:", app.options.projectId);
+      }
     }
-    setInitialized(true);
   }, [setInitialized]);
 
   return initialized ? getApp() : null;
