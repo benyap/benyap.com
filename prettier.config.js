@@ -7,4 +7,5 @@ module.exports = {
   tailwindConfig: "./apps/web/tailwind.config.js",
   // Formatting options
   printWidth: 88,
+  proseWrap: "always",
 };

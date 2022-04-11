@@ -7,12 +7,13 @@ module.exports = {
     publish: false,
   },
   git: {
+    requireBranch: "develop",
     tag: true,
     commit: true,
     commitMessage: "chore(release): release ${version}",
   },
   hooks: {
-    "before:init": ["yarn lint"],
+    "after:init": ["yarn format", "yarn lint"],
     "after:bump": ["yarn build"],
   },
   plugins: {
