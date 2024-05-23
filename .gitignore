@@ -1,0 +1,15 @@
+# dependencies
+node_modules
+
+# debug
+*.log
+
+# development
+tsconfig.tsbuildinfo
+build
+.turbo
+.cache
+
+# env files
+.env
+.env.local

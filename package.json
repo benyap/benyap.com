@@ -1,0 +1,21 @@
+{
+  "name": "benyap.com",
+  "version": "0.0.0",
+  "private": true,
+  "author": "Ben Yap <contact@benyap.com>",
+  "repository": "https://github.com/benyap/benyap.com",
+  "engines": {
+    "node": "20"
+  },
+  "packageManager": "pnpm@9.1.2",
+  "scripts": {
+    "prepare": "node scripts/setup.mjs"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "19.3.0",
+    "@commitlint/config-conventional": "19.2.2",
+    "husky": "9.0.11",
+    "prettier": "3.2.5",
+    "turbo": "1.13.3"
+  }
+}
