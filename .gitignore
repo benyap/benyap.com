@@ -13,3 +13,7 @@ build
 # env files
 .env
 .env.local
+
+# next.js
+.next
+next-env.d.ts

@@ -7,9 +7,15 @@
   "engines": {
     "node": "20"
   },
-  "packageManager": "pnpm@9.1.2",
+  "packageManager": "pnpm@9.1.4",
   "scripts": {
-    "prepare": "node scripts/setup.mjs"
+    "prepare": "node scripts/setup.mjs",
+    "lint": "turbo run lint",
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "dev:admin": "turbo run dev --filter=admin...",
+    "dev:portal": "turbo run dev --filter=portal...",
+    "dev:web": "turbo run dev --filter=web..."
   },
   "devDependencies": {
     "@commitlint/cli": "19.3.0",

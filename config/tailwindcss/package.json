@@ -1,0 +1,14 @@
+{
+  "name": "@config/tailwindcss",
+  "version": "0.0.0",
+  "files": [
+    "index.js"
+  ],
+  "devDependencies": {
+    "deepmerge": "4.3.1",
+    "tailwindcss": "3.4.3"
+  },
+  "peerDependencies": {
+    "tailwindcss": "3.4.3"
+  }
+}

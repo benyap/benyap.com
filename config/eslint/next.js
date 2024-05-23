@@ -1,14 +1,17 @@
 // @ts-check
 
-const eslint = require("@eslint/js");
 const tseslint = require("typescript-eslint");
+const defaultConfig = require("./default");
 
 module.exports = tseslint.config(
-  eslint.configs.recommended,
-  ...tseslint.configs.strict,
-  ...tseslint.configs.stylistic,
+  ...defaultConfig,
   {
-    ignores: [".turbo/*", "build/*", "eslint.config.js"],
+    ignores: [
+      ".next/*",
+      "next.config.js",
+      "postcss.config.js",
+      "tailwind.config.js",
+    ],
   },
   {
     rules: {
