@@ -1,0 +1,94 @@
+steps:
+  - name: gcr.io/cloud-builders/docker
+    script: |
+      #!/usr/bin/env bash
+      apt-get -y install jq
+
+      APP=$_APP
+      VERSION=$(jq -r '.version' package.json)
+      COMMIT_HASH=$SHORT_SHA
+
+      REGISTRY=$_IMAGE_REGISTRY
+      REPOSITORY=$_IMAGE_REPOSITORY
+      IMAGE_VERSION="$REGISTRY/$PROJECT_ID/$REPOSITORY/$APP:$VERSION"
+      IMAGE_LATEST="$REGISTRY/$PROJECT_ID/$REPOSITORY/$APP:latest"
+
+      BUILD_ARGS=()
+      BUILD_ARGS+=("--build-arg" "APP=$APP")
+      BUILD_ARGS+=("--build-arg" "VERSION=$VERSION")
+      BUILD_ARGS+=("--build-arg" "COMMIT_HASH=$COMMIT_HASH")
+      BUILD_ARGS+=("--build-arg" "BUILD_ID=$BUILD_ID")
+
+      ENV_FILE_DEV="./apps/$APP/.env.development"
+
+      # Read any additional variables in .env.development
+      if [ -f "$ENV_FILE_DEV" ]; then
+        while IFS= read -r line; do
+          # Skip empty lines
+          if [ -z "$line" ]; then
+              continue
+          fi
+
+          # Skip lines starting with "#"
+          if [[ "$line" == \#* ]]; then
+              continue
+          fi
+
+          # Split the string by = and take the first part
+          name=$(echo "$line" | cut -d'=' -f1)
+
+          # Read the value provided by the Cloud Build trigger
+          value="_$name"
+          build_arg="$name=${!value}"
+
+          # Add the build arg
+          BUILD_ARGS+=("--build-arg" "$build_arg")
+        done < "$ENV_FILE_DEV"
+      fi
+
+      echo
+      echo "Environment variables:"
+      for build_arg in "${BUILD_ARGS[@]}"
+      do
+        if [ "$build_arg" != "--build-arg" ]; then
+          echo "$build_arg"
+        fi
+      done
+      echo
+
+      docker build -t "$IMAGE_VERSION" "${BUILD_ARGS[@]}" .
+      docker push "$IMAGE_VERSION"
+      docker tag "$IMAGE_VERSION" "$IMAGE_LATEST"
+      docker push "$IMAGE_LATEST"
+
+  - name: google/cloud-sdk
+    script: |
+      #!/usr/bin/env bash
+      apt-get -y install jq
+
+      APP=$_APP
+      VERSION=$(jq -r '.version' package.json | sed 's/[.]/-/g')
+      # BUILD_ID is a UUIDv4, so we just grab the last segment
+      BUILD_ID_SHORT=$(echo $BUILD_ID | awk -F'-' '{print $5}')
+
+      REGION=$_GCP_REGION
+      REGISTRY=$_IMAGE_REGISTRY
+      REPOSITORY=$_IMAGE_REPOSITORY
+      REVISION_SUFFIX="$VERSION-$BUILD_ID_SHORT"
+      IMAGE="$REGISTRY/$PROJECT_ID/$REPOSITORY/$APP:latest"
+
+      gcloud config set project $PROJECT_ID
+      gcloud run deploy $APP\
+        --image=$IMAGE \
+        --timeout=60 \
+        --memory=1Gi \
+        --region=$REGION \
+        --revision-suffix=$REVISION_SUFFIX \
+        --ingress=all \
+        --allow-unauthenticated
+
+options:
+  automapSubstitutions: true
+  default_logs_bucket_behavior: REGIONAL_USER_OWNED_BUCKET
+
+timeout: 1200s

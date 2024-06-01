@@ -1,0 +1,21 @@
+# Ignore everything
+*
+
+# Allow these
+!apps/**
+!config/**
+!packages/**
+!scripts/**
+!.prettierignore
+!pnpm-lock.yaml
+!pnpm-workspace.yaml
+!package.json
+!prettier.config.js
+!turbo.json
+
+# Ignore these if the were in the allowed directories
+**/.env
+**/.turbo
+**/.next
+**/node_modules
+**/*.log
