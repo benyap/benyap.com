@@ -6,4 +6,9 @@ import merge from "deepmerge";
 export const mergeConfig = (config) =>
   merge(config, {
     theme: {},
+    plugins: [
+      require("@tailwindcss/forms"),
+      require("@tailwindcss/typography"),
+      require("@tailwindcss/container-queries"),
+    ],
   });

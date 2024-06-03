@@ -24,6 +24,7 @@
     "husky": "9.0.11",
     "hygen": "6.2.11",
     "prettier": "3.2.5",
+    "prettier-plugin-tailwindcss": "0.6.1",
     "turbo": "1.13.3"
   }
 }
