@@ -5,6 +5,7 @@ node_modules
 *.log
 
 # development
+firebase/emulator-data
 tsconfig.tsbuildinfo
 build
 .turbo

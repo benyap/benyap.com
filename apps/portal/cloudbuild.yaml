@@ -1,0 +1,117 @@
+steps:
+  - id: Version
+    name: node
+    entrypoint: "bash"
+    args:
+      - -c
+      - |
+        echo "VERSION=$(node -p 'require("./package.json").version')" >> /workspace/env_vars
+        echo "VERSION_SAFE=$(node -p 'require("./package.json").version.replace(/\./g, "-")')" >> /workspace/env_vars
+
+  - id: Build
+    name: gcr.io/cloud-builders/docker
+    script: |
+      #!/usr/bin/env bash
+      source /workspace/env_vars
+
+      APP=$_APP
+      GCP_PROJECT=$_GCP_PROJECT
+      REGISTRY=$_IMAGE_REGISTRY
+      REPOSITORY=$_IMAGE_REPOSITORY
+
+      IMAGE_VERSION="$REGISTRY/$PROJECT_ID/$REPOSITORY/$APP:$VERSION"
+      IMAGE_LATEST="$REGISTRY/$PROJECT_ID/$REPOSITORY/$APP:latest"
+
+      BUILD_ARGS=()
+      BUILD_ARGS+=("--build-arg" "APP=$APP")
+      BUILD_ARGS+=("--build-arg" "VERSION=$VERSION")
+      BUILD_ARGS+=("--build-arg" "COMMIT_HASH=$SHORT_SHA")
+      BUILD_ARGS+=("--build-arg" "BUILD_ID=$BUILD_ID")
+      BUILD_ARGS+=("--build-arg" "GCP_PROJECT=$GCP_PROJECT")
+
+      ENV_FILE_DEV="./apps/$APP/.env.development"
+
+      # Read any additional variables in .env.development
+      if [ -f "$ENV_FILE_DEV" ]; then
+        while IFS= read -r line; do
+          # Skip empty lines
+          if [ -z "$line" ]; then
+            continue
+          fi
+
+          # Skip lines starting with "#"
+          if [[ "$line" == \#* ]]; then
+            continue
+          fi
+
+          # Split the string by = and take the first part
+          name=$(echo "$line" | cut -d'=' -f1)
+
+          # Read the value provided by the Cloud Build trigger
+          value="_$name"
+          build_arg="$name=${!value}"
+
+          # Add the build arg
+          BUILD_ARGS+=("--build-arg" "$build_arg")
+        done < "$ENV_FILE_DEV"
+      fi
+
+      echo
+      echo "Environment variables:"
+      for build_arg in "${BUILD_ARGS[@]}"
+      do
+        if [ "$build_arg" != "--build-arg" ]; then
+          echo "$build_arg"
+        fi
+      done
+      echo
+
+      docker build -t "$IMAGE_VERSION" -f apps/$APP/Dockerfile "${BUILD_ARGS[@]}" .
+      docker push "$IMAGE_VERSION"
+      docker tag "$IMAGE_VERSION" "$IMAGE_LATEST"
+      docker push "$IMAGE_LATEST"
+
+  - id: Deploy
+    name: google/cloud-sdk
+    script: |
+      #!/usr/bin/env bash
+      source /workspace/env_vars
+
+      APP=$_APP
+      GCP_PROJECT=$_GCP_PROJECT
+      REGISTRY=$_IMAGE_REGISTRY
+      REPOSITORY=$_IMAGE_REPOSITORY
+
+      REVISION_SUFFIX="$VERSION_SAFE-${BUILD_ID%%-*}"
+      IMAGE="$REGISTRY/$PROJECT_ID/$REPOSITORY/$APP:latest"
+      SERVICE_ACCOUNT="cloudrun-agent-$APP@$GCP_PROJECT.iam.gserviceaccount.com"
+
+      gcloud config set project $PROJECT_ID
+      gcloud run deploy $APP \
+        --image=$IMAGE \
+        --revision-suffix=$REVISION_SUFFIX \
+        --region=$_REGION \
+        --memory=$_MEMORY \
+        --timeout=$_TIMEOUT \
+        --concurrency=$_CONCURRENCY \
+        --max-instances=$_MAX_INSTANCES \
+        --service-account=$SERVICE_ACCOUNT \
+        --no-use-http2 \
+        --allow-unauthenticated \
+        --ingress=all
+
+options:
+  automapSubstitutions: true
+  default_logs_bucket_behavior: REGIONAL_USER_OWNED_BUCKET
+
+timeout: 1200s
+
+substitutions:
+  _REGION: asia-southeast1
+  _IMAGE_REGISTRY: australia-southeast1-docker.pkg.dev
+  _IMAGE_REPOSITORY: cloudrun-apps
+  _APP: portal
+  _MEMORY: 1Gi
+  _TIMEOUT: "60"
+  _CONCURRENCY: "100"
+  _MAX_INSTANCES: "5"

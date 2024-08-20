@@ -3,30 +3,42 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "dev": "rm -f .env && next dev -p 3001",
     "clean": "rm -rf .next .env",
     "lint": "eslint src",
-    "build": "./env.sh && next build",
-    "start": "next start"
+    "env": "./env.sh",
+    "build": "next build",
+    "start": "next start",
+    "dev": "rm -f .env && next dev -p 3001"
   },
   "dependencies": {
+    "@edge-csrf/nextjs": "2.2.0",
+    "@packages/auth": "workspace:*",
+    "@packages/secret": "workspace:*",
     "@packages/svgs": "workspace:*",
     "@packages/utils": "workspace:*",
+    "@packages/value": "workspace:*",
+    "clsx": "2.1.1",
+    "firebase": "10.13.0",
+    "firebase-admin": "12.3.1",
+    "luxon": "3.5.0",
     "next": "15.0.0-rc.0",
     "react": "19.0.0-rc-6d3110b4d9-20240531",
-    "react-dom": "19.0.0-rc-6d3110b4d9-20240531"
+    "react-dom": "19.0.0-rc-6d3110b4d9-20240531",
+    "zod": "3.23.8"
   },
   "devDependencies": {
     "@config/eslint": "workspace:*",
     "@config/tailwindcss": "workspace:*",
     "@config/tsconfig": "workspace:*",
-    "@types/node": "20.12.12",
-    "@types/react": "18.3.2",
+    "@firebase/functions": "workspace:*",
+    "@types/luxon": "3.4.2",
+    "@types/node": "22.4.0",
+    "@types/react": "18.3.3",
     "@types/react-dom": "18.3.0",
-    "autoprefixer": "10.4.19",
+    "autoprefixer": "10.4.20",
     "babel-plugin-react-compiler": "0.0.0-experimental-938cd9a-20240601",
-    "postcss": "8.4.38",
-    "tailwindcss": "3.4.3",
-    "typescript": "5.4.5"
+    "postcss": "8.4.41",
+    "tailwindcss": "3.4.10",
+    "typescript": "5.5.4"
   }
 }

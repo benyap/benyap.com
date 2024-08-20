@@ -12,7 +12,7 @@ module.exports = [
     name: "prefix",
     message:
       "Add `NEXT_PUBLIC_` prefix? (i.e. allow variable to be accessed in browser)",
-    choices: ["NEXT_PUBLIC_", ""],
+    choices: ["", "NEXT_PUBLIC_"],
     choiceMessage: (choice) => (choice.value === "NEXT_PUBLIC_" ? "Yes" : "No"),
   },
   {

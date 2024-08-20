@@ -1,0 +1,8 @@
+{
+  "name": "@firebase/firestore",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "sync": "firebase firestore:indexes -P dev > firestore.indexes.json"
+  }
+}

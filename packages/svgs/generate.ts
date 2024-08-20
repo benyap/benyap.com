@@ -7,6 +7,7 @@ import config from "./svgr.config";
 
 const ASSETS_PATH = "assets";
 const EXPORT_PATH = "build";
+const COMPONENT_SUFFIX = "SVG";
 
 function capitalise(word: string) {
   return word[0]?.toUpperCase() + word.slice(1);
@@ -20,11 +21,12 @@ async function main() {
   const components = await Promise.all(
     entries.map(async (entry) => {
       const segments = entry.replace(`${ASSETS_PATH}/`, "").split("/");
-      const componentName = segments
-        .filter((segment) => !/\(.+\)/.test(segment))
-        .map(capitalise)
-        .join("")
-        .replace(".svg", "");
+      const componentName =
+        segments
+          .filter((segment) => !/\(.+\)/.test(segment))
+          .map(capitalise)
+          .join("")
+          .replace(".svg", "") + COMPONENT_SUFFIX;
       const svg = await readFile(entry, "utf-8");
       const jsx = await transform(svg, config, { componentName });
       return { name: componentName, jsx };

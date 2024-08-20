@@ -1,0 +1,26 @@
+{
+  "name": "@firebase/functions",
+  "private": true,
+  "version": "0.0.0",
+  "main": "lib/index.js",
+  "engines": {
+    "node": "22"
+  },
+  "scripts": {
+    "dev": "pnpm clean && tsc-watch --onSuccess resolve-tspaths",
+    "clean": "rm -rf lib",
+    "lint": "eslint src",
+    "build": "npm run clean && tsc && resolve-tspaths"
+  },
+  "dependencies": {
+    "firebase-admin": "12.3.1",
+    "firebase-functions": "5.0.1"
+  },
+  "devDependencies": {
+    "@config/eslint": "workspace:*",
+    "@config/tsconfig": "workspace:*",
+    "resolve-tspaths": "0.8.19",
+    "tsc-watch": "6.2.0",
+    "typescript": "5.5.4"
+  }
+}

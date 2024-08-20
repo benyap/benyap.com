@@ -6,11 +6,11 @@
 # ASSUMPTION: environment variables defined in `.env.development`
 # are also used for a production build.
 
-VARIABLES=("APP" "VERSION" "BUILD_ID" "COMMIT_HASH")
+RESERVED_VARIABLES=("APP" "VERSION" "BUILD_ID" "COMMIT_HASH")
 
 is_reserved() {
   local string="$1"
-  for element in "${VARIABLES[@]}"; do
+  for element in "${RESERVED_VARIABLES[@]}"; do
     if [[ "$element" == "$string" ]]; then
       return 0 # match found
     fi
@@ -18,6 +18,7 @@ is_reserved() {
   return 1  # No match found
 }
 
+VARIABLES=("APP" "VERSION" "BUILD_ID" "COMMIT_HASH")
 ENV_FILE_DEV=".env.development"
 ENV_FILE=".env"
 

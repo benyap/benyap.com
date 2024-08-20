@@ -6,16 +6,22 @@ My personal websites.
 
 Ensure that you have the following software installed on your machine:
 
-- [Node.js](https://nodejs.org) 22.x
+- [Node.js](https://nodejs.org) 20.x
 - [pnpm](https://pnpm.io) 9.x
+- [Google Cloud CLI](https://cloud.google.com/sdk/docs/install-sdk)
 
 ### Pre-requisites
 
-1. Install dependencies with `pnpm install`
+- Install project dependencies with `pnpm install`.
 
-### Run the application
+### Run the full application stack locally
 
-TODO: Fill in this section.
+1. Start the application stack with `pnpm dev`
+2. Start the Firebase emulator in a separate terminal with `pnpm emulator start`
+
+Access the application at the following URLs:
+
+- Portal: [localhost:3001](http://localhost:3001)
 
 ## Project links
 

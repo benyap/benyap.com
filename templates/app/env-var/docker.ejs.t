@@ -1,5 +1,5 @@
 ---
-to: 'Dockerfile'
+to: 'apps/<%= app %>/Dockerfile'
 inject: true
 before: HYGEN INJECTION POINT
 skip_if: <%= prefix %><%= h.changeCase.constantCase(name) %>

@@ -1,0 +1,7 @@
+{
+  "projects": {
+    "default": "benyap-dev",
+    "dev": "benyap-dev",
+    "prod": "benyap-prod"
+  }
+}

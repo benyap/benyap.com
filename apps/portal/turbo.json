@@ -1,0 +1,22 @@
+{
+  "$schema": "https://turborepo.org/schema.json",
+  "extends": ["//"],
+  "tasks": {
+    "env": {
+      "env": [
+        "APP",
+        "VERSION",
+        "BUILD_ID",
+        "COMMIT_HASH",
+        "GCP_PROJECT",
+        "NEXT_PUBLIC_FIREBASE_CONFIG"
+      ],
+      "dependsOn": ["clean"],
+      "outputs": [".env"]
+    },
+    "build": {
+      "dependsOn": ["^lint", "^build", "lint", "env"],
+      "outputs": [".next/**"]
+    }
+  }
+}

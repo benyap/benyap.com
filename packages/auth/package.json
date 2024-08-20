@@ -1,0 +1,20 @@
+{
+  "name": "@packages/auth",
+  "version": "0.0.0",
+  "private": true,
+  "main": "src/index.ts",
+  "scripts": {
+    "lint": "eslint src"
+  },
+  "peerDependencies": {
+    "firebase-admin": "12.1.1",
+    "next": "15.0.0-rc.0"
+  },
+  "devDependencies": {
+    "@config/eslint": "workspace:*",
+    "@config/tsconfig": "workspace:*",
+    "@types/node": "22.4.0",
+    "firebase-admin": "12.3.1",
+    "next": "15.0.0-rc.0"
+  }
+}
