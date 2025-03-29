@@ -1,11 +1,8 @@
 /**
  * @type {import("prettier").Config}
+ * @see https://prettier.io/docs/en/options.html
  */
 module.exports = {
-  // https://github.com/tailwindlabs/prettier-plugin-tailwindcss
-  plugins: [require("prettier-plugin-tailwindcss")],
-  tailwindConfig: "./apps/web/tailwind.config.js",
-  // Formatting options
-  printWidth: 88,
+  plugins: ["prettier-plugin-tailwindcss"],
   proseWrap: "always",
 };

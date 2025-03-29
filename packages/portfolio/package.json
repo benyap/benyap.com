@@ -1,0 +1,40 @@
+{
+  "name": "portfolio",
+  "private": true,
+  "engines": {
+    "node": "22"
+  },
+  "packageManager": "pnpm@10.7.0",
+  "scripts": {
+    "dev": "PORT=3000 next dev --turbopack",
+    "dev:icons": "tsx assets/icons/generate.ts --watch",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "class-variance-authority": "0.7.1",
+    "clsx": "2.1.1",
+    "lucide-react": "0.485.0",
+    "next": "15.2.4",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "tailwind-merge": "3.0.2",
+    "tw-animate-css": "1.2.5",
+    "typed.js": "2.1.0"
+  },
+  "devDependencies": {
+    "@svgr/babel-plugin-transform-svg-component": "8.0.0",
+    "@svgr/core": "8.1.0",
+    "@svgr/plugin-jsx": "8.1.0",
+    "@svgr/plugin-svgo": "8.1.0",
+    "@tailwindcss/postcss": "4.0.17",
+    "@types/react": "19.0.12",
+    "chokidar": "4.0.3",
+    "fast-glob": "3.3.3",
+    "postcss": "8.5.3",
+    "tailwindcss": "4.0.17",
+    "tsx": "4.19.3",
+    "typescript": "5.8.2"
+  }
+}

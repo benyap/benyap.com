@@ -2,34 +2,44 @@ name: Release pull request
 
 on:
   release:
-    types: [published]
+    types: [released]
 
 jobs:
   create-pull-request:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
-          ref: main
           fetch-depth: 0
 
       - name: Get release version
-        run: echo "VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+        uses: actions/github-script@v7
+        id: version
+        with:
+          script: |
+            const release = context.ref.substring(10)
+            const releaseType = release.replace(/^(\d+\.)+\d+-?/, "").replace(/\.\d+$/, "")
+            core.setOutput("release", release)
+            core.setOutput("releaseType", releaseType || "latest")
 
-      - name: Create promotion branch
+      - name: Create release branch
         run: |
-          git checkout -B release/${{ env.VERSION }}
-          git push --set-upstream origin release/${{ env.VERSION }}
-          git fetch origin develop:develop
-          git reset --hard develop
+          git checkout -B release/${{ steps.version.outputs.release }}
+          git push --set-upstream origin release/${{ steps.version.outputs.release }}
 
       - name: Create pull request
-        uses: peter-evans/create-pull-request@v4
+        uses: devops-infra/action-pull-request@master
         with:
-          base: main
-          branch: release/${{ env.VERSION }}
-          title: Release ${{ env.VERSION }}
-          body: Merge this PR to release ${{ env.VERSION }} to production
-          labels: release
-          assignees: benyap
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          source_branch: release/${{ steps.version.outputs.release }}
+          target_branch: main
+          title: Release v${{ steps.version.outputs.release }}
+          label: release
+          body: |
+            Merge this PR to release ${{ steps.version.outputs.release }} to production.
+
+            **Commits**
+
+            <!-- Diff summary - START -->
+            <!-- Diff summary - END -->
