@@ -7,6 +7,9 @@
     "build": {},
     "dev": {
       "cache": false
+    },
+    "dev:icons": {
+      "cache": false
     }
   }
 }

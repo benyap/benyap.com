@@ -38,3 +38,7 @@ pnpm install
    | App       | Route                                          |
    | --------- | ---------------------------------------------- |
    | portfolio | [http://localhost:3000](http://localhost:3000) |
+
+---
+
+Copyright © 2025 [benyap](https://github.com/benyap).
