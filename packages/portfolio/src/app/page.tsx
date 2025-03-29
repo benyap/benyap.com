@@ -1,5 +1,15 @@
+import { Metadata } from "next";
+
 import { LogoIcon, GithubIcon } from "~/components/icons";
 import { Typed } from "~/components/core/Typed";
+
+export const metadata: Metadata = {
+  title: {
+    default: "benyap.com",
+    template: "%s - benyap.com",
+  },
+  description: "Ben Yap's online space.",
+};
 
 const GREETINGS = ["Hello!", "你好！", "こんにちは！", "Bonjour!"];
 
