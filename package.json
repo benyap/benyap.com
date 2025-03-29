@@ -8,19 +8,22 @@
   "packageManager": "pnpm@10.7.0",
   "scripts": {
     "postinstall": "node ./scripts/setup.mjs",
+    "emulator": "pnpm --filter emulator",
+    "dev": "node ./scripts/predev.mjs && turbo run dev dev:icons",
     "format": "prettier --write .",
     "lint": "turbo run lint",
-    "build": "turbo run build",
     "test": "turbo run test",
-    "emulator": "pnpm --filter emulator",
-    "dev": "node ./scripts/predev.mjs && turbo run dev dev:icons"
+    "build": "turbo run build",
+    "release": "release-it"
   },
   "devDependencies": {
     "@commitlint/cli": "19.8.0",
     "@commitlint/config-conventional": "19.8.0",
+    "@release-it/conventional-changelog": "10.0.0",
     "husky": "9.1.7",
     "prettier": "3.5.3",
     "prettier-plugin-tailwindcss": "0.6.11",
+    "release-it": "18.1.2",
     "turbo": "2.4.4"
   }
 }
