@@ -1,0 +1,14 @@
+{
+  "name": "emulator",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "clean": "rm -rf ../../*-debug.log",
+    "reset": "rm -rf data/*",
+    "prestart": "cd ../functions && pnpm build",
+    "start": "cd ../.. && firebase emulators:start --import firebase/emulator/data --export-on-exit --project demo-benyap"
+  },
+  "devDependencies": {
+    "firebase-tools": "14.0.1"
+  }
+}
