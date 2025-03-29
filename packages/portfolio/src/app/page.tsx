@@ -33,7 +33,8 @@ export default function Page() {
               &nbsp;
             </p>
             <p>
-              I'm <b>Ben</b> and I'm a human based in Melbourne, Australia.
+              I&apos;m <b>Ben</b> and I&apos;m a human based in Melbourne,
+              Australia.
             </p>
             <p>
               Welcome to my online space, where I can share a little bit of
