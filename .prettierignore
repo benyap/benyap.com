@@ -1,1 +1,9 @@
-CHANGELOG.md
+.next
+.turbo
+
+dist
+build
+
+/firebase/emulator/data
+/docs/CHANGELOG.md
+/pnpm-lock.yaml

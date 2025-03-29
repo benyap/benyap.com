@@ -1,36 +1,44 @@
 # benyap.com
 
-> ⚠️ This project is a work in progress.
+My personal website.
 
-My personal portfolio website. Built with [Next.js](https://nextjs.org),
-[Turborepo](https://turborepo.org), [Tailwind](https://tailwindcss.com) and
-[Radix UI](https://www.radix-ui.com).
+## Quick start
 
-## Local development
+### Prerequisites
 
-### Develop
+#### Software
 
-To develop all apps and packages, run `yarn dev`.
+Ensure that you have the following software on your system:
 
-To enable Firebase services for the `web` app, provide the stringifed Firebase config
-through the `NEXT_PUBLIC_FIREBASE_CONFIG` variable in the file `apps/web/.env.local`.
+- [Node.js](https://nodejs.org/en/) (v22.x)
+- [pnpm](https://pnpm.io/) (v10.x)
 
-### Build
+Clone this repository and install dependencies with `pnpm`.
 
-To build all apps and packages, run `yarn build`.
+```bash
+pnpm install
+```
 
-## Release workflow
+### Running the application locally
 
-Releases should be created using [release-it](https://github.com/release-it/release-it)
-on the `develop` branch.
+1. Start the Firebase emulator.
 
-1. Check out the `develop` branch
-2. Run `yarn release`
+   ```bash
+   pnpm emulator start
+   ```
 
-Once a release has been created on GitHub, a pull request will be automatically created
-to merge the release into `main`. Merging the pull request will trigger a deployment to
-production on Vercel.
+2. In a separate terminal, start the development server.
+
+   ```bash
+   pnpm dev
+   ```
+
+3. Access the apps on the following URL for local development:
+
+   | App       | Route                                          |
+   | --------- | ---------------------------------------------- |
+   | portfolio | [http://localhost:3000](http://localhost:3000) |
 
 ---
 
-Copyright © 2022 [benyap](https://github.com/benyap)
+Copyright © 2025 [benyap](https://github.com/benyap).
