@@ -15,7 +15,7 @@ export function Typed(props: TypedOptions) {
       ...rest,
     });
     return () => typed.destroy();
-  }, []);
+  }, [typeSpeed, backSpeed, rest]);
 
   return <span ref={ref}></span>;
 }

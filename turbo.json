@@ -4,7 +4,9 @@
   "tasks": {
     "lint": {},
     "test": {},
-    "build": {},
+    "build": {
+      "outputs": [".next/**", "!.next/cache/**"]
+    },
     "dev": {
       "cache": false
     },
