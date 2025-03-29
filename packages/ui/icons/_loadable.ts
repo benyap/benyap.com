@@ -1,0 +1,22 @@
+import loadable from "@loadable/component";
+
+export const EnvelopeIcon = loadable(() => import("./EnvelopeIcon"));
+export const GitHubIcon = loadable(() => import("./GitHubIcon"));
+export const LaptopIcon = loadable(() => import("./LaptopIcon"));
+export const LinkedInIcon = loadable(() => import("./LinkedInIcon"));
+export const MoonIcon = loadable(() => import("./MoonIcon"));
+export const SquareIcon = loadable(() => import("./SquareIcon"));
+export const SunIcon = loadable(() => import("./SunIcon"));
+export const BoltIcon = loadable(() => import("./BoltIcon"));
+export const BulbIcon = loadable(() => import("./BulbIcon"));
+export const WorldIcon = loadable(() => import("./WorldIcon"));
+export const ChevronRightIcon = loadable(() => import("./ChevronRightIcon"));
+export const MenuIcon = loadable(() => import("./MenuIcon"));
+export const XIcon = loadable(() => import("./XIcon"));
+export const DownloadIcon = loadable(() => import("./DownloadIcon"));
+export const MapIcon = loadable(() => import("./MapIcon"));
+export const WorkIcon = loadable(() => import("./WorkIcon"));
+export const AwardIcon = loadable(() => import("./AwardIcon"));
+export const ExperimentIcon = loadable(() => import("./ExperimentIcon"));
+export const CopyIcon = loadable(() => import("./CopyIcon"));
+export const MailSendIcon = loadable(() => import("./MailSendIcon"));

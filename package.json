@@ -2,6 +2,9 @@
   "name": "benyap.com",
   "version": "2.0.0",
   "private": true,
+  "author": "Ben Yap <contact@benyap.com>",
+  "repository": "https://github.com/benyap/benyap.com.git",
+  "license": "MIT",
   "engines": {
     "node": "22"
   },
