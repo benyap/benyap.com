@@ -1,5 +1,6 @@
 import clsx from "clsx";
 import { Outfit, Newsreader, Geist_Mono } from "next/font/google";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const outfit = Outfit({ subsets: ["latin"], variable: "--font-sans" });
 const newsreader = Newsreader({ subsets: ["latin"], variable: "--font-serif" });
@@ -17,7 +18,10 @@ export default function RootLayout({
       lang="en"
       className={clsx(outfit.variable, newsreader.variable, geistMono.variable)}
     >
-      <body>{children}</body>
+      <body>
+        {children}
+        <SpeedInsights />
+      </body>
     </html>
   );
 }
