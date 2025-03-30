@@ -1,13 +1,17 @@
 # next.js
 /.next/
 /out/
+next-env.d.ts
 
 # production
 /build
 
 # env files (can opt-in for committing if needed)
 .env*
+.env*.local
 
 # typescript
 *.tsbuildinfo
-next-env.d.ts
+
+# vercel
+.vercel
