@@ -1,5 +1,11 @@
 # Changelog
 
+## <small>2.0.3 (2025-03-30)</small>
+
+* chore: add firebase provider ([b6af188](https://github.com/benyap/benyap.com/commit/b6af188))
+* chore: add vercel speed insights ([75cb016](https://github.com/benyap/benyap.com/commit/75cb016))
+* chore: update turbo.json ([4476866](https://github.com/benyap/benyap.com/commit/4476866))
+
 ## <small>2.0.2 (2025-03-29)</small>
 
 * chore: add pre-commit and pre-lint scripts ([5600b6d](https://github.com/benyap/benyap.com/commit/5600b6d))
