@@ -1,0 +1,16 @@
+{
+  "name": "generate-icons",
+  "private": true,
+  "bin": {
+    "generate-icons": "generate-icons.ts"
+  },
+  "dependencies": {
+    "@svgr/babel-plugin-transform-svg-component": "8.0.0",
+    "@svgr/core": "8.1.0",
+    "@svgr/plugin-jsx": "8.1.0",
+    "@svgr/plugin-svgo": "8.1.0",
+    "chokidar": "4.0.3",
+    "fast-glob": "3.3.3",
+    "typescript": "5.8.2"
+  }
+}
