@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 
 import { DESCRIPTION, SITE_NAME } from "~/constants/metadata";
-import { VERCEL_PROJECT_PRODUCTION_URL } from "~/constants/vercel";
+import { VERCEL_PROJECT_PRODUCTION_DOMAIN } from "~/constants/vercel";
 
 import { LogoIcon, GithubIcon } from "~/components/icons";
 import { Typed } from "~/components/core/Typed";
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     title: SITE_NAME,
     siteName: SITE_NAME,
     description: DESCRIPTION,
-    url: VERCEL_PROJECT_PRODUCTION_URL,
+    url: `https://${VERCEL_PROJECT_PRODUCTION_DOMAIN}`,
   },
 };
 
