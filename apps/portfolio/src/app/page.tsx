@@ -9,6 +9,9 @@ export const metadata: Metadata = {
     template: "%s - benyap.com",
   },
   description: "Ben Yap's online space.",
+  openGraph: {
+    type: "website",
+  },
 };
 
 const GREETINGS = ["Hello!", "你好！", "こんにちは！", "Bonjour!"];
