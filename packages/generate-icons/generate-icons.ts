@@ -1,3 +1,5 @@
+#!/usr/bin/env tsx
+
 import { mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { transform } from "@svgr/core";
@@ -7,9 +9,28 @@ import { format } from "prettier";
 
 import config from "./svgr.config";
 
-const SVGS_PATH = "assets/icons";
-const OUTPUT_PATH = "src/components/icons";
-const COMPONENT_SUFFIX = "Icon";
+const [, , ...FLAGS] = process.argv;
+
+function findBooleanFlag(flag: string, defaultValue = false) {
+  if (FLAGS.includes(flag)) return true;
+  return defaultValue;
+}
+
+const WATCH = findBooleanFlag("--watch");
+
+function findStringFlag(flag: string, defaultValue: string) {
+  const match = FLAGS.find((value) => value.startsWith(flag));
+  if (match) {
+    const DELIMITER = "=";
+    const [, ...value] = match.split(DELIMITER);
+    return value.join(DELIMITER);
+  }
+  return defaultValue ?? null;
+}
+
+const SVGS_PATH = findStringFlag("--src", "assets/icons");
+const OUTPUT_PATH = findStringFlag("--out", "src/components/icons");
+const COMPONENT_SUFFIX = findStringFlag("--suffix", "Icon");
 
 function capitalise(word: string) {
   return word[0]?.toUpperCase() + word.slice(1);
@@ -41,10 +62,14 @@ function svgPathToOutput(svgPath: string) {
   };
 }
 
-async function transformSvg(options: { svgPath: string; componentName: string }) {
+async function transformSvg(options: {
+  svgPath: string;
+  componentName: string;
+}) {
   const { svgPath, componentName } = options;
   const svg = await readFile(svgPath, "utf-8");
-  const content = svg.length === 0 ? "" : await transform(svg, config, { componentName });
+  const content =
+    svg.length === 0 ? "" : await transform(svg, config, { componentName });
   return {
     content: await format(content, { parser: "babel-ts" }),
     filename: `${componentName}.tsx`,
@@ -52,7 +77,9 @@ async function transformSvg(options: { svgPath: string; componentName: string })
 }
 
 async function generateIndexFile(componentNames: string[]) {
-  const content = componentNames.map((name) => `export { ${name} } from "./${name}";`).join("\n");
+  const content = componentNames
+    .map((name) => `export { ${name} } from "./${name}";`)
+    .join("\n");
   return {
     content: await format(content, { parser: "babel-ts" }),
     filename: "index.ts",
@@ -95,7 +122,10 @@ async function removeUnrecognised() {
   const expectedOutputs = paths.map(svgPathToOutput);
 
   const unrecognisedOutputs = outputs.filter(
-    (path) => !expectedOutputs.find(({ componentName }) => path.endsWith(`${componentName}.tsx`)),
+    (path) =>
+      !expectedOutputs.find(({ componentName }) =>
+        path.endsWith(`${componentName}.tsx`),
+      ),
   );
 
   await Promise.all(unrecognisedOutputs.map(removeFromOutput));
@@ -140,8 +170,7 @@ transformAll()
     console.log();
   })
   .then(() => {
-    const [, , ...flags] = process.argv;
-    if (!flags.includes("--watch")) return;
+    if (!WATCH) return;
 
     console.log("👀 Watching for changes in", SVGS_PATH);
     console.log();

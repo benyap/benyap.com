@@ -1,6 +1,6 @@
 {
   "name": "benyap.com",
-  "version": "2.0.3",
+  "version": "2.1.0",
   "private": true,
   "author": "Ben Yap <contact@benyap.com>",
   "repository": "https://github.com/benyap/benyap.com.git",
@@ -22,6 +22,7 @@
   "devDependencies": {
     "@commitlint/cli": "19.8.0",
     "@commitlint/config-conventional": "19.8.0",
+    "@release-it/bumper": "7.0.2",
     "@release-it/conventional-changelog": "10.0.0",
     "husky": "9.1.7",
     "prettier": "3.5.3",

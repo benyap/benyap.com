@@ -13,6 +13,10 @@
     "publish": false
   },
   "plugins": {
+    "@release-it/bumper": {
+      "in": "package.json",
+      "out": ["apps/portfolio/src/constants/version.json"]
+    },
     "@release-it/conventional-changelog": {
       "infile": "CHANGELOG.md",
       "preset": {
