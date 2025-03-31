@@ -1,5 +1,16 @@
 # Changelog
 
+## 2.1.0 (2025-03-31)
+
+* chore: move icon generation into a utility package ([15bbb76](https://github.com/benyap/benyap.com/commit/15bbb76))
+* chore: move portfolio into `apps` directory ([2e90254](https://github.com/benyap/benyap.com/commit/2e90254))
+* chore: update release workflow ([bda317b](https://github.com/benyap/benyap.com/commit/bda317b))
+* chore(photos): add photos app ([a357d83](https://github.com/benyap/benyap.com/commit/a357d83))
+* chore(portfolio): fix lint warning ([053dedb](https://github.com/benyap/benyap.com/commit/053dedb))
+* fix(portfolio): fix OG url not being a fully qualified path ([0cf94f2](https://github.com/benyap/benyap.com/commit/0cf94f2))
+* feat(portfolio): add `/api/version` route ([69ea625](https://github.com/benyap/benyap.com/commit/69ea625))
+* feat(portfolio): add robots.txt and og metadata ([cc7236a](https://github.com/benyap/benyap.com/commit/cc7236a))
+
 ## <small>2.0.3 (2025-03-30)</small>
 
 * chore: add firebase provider ([b6af188](https://github.com/benyap/benyap.com/commit/b6af188))
