@@ -1,5 +1,5 @@
-import { version } from "~/constants/version.json";
+import version from "~/constants/version.json";
 
 export function GET() {
-  return Response.json({ version });
+  return Response.json({ version: version.version });
 }
