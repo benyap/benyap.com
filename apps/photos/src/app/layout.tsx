@@ -1,3 +1,5 @@
+import { FirebaseProvider } from "~/components/firebase/FirebaseProvider";
+
 import "./globals.css";
 
 export default function RootLayout({
@@ -7,7 +9,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <FirebaseProvider>{children}</FirebaseProvider>
+      </body>
     </html>
   );
 }
