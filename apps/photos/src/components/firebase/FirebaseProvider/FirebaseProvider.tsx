@@ -24,9 +24,15 @@ export function FirebaseProvider(props: { children?: React.ReactNode }) {
   );
 }
 
-export function useFirebase<T>(selector: (store: FirebaseStore) => T) {
+export function useFirebase(): FirebaseStore;
+
+export function useFirebase<T>(select: (store: FirebaseStore) => T): T;
+
+export function useFirebase<T>(
+  select: (store: FirebaseStore) => T = (store) => store as T,
+) {
   const context = useContext(FirebaseStoreContext);
   if (!context)
     throw new Error("useFirebase must be used within FirebaseProvider");
-  return useStore(context, selector);
+  return useStore(context, select);
 }

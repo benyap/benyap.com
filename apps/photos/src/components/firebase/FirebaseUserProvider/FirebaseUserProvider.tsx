@@ -41,8 +41,9 @@ export function FirebaseUserProvider(props: React.PropsWithChildren) {
   const auth = useFirebase(({ auth }) => auth);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      ref.current?.setState({ user, loading: false });
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      const token = (await user?.getIdTokenResult()) ?? null;
+      ref.current?.setState({ user, token, loading: false });
     });
     return unsubscribe;
   }, [auth]);
@@ -54,11 +55,15 @@ export function FirebaseUserProvider(props: React.PropsWithChildren) {
   );
 }
 
+export function useFirebaseUser(): FirebaseUserStore;
+
+export function useFirebaseUser<T>(select: (store: FirebaseUserStore) => T): T;
+
 export function useFirebaseUser<T>(
-  selector: (store: FirebaseUserStore) => T,
+  select: (store: FirebaseUserStore) => T = (store) => store as T,
 ): T {
   const context = useContext(FirebaseUserStoreContext);
   if (!context)
     throw new Error(`useFirebaseUser must be used within FirebaseUserProvider`);
-  return useStore(context, selector);
+  return useStore(context, select);
 }
