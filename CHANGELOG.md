@@ -1,5 +1,15 @@
 # Changelog
 
+## 2.2.0 (2025-04-02)
+
+* feat(photos): add auth flow ([90bef78](https://github.com/benyap/benyap.com/commit/90bef78))
+* feat(photos): add auth prototype ([2eab213](https://github.com/benyap/benyap.com/commit/2eab213))
+* feat(photos): add home page and site og metadata ([50aea32](https://github.com/benyap/benyap.com/commit/50aea32))
+* feat(portfolio): update site metadata ([c1940fa](https://github.com/benyap/benyap.com/commit/c1940fa))
+* chore: update dependencies ([225faeb](https://github.com/benyap/benyap.com/commit/225faeb))
+* chore(photos): set up initial schemas ([98b2b5a](https://github.com/benyap/benyap.com/commit/98b2b5a))
+* chore(photos): use custom service account for invoking auth functions ([882e9c6](https://github.com/benyap/benyap.com/commit/882e9c6))
+
 ## 2.1.0 (2025-03-31)
 
 * chore: move icon generation into a utility package ([15bbb76](https://github.com/benyap/benyap.com/commit/15bbb76))
