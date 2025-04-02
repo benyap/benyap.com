@@ -1,5 +1,3 @@
-import { SITE_NAME } from "~/constants/metadata";
-
 const SLATE_700_HEX = "#314158";
 const SKY_600_HEX = "#0084d1";
 
@@ -47,7 +45,7 @@ export function OGImage() {
             color: SKY_600_HEX,
           }}
         >
-          {SITE_NAME}
+          benyap.com
         </p>
       </div>
     </div>
