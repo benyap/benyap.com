@@ -1,8 +1,14 @@
+import { Metadata } from "next";
+
 import { AppHeader } from "~/components/admin/AppHeader";
 import { AppSidebar } from "~/components/admin/AppSidebar";
 import { RequireSignIn } from "~/components/auth/RequireSignIn/RequireSignIn";
 import { FirebaseUserProvider } from "~/components/firebase/FirebaseUserProvider";
 import { SidebarProvider } from "~/components/ui/sidebar";
+
+export const metadata: Metadata = {
+  title: "Admin",
+};
 
 export default function Layout(props: React.PropsWithChildren) {
   const { children } = props;
