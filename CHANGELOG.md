@@ -1,5 +1,10 @@
 # Changelog
 
+## <small>2.2.2 (2025-04-02)</small>
+
+* chore(photos): add fonts ([b20eec9](https://github.com/benyap/benyap.com/commit/b20eec9))
+* chore(portfolio): sync changes with firebase provider ([406afee](https://github.com/benyap/benyap.com/commit/406afee))
+
 ## <small>2.2.1 (2025-04-02)</small>
 
 * chore(portfolio): update OG image text ([32939cd](https://github.com/benyap/benyap.com/commit/32939cd))
