@@ -6,8 +6,9 @@
     "tagAnnotation": "Release v${version}"
   },
   "github": {
+    "releaseName": "v${version}",
     "release": true,
-    "releaseName": "v${version}"
+    "web": true
   },
   "npm": {
     "publish": false
