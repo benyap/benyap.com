@@ -1,13 +1,5 @@
-import * as logger from "firebase-functions/logger";
-import { onRequest } from "firebase-functions/v2/https";
+import { initializeApp } from "firebase-admin/app";
 
-// Start writing functions
-// https://firebase.google.com/docs/functions/typescript
+initializeApp();
 
-export const helloWorld = onRequest(
-  { region: "australia-southeast1" },
-  (request, response) => {
-    logger.info("Hello logs!", { structuredData: true });
-    response.send("Hello from Firebase!");
-  },
-);
+export * as auth from "./auth";

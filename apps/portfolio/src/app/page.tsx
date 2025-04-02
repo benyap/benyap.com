@@ -1,25 +1,5 @@
-import { Metadata } from "next";
-
-import { DESCRIPTION, SITE_NAME } from "~/constants/metadata";
-import { VERCEL_PROJECT_PRODUCTION_DOMAIN } from "~/constants/vercel";
-
 import { LogoIcon, GithubIcon } from "~/components/icons";
 import { Typed } from "~/components/core/Typed";
-
-export const metadata: Metadata = {
-  title: {
-    default: SITE_NAME,
-    template: `%s - ${SITE_NAME}`,
-  },
-  description: DESCRIPTION,
-  openGraph: {
-    type: "website",
-    title: SITE_NAME,
-    siteName: SITE_NAME,
-    description: DESCRIPTION,
-    url: `https://${VERCEL_PROJECT_PRODUCTION_DOMAIN}`,
-  },
-};
 
 const GREETINGS = ["Hello!", "你好！", "こんにちは！", "Bonjour!"];
 
@@ -30,7 +10,7 @@ export default function Page() {
         <main className="max-w-2xl space-y-6 sm:space-y-8">
           <LogoIcon className="size-16 fill-slate-700" />
           <h1 className="text-4xl font-bold text-sky-600 sm:text-6xl">
-            {SITE_NAME}
+            benyap.com
           </h1>
           <div className="space-y-4 text-xl sm:text-2xl">
             <p>
