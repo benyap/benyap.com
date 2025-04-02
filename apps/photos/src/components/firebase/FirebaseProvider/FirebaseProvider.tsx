@@ -1,48 +1,32 @@
 "use client";
 
-import { createContext, useContext, useEffect, useMemo, useState } from "react";
-import { initializeApp, FirebaseApp } from "firebase/app";
+import { createContext, useContext, useRef } from "react";
+import { useStore } from "zustand";
+
 import {
-  Analytics,
-  isSupported,
-  initializeAnalytics,
-} from "firebase/analytics";
+  createFirebaseStore,
+  FirebaseStore,
+  FirebaseStoreApi,
+} from "~/stores/firebase";
 
-const FIREBASE_CONFIG = process.env["NEXT_PUBLIC_FIREBASE_CONFIG"];
-
-const FirebaseContext = createContext<{
-  app: FirebaseApp;
-  analytics: Analytics | undefined;
-} | null>(null);
-
-export function useFirebase() {
-  const context = useContext(FirebaseContext);
-  if (!context) throw new Error("Firebase is not available");
-  return context;
-}
+const FirebaseStoreContext = createContext<FirebaseStoreApi | null>(null);
 
 export function FirebaseProvider(props: { children?: React.ReactNode }) {
   const { children } = props;
 
-  if (!FIREBASE_CONFIG) throw new Error("FIREBASE_CONFIG not available");
-
-  const app = useMemo(() => initializeApp(JSON.parse(FIREBASE_CONFIG)), []);
-
-  const [analytics, setAnalytics] = useState<Analytics>();
-
-  useEffect(() => {
-    isSupported().then((supported) => {
-      if (!supported) return;
-      const analytics = initializeAnalytics(app);
-      const measurementId = analytics.app.options.measurementId;
-      console.debug("Initialised Firebase Analytics", measurementId);
-      setAnalytics(analytics);
-    });
-  }, [app]);
+  const ref = useRef<FirebaseStoreApi | null>(null);
+  if (ref.current === null) ref.current = createFirebaseStore();
 
   return (
-    <FirebaseContext.Provider value={{ app, analytics }}>
+    <FirebaseStoreContext.Provider value={ref.current}>
       {children}
-    </FirebaseContext.Provider>
+    </FirebaseStoreContext.Provider>
   );
+}
+
+export function useFirebase<T>(selector: (store: FirebaseStore) => T) {
+  const context = useContext(FirebaseStoreContext);
+  if (!context)
+    throw new Error("useFirebase must be used within FirebaseProvider");
+  return useStore(context, selector);
 }
