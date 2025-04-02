@@ -1,5 +1,9 @@
 # Changelog
 
+## <small>2.2.1 (2025-04-02)</small>
+
+* chore(portfolio): update OG image text ([32939cd](https://github.com/benyap/benyap.com/commit/32939cd))
+
 ## 2.2.0 (2025-04-02)
 
 * feat(photos): add auth flow ([90bef78](https://github.com/benyap/benyap.com/commit/90bef78))
