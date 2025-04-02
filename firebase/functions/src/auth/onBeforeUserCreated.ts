@@ -3,7 +3,10 @@ import { BlockingFunction } from "firebase-functions/v1";
 import { beforeUserCreated, HttpsError } from "firebase-functions/v2/identity";
 import * as logger from "firebase-functions/logger";
 
+import { serviceAccount } from "../constants";
+
 export const onBeforeUserCreated: BlockingFunction = beforeUserCreated(
+  { serviceAccount },
   async (event) => {
     if (!event.data) throw new HttpsError("internal", "Event data unavailable");
 
