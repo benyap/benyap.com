@@ -6,11 +6,11 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { DESCRIPTION, SITE_NAME } from "~/constants/metadata";
 import { VERCEL_PROJECT_PRODUCTION_DOMAIN } from "~/constants/vercel";
 
-import { FirebaseProvider } from "~/providers/Firebase";
+import { FirebaseProvider } from "~/components/firebase/FirebaseProvider";
 
-const outfit = Outfit({ subsets: ["latin"], variable: "--font-sans" });
-const newsreader = Newsreader({ subsets: ["latin"], variable: "--font-serif" });
-const geistMono = Geist_Mono({ subsets: ["latin"], variable: "--font-mono" });
+const sans = Outfit({ subsets: ["latin"], variable: "--font-sans" });
+const serif = Newsreader({ subsets: ["latin"], variable: "--font-serif" });
+const mono = Geist_Mono({ subsets: ["latin"], variable: "--font-mono" });
 
 import "./globals.css";
 
@@ -37,7 +37,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={clsx(outfit.variable, newsreader.variable, geistMono.variable)}
+      className={clsx(sans.variable, serif.variable, mono.variable)}
     >
       <body>
         <FirebaseProvider>{children}</FirebaseProvider>
