@@ -1,9 +1,16 @@
+import clsx from "clsx";
 import { Metadata } from "next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Newsreader, Outfit, Geist_Mono } from "next/font/google";
 
 import { DESCRIPTION, SITE_NAME } from "~/constants/metadata";
 import { VERCEL_PROJECT_PRODUCTION_DOMAIN } from "~/constants/vercel";
 
 import { FirebaseProvider } from "~/components/firebase/FirebaseProvider";
+
+const sans = Outfit({ subsets: ["latin"], variable: "--font-sans" });
+const serif = Newsreader({ subsets: ["latin"], variable: "--font-serif" });
+const mono = Geist_Mono({ subsets: ["latin"], variable: "--font-mono" });
 
 import "./globals.css";
 
@@ -28,9 +35,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html
+      lang="en"
+      className={clsx(sans.variable, serif.variable, mono.variable)}
+    >
       <body>
         <FirebaseProvider>{children}</FirebaseProvider>
+        <SpeedInsights />
       </body>
     </html>
   );
