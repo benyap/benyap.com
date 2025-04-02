@@ -1,3 +1,4 @@
-export const SITE_NAME = "benyap.com";
+export const SITE_NAME = "Ben Yap";
 
-export const DESCRIPTION = "Ben Yap's online space.";
+export const DESCRIPTION =
+  "Ben Yap's online space, for sharing with the world.";

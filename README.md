@@ -29,7 +29,7 @@ To do this:
 1. Navigate to the project directory.
 
    ```bash
-   cd packages/portfolio
+   cd apps/portfolio
    ```
 
 2. Link the project (this is only required once).
