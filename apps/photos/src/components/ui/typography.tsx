@@ -13,10 +13,17 @@ export type TypographyProps = {
     | "large"
     | "small"
     | "muted";
+  paragraph?: boolean;
 };
 
 export function Text(props: React.PropsWithChildren<TypographyProps>) {
-  const { className, as: Component = "p", style = "body", children } = props;
+  const {
+    className,
+    as: Component = "p",
+    style = "body",
+    paragraph,
+    children,
+  } = props;
   return (
     <Component
       className={clsx(
@@ -30,10 +37,11 @@ export function Text(props: React.PropsWithChildren<TypographyProps>) {
         style === "subheading" &&
           "scroll-m-20 text-xl font-semibold tracking-tight",
         style === "lead" && "text-muted-foreground text-xl",
-        style === "body" && "leading-7 [&:not(:first-child)]:mt-6",
+        style === "body" && "leading-7",
         style === "large" && "text-lg font-semibold",
         style === "small" && "text-sm font-medium leading-none",
         style === "muted" && "text-muted-foreground text-sm",
+        paragraph && "[&:not(:first-child)]:mt-6",
       )}
     >
       {children}

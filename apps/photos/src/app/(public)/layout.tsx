@@ -4,7 +4,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Newsreader, Outfit, Geist_Mono } from "next/font/google";
 
 import { SITE_NAME, DESCRIPTION } from "~/constants/metadata";
-import { VERCEL_PROJECT_PRODUCTION_DOMAIN } from "~/constants/vercel";
+import { APP_HOST } from "~/constants/app";
 
 import { FirebaseProvider } from "~/components/firebase/FirebaseProvider";
 
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     title: SITE_NAME,
     siteName: SITE_NAME,
     description: DESCRIPTION,
-    url: `https://${VERCEL_PROJECT_PRODUCTION_DOMAIN}`,
+    url: `https://${APP_HOST}`,
   },
 };
 

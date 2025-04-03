@@ -4,14 +4,14 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Newsreader, Geist_Mono, Inter } from "next/font/google";
 
 import { DESCRIPTION_ADMIN, SITE_NAME_ADMIN } from "~/constants/metadata";
-import { VERCEL_PROJECT_PRODUCTION_DOMAIN } from "~/constants/vercel";
+import { APP_HOST } from "~/constants/app";
 
+import { SidebarProvider } from "~/components/ui/sidebar";
 import { AppHeader } from "~/components/admin/AppHeader";
 import { AppSidebar } from "~/components/admin/AppSidebar";
 import { RequireSignIn } from "~/components/auth/RequireSignIn/RequireSignIn";
 import { FirebaseUserProvider } from "~/components/firebase/FirebaseUserProvider";
 import { FirebaseProvider } from "~/components/firebase/FirebaseProvider";
-import { SidebarProvider } from "~/components/ui/sidebar";
 
 const sans = Inter({ subsets: ["latin"], variable: "--font-sans" });
 const serif = Newsreader({ subsets: ["latin"], variable: "--font-serif" });
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     title: SITE_NAME_ADMIN,
     siteName: SITE_NAME_ADMIN,
     description: DESCRIPTION_ADMIN,
-    url: `https://${VERCEL_PROJECT_PRODUCTION_DOMAIN}`,
+    url: `https://${APP_HOST}`,
   },
 };
 
@@ -45,7 +45,7 @@ export default function Layout(props: React.PropsWithChildren) {
         <FirebaseProvider>
           <FirebaseUserProvider>
             <RequireSignIn>
-              <SidebarProvider className="min-w-screen">
+              <SidebarProvider>
                 <AppSidebar />
                 <div className="w-full">
                   <AppHeader />

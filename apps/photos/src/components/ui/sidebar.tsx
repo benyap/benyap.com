@@ -1,9 +1,10 @@
 "use client";
 
+import clsx from "clsx";
 import * as React from "react";
 import { Slot } from "@radix-ui/react-slot";
 import { VariantProps, cva } from "class-variance-authority";
-import { PanelLeftIcon } from "lucide-react";
+import { ChevronLeftIcon, MenuIcon } from "lucide-react";
 
 import { useIsMobile } from "~/hooks/use-mobile";
 import { cn } from "~/lib/utils";
@@ -258,8 +259,7 @@ function SidebarTrigger({
   onClick,
   ...props
 }: React.ComponentProps<typeof Button>) {
-  const { toggleSidebar } = useSidebar();
-
+  const { toggleSidebar, open, isMobile } = useSidebar();
   return (
     <Button
       data-sidebar="trigger"
@@ -273,7 +273,8 @@ function SidebarTrigger({
       }}
       {...props}
     >
-      <PanelLeftIcon />
+      <MenuIcon className={clsx(!isMobile && open && "hidden")} />
+      <ChevronLeftIcon className={clsx((isMobile || !open) && "hidden")} />
       <span className="sr-only">Toggle Sidebar</span>
     </Button>
   );
