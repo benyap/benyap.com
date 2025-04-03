@@ -12,7 +12,7 @@ const sans = Outfit({ subsets: ["latin"], variable: "--font-sans" });
 const serif = Newsreader({ subsets: ["latin"], variable: "--font-serif" });
 const mono = Geist_Mono({ subsets: ["latin"], variable: "--font-mono" });
 
-import "./globals.css";
+import "~/app/globals.css";
 
 export const metadata: Metadata = {
   title: {
