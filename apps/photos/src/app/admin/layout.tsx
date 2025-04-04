@@ -7,6 +7,7 @@ import { DESCRIPTION_ADMIN, SITE_NAME_ADMIN } from "~/constants/metadata";
 import { APP_HOST } from "~/constants/app";
 
 import { SidebarProvider } from "~/components/ui/sidebar";
+import { Toaster } from "~/components/ui/sonner";
 import { AppHeader } from "~/components/admin/AppHeader";
 import { AppSidebar } from "~/components/admin/AppSidebar";
 import { RequireSignIn } from "~/components/auth/RequireSignIn/RequireSignIn";
@@ -16,8 +17,6 @@ import { FirebaseProvider } from "~/components/firebase/FirebaseProvider";
 const sans = Inter({ subsets: ["latin"], variable: "--font-sans" });
 const serif = Newsreader({ subsets: ["latin"], variable: "--font-serif" });
 const mono = Geist_Mono({ subsets: ["latin"], variable: "--font-mono" });
-
-import "~/app/globals.css";
 
 export const metadata: Metadata = {
   title: {
@@ -37,26 +36,22 @@ export const metadata: Metadata = {
 export default function Layout(props: React.PropsWithChildren) {
   const { children } = props;
   return (
-    <html
-      lang="en"
-      className={clsx(sans.variable, serif.variable, mono.variable)}
-    >
-      <body>
-        <FirebaseProvider>
-          <FirebaseUserProvider>
-            <RequireSignIn>
-              <SidebarProvider>
-                <AppSidebar />
-                <div className="w-full">
-                  <AppHeader />
-                  <main className="m-4">{children}</main>
-                </div>
-              </SidebarProvider>
-            </RequireSignIn>
-          </FirebaseUserProvider>
-        </FirebaseProvider>
-        <SpeedInsights />
-      </body>
-    </html>
+    <div className={clsx(sans.variable, serif.variable, mono.variable)}>
+      <FirebaseProvider>
+        <FirebaseUserProvider>
+          <RequireSignIn>
+            <SidebarProvider>
+              <AppSidebar />
+              <div className="w-full">
+                <AppHeader />
+                <main className="m-4">{children}</main>
+                <Toaster />
+              </div>
+            </SidebarProvider>
+          </RequireSignIn>
+        </FirebaseUserProvider>
+      </FirebaseProvider>
+      <SpeedInsights />
+    </div>
   );
 }

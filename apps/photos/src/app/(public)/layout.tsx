@@ -1,6 +1,5 @@
 import clsx from "clsx";
 import { Metadata } from "next";
-import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Newsreader, Outfit, Geist_Mono } from "next/font/google";
 
 import { SITE_NAME, DESCRIPTION } from "~/constants/metadata";
@@ -11,8 +10,6 @@ import { FirebaseProvider } from "~/components/firebase/FirebaseProvider";
 const sans = Outfit({ subsets: ["latin"], variable: "--font-sans" });
 const serif = Newsreader({ subsets: ["latin"], variable: "--font-serif" });
 const mono = Geist_Mono({ subsets: ["latin"], variable: "--font-mono" });
-
-import "~/app/globals.css";
 
 export const metadata: Metadata = {
   title: {
@@ -29,20 +26,10 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <html
-      lang="en"
-      className={clsx(sans.variable, serif.variable, mono.variable)}
-    >
-      <body>
-        <FirebaseProvider>{children}</FirebaseProvider>
-        <SpeedInsights />
-      </body>
-    </html>
+    <div className={clsx(sans.variable, serif.variable, mono.variable)}>
+      <FirebaseProvider>{children}</FirebaseProvider>
+    </div>
   );
 }

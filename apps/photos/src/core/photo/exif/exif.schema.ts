@@ -19,7 +19,7 @@ export const IntegerTagSchema = z.object({
   description: z.string().optional(),
 });
 
-export const PhotoExifTagsSchema = z.object({
+export const ExifTagsSchema = z.object({
   camera: z.object({
     make: z.string().optional(),
     model: z.string().optional(),
@@ -42,4 +42,4 @@ export const PhotoExifTagsSchema = z.object({
   whiteBalance: IntegerTagSchema,
 });
 
-export type PhotoExifTags = z.infer<typeof PhotoExifTagsSchema>;
+export type ExifTags = z.infer<typeof ExifTagsSchema>;

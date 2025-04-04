@@ -3,14 +3,16 @@ import ExifReader from "exifreader";
 
 import type { Tags } from "exifreader";
 
-import { IntegerTagSchema, RationalTagSchema, StringTagSchema } from "./schema";
-
-export type ExifTags = Tags;
+import {
+  IntegerTagSchema,
+  RationalTagSchema,
+  StringTagSchema,
+} from "./exif.schema";
 
 /**
  * Read EXIF tags from a photo that has been loaded as a buffer.
  */
-export function readExifTags(photo: Buffer): ExifTags {
+export function readExifTags(photo: Buffer): Tags {
   return ExifReader.load(photo);
 }
 
