@@ -34,11 +34,13 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarRail,
+  useSidebar,
 } from "~/components/ui/sidebar";
 import { Text } from "~/components/ui/text";
 import { UserAvatar } from "~/components/core/UserAvatar";
 import { LogoIcon } from "~/components/icons";
 import { AdminAccountMenu } from "~/components/admin/AdminAccountMenu";
+import { useEffect } from "react";
 
 const LINKS = [
   {
@@ -85,9 +87,15 @@ const LINKS = [
 
 export function AdminSidebar() {
   const { user } = useFirebaseUser();
+  const { isMobile, setOpenMobile } = useSidebar();
 
   const pathname = usePathname();
   const homeActive = pathname === AdminRoute.index;
+
+  // Close mobile sidebar when pathname changes
+  useEffect(() => {
+    if (isMobile) setOpenMobile(false);
+  }, [isMobile, setOpenMobile, pathname]);
 
   return (
     <Sidebar variant="floating">
@@ -113,7 +121,7 @@ export function AdminSidebar() {
                       )}
                     />
                     <Text className={clsx(homeActive && "font-medium")}>
-                      Admin Home
+                      Home
                     </Text>
                   </Link>
                 </SidebarMenuButton>
