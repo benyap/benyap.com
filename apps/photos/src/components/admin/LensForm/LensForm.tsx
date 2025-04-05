@@ -7,12 +7,12 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { DocumentReference } from "firebase/firestore";
 
 import {
-  Camera,
-  CameraSchema,
-  CameraCreateFailedException,
-  CameraDeleteFailedException,
-  CameraUpdateFailedException,
-} from "~/core/camera";
+  Lens,
+  LensSchema,
+  LensCreateFailedException,
+  LensDeleteFailedException,
+  LensUpdateFailedException,
+} from "~/core/lens";
 
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
@@ -28,33 +28,33 @@ import {
   FormRootErrorMessage,
 } from "~/components/ui/form";
 
-const CameraFormSchema = z.object({
-  name: CameraSchema.shape.name.min(3, "Must have at least 3 characters."),
-  description: CameraSchema.shape.description,
+const LensFormSchema = z.object({
+  name: LensSchema.shape.name.min(3, "Must have at least 3 characters."),
+  description: LensSchema.shape.description,
   exifTagMatches: z.string().optional(),
 });
 
-export function CameraForm(props: {
-  camera?: Camera;
+export function LensForm(props: {
+  lens?: Lens;
   onSave?: (
-    camera: Camera,
+    lens: Lens,
   ) => ResultAsync<
     DocumentReference,
-    CameraCreateFailedException | CameraUpdateFailedException
+    LensCreateFailedException | LensUpdateFailedException
   >;
 }) {
-  const { camera, onSave } = props;
+  const { lens, onSave } = props;
 
-  const form = useForm<z.infer<typeof CameraFormSchema>>({
-    resolver: zodResolver(CameraFormSchema),
+  const form = useForm<z.infer<typeof LensFormSchema>>({
+    resolver: zodResolver(LensFormSchema),
     defaultValues: {
-      name: camera?.name ?? "",
-      description: camera?.description ?? "",
-      exifTagMatches: camera?.exifTagMatches.join("\n") ?? "",
+      name: lens?.name ?? "",
+      description: lens?.description ?? "",
+      exifTagMatches: lens?.exifTagMatches.join("\n") ?? "",
     },
   });
 
-  function onSubmit(data: z.infer<typeof CameraFormSchema>) {
+  function onSubmit(data: z.infer<typeof LensFormSchema>) {
     const now = new Date();
     onSave?.({
       name: data.name,
@@ -75,13 +75,13 @@ export function CameraForm(props: {
   return (
     <Form {...form}>
       <form className="space-y-6" onSubmit={form.handleSubmit(onSubmit)}>
-        <FormRootErrorMessage form={form} errorTitle="Could not save camera" />
+        <FormRootErrorMessage form={form} errorTitle="Could not save lens" />
         <FormField
           control={form.control}
           name="name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Camera name</FormLabel>
+              <FormLabel>Lens name</FormLabel>
               <FormControl>
                 <Input {...field} />
               </FormControl>
@@ -113,8 +113,8 @@ export function CameraForm(props: {
               </FormControl>
               <FormDescription>
                 A list of values that will match a photo&apos;s Exif{" "}
-                <code>Camera</code> tag to this camera. Specify each value on a
-                new line.
+                <code>Lens</code> tag to this lens. Specify each value on a new
+                line.
               </FormDescription>
               <FormMessage />
             </FormItem>
@@ -126,8 +126,8 @@ export function CameraForm(props: {
   );
 }
 
-export function DeleteCameraForm(props: {
-  onDelete?: () => ResultAsync<DocumentReference, CameraDeleteFailedException>;
+export function DeleteLensForm(props: {
+  onDelete?: () => ResultAsync<DocumentReference, LensDeleteFailedException>;
   onCancel?: () => void;
 }) {
   const { onDelete, onCancel } = props;
