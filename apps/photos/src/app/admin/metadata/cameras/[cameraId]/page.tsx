@@ -56,9 +56,21 @@ export default function Page(props: { params: Promise<{ cameraId: string }> }) {
         contexts={[EditCamera.Context, DeleteCamera.Context]}
       >
         <Heading>
-          <Text as="h1" style="heading" className="flex items-center">
-            {camera?.name ?? <SkeletonText className="w-3xs" />}
-          </Text>
+          <div className="space-y-2">
+            <Text as="h1" style="heading" className="flex items-center">
+              {loading ? <SkeletonText className="w-40" /> : camera?.name}
+            </Text>
+            <Text
+              style="muted"
+              className="flex items-center whitespace-pre-wrap"
+            >
+              {loading ? (
+                <SkeletonText className="w-60" />
+              ) : (
+                camera?.description
+              )}
+            </Text>
+          </div>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="outline" size="icon">

@@ -25,6 +25,7 @@ import {
 
 const CameraFormSchema = z.object({
   name: CameraSchema.shape.name.min(3, "Must have at least 3 characters."),
+  description: CameraSchema.shape.description,
   exifTagMatches: z.string().optional(),
 });
 
@@ -40,6 +41,7 @@ export function CameraForm(props: {
     resolver: zodResolver(CameraFormSchema),
     defaultValues: {
       name: camera?.name ?? "",
+      description: camera?.description ?? "",
       exifTagMatches: camera?.exifTagMatches.join("\n") ?? "",
     },
   });
@@ -48,6 +50,7 @@ export function CameraForm(props: {
     const now = new Date();
     onSave?.({
       name: data.name,
+      description: data.description,
       exifTagMatches:
         data.exifTagMatches
           ?.split("\n")
@@ -73,6 +76,19 @@ export function CameraForm(props: {
               <FormLabel>Camera name</FormLabel>
               <FormControl>
                 <Input {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="description"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Description</FormLabel>
+              <FormControl>
+                <Textarea {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>

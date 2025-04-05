@@ -41,7 +41,7 @@ export function Breadcrumbs(props: {
         {links.map((link, index) => {
           const label =
             link.label ||
-            (link.loading ? <SkeletonText className="w-30" /> : null);
+            (link.loading ? <SkeletonText className="w-20" /> : null);
           return (
             <li key={index}>
               <div className="flex items-center">
