@@ -8,8 +8,8 @@ import {
   CameraIcon,
   ChevronUpIcon,
   ExternalLinkIcon,
+  HomeIcon,
   ImageIcon,
-  LayoutDashboardIcon,
   LibraryBigIcon,
   MapPinIcon,
   TagIcon,
@@ -88,7 +88,7 @@ export function AppSidebar() {
   const { user, signOut } = useFirebaseUser();
 
   const pathname = usePathname();
-  const home = pathname === AdminRoute.dashboard;
+  const home = pathname === AdminRoute.index;
 
   return (
     <Sidebar variant="floating">
@@ -103,8 +103,8 @@ export function AppSidebar() {
             <SidebarMenu>
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
-                  <Link href={AdminRoute.dashboard}>
-                    <LayoutDashboardIcon
+                  <Link href={AdminRoute.index}>
+                    <HomeIcon
                       className={clsx(home ? "text-sky-600" : "text-slate-500")}
                     />
                     <Text

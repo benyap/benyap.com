@@ -13,9 +13,12 @@ function Skeleton({ className, ...props }: React.ComponentProps<"div">) {
 function SkeletonText({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <>
-      <div
+      <span
         data-slot="skeleton"
-        className={cn("bg-accent h-[1em] animate-pulse rounded-md", className)}
+        className={cn(
+          "bg-accent inline-block h-[1em] animate-pulse rounded-md",
+          className,
+        )}
         {...props}
       />
       &nbsp;

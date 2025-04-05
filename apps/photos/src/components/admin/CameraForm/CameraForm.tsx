@@ -38,12 +38,10 @@ export function CameraForm(props: {
 
   const form = useForm<z.infer<typeof CameraFormSchema>>({
     resolver: zodResolver(CameraFormSchema),
-    defaultValues: camera
-      ? {
-          name: camera.name,
-          exifTagMatches: camera.exifTagMatches.join("\n"),
-        }
-      : {},
+    defaultValues: {
+      name: camera?.name ?? "",
+      exifTagMatches: camera?.exifTagMatches.join("\n") ?? "",
+    },
   });
 
   function onSubmit(data: z.infer<typeof CameraFormSchema>) {

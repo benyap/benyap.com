@@ -3,10 +3,10 @@
 import { use, useMemo } from "react";
 import { AlertCircle, EllipsisVerticalIcon } from "lucide-react";
 
+import { AdminRoute } from "~/constants/routes";
 import { getCamera } from "~/core/camera";
 import { useSnapshot } from "~/hooks/use-snapshot";
 
-import { Heading } from "~/components/core/Heading";
 import { SkeletonText } from "~/components/ui/skeleton";
 import { Text } from "~/components/ui/typography";
 import { Button } from "~/components/ui/button";
@@ -17,6 +17,8 @@ import {
 } from "~/components/ui/dropdown-menu";
 import { DialogStoreProvider } from "~/components/ui/dialog-store-provider";
 import { Alert, AlertTitle } from "~/components/ui/alert";
+import { Heading } from "~/components/core/Heading";
+import { AdminBreadcrumbs } from "~/components/core/Breadcrumbs";
 
 import { EditCamera } from "./EditCamera";
 import { DeleteCamera } from "./DeleteCamera";
@@ -43,7 +45,13 @@ export default function Page(props: { params: Promise<{ cameraId: string }> }) {
   const camera = snapshot?.data();
 
   return (
-    <div>
+    <>
+      <AdminBreadcrumbs
+        links={[
+          { href: AdminRoute.metadata.cameras.index, label: "Cameras" },
+          { label: camera?.name, loading },
+        ]}
+      />
       <DialogStoreProvider
         contexts={[EditCamera.Context, DeleteCamera.Context]}
       >
@@ -66,6 +74,6 @@ export default function Page(props: { params: Promise<{ cameraId: string }> }) {
         {camera && <EditCamera.Dialog cameraId={cameraId} camera={camera} />}
         {camera && <DeleteCamera.Dialog cameraId={cameraId} camera={camera} />}
       </DialogStoreProvider>
-    </div>
+    </>
   );
 }

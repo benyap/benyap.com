@@ -5,7 +5,7 @@ export const PublicRoute = {
 };
 
 export const AdminRoute = {
-  dashboard: "/admin",
+  index: "/admin",
   photos: {
     index: "/admin/photos",
     photo: (id: string) => `/admin/photos/${id}`,
