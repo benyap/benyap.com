@@ -17,7 +17,7 @@
     "class-variance-authority": "0.7.1",
     "clsx": "2.1.1",
     "firebase": "11.6.0",
-    "lucide-react": "0.486.0",
+    "lucide-react": "0.487.0",
     "next": "15.2.4",
     "react": "19.1.0",
     "react-dom": "19.1.0",
@@ -27,12 +27,17 @@
     "zustand": "5.0.3"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "4.1.0",
-    "@types/react": "19.0.12",
+    "@eslint/eslintrc": "3.3.1",
+    "@next/eslint-plugin-next": "15.2.4",
+    "@tailwindcss/postcss": "4.1.3",
+    "@types/react": "19.1.0",
+    "eslint": "9.24.0",
+    "eslint-config-next": "15.2.4",
+    "eslint-plugin-react-hooks": "5.2.0",
     "generate-icons": "workspace:*",
     "postcss": "8.5.3",
-    "tailwindcss": "4.1.0",
+    "tailwindcss": "4.1.3",
     "tsx": "4.19.3",
-    "typescript": "5.8.2"
+    "typescript": "5.8.3"
   }
 }

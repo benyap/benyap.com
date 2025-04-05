@@ -9,6 +9,6 @@
     "start": "cd ../.. && firebase emulators:start --import firebase/emulator/data --export-on-exit --project demo-benyap"
   },
   "devDependencies": {
-    "firebase-tools": "14.0.1"
+    "firebase-tools": "14.1.0"
   }
 }

@@ -11,6 +11,6 @@
     "@svgr/plugin-svgo": "8.1.0",
     "chokidar": "4.0.3",
     "fast-glob": "3.3.3",
-    "typescript": "5.8.2"
+    "typescript": "5.8.3"
   }
 }

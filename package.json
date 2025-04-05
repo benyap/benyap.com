@@ -6,6 +6,12 @@
     "node": "22"
   },
   "packageManager": "pnpm@10.7.0",
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "@vercel/speed-insights",
+      "sharp"
+    ]
+  },
   "scripts": {
     "postinstall": "node ./scripts/setup.mjs",
     "emulator": "pnpm --filter emulator",
@@ -25,6 +31,6 @@
     "prettier": "3.5.3",
     "prettier-plugin-tailwindcss": "0.6.11",
     "release-it": "18.1.2",
-    "turbo": "2.4.4"
+    "turbo": "2.5.0"
   }
 }
