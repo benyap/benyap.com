@@ -8,13 +8,12 @@ import { Text } from "~/components/ui/text";
 export type BreadcrumbLink = {
   href?: string;
   label?: React.ReactNode;
-  current?: boolean;
   loading?: boolean;
 };
 
 export function Breadcrumbs(props: {
   className?: string;
-  root: BreadcrumbLink;
+  root: BreadcrumbLink & { current?: boolean };
   links?: BreadcrumbLink[];
 }) {
   const { className, root, links = [] } = props;
