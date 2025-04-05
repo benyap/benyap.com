@@ -162,6 +162,7 @@ export function useSnapshot<AppModelType, DbModelType extends DocumentData>(
     };
   }, [ref, onNextDoc, onNextQuery, onError]);
 
+  // notFound indicates that the document was empty on initial snapshot load
   const notFound =
     snapshot instanceof DocumentSnapshot &&
     !snapshot.data() &&

@@ -4,7 +4,7 @@ import { use } from "react";
 import { EllipsisVerticalIcon } from "lucide-react";
 
 import { AdminRoute } from "~/constants/routes";
-import { getCamera } from "~/core/camera";
+import { getLens } from "~/core/lens";
 import { useSnapshot } from "~/hooks/use-snapshot";
 
 import { SkeletonText } from "~/components/ui/skeleton";
@@ -20,43 +20,38 @@ import { AdminBreadcrumbs } from "~/components/core/Breadcrumbs";
 import { HideIfError } from "~/components/core/HideIfError";
 import { NotFoundMessage } from "~/components/core/NotFoundMessage";
 
-import { EditCamera } from "./EditCamera";
-import { DeleteCamera } from "./DeleteCamera";
-import { CameraDetails } from "./CameraDetails";
+import { EditLens } from "./EditLens";
+import { DeleteLens } from "./DeleteLens";
+import { LensDetails } from "./LensDetails";
 
-export default function Page(props: { params: Promise<{ cameraId: string }> }) {
-  const { cameraId } = use(props.params);
+export default function Page(props: { params: Promise<{ lensId: string }> }) {
+  const { lensId: lensId } = use(props.params);
 
-  const [loading, snapshot, error, notFound] = useSnapshot(getCamera(cameraId));
+  const [loading, snapshot, error, notFound] = useSnapshot(getLens(lensId));
 
-  const camera = snapshot?.data();
+  const lens = snapshot?.data();
 
   return (
     <>
       <AdminBreadcrumbs
         links={[
-          { href: AdminRoute.metadata.cameras.index, label: "Cameras" },
-          { label: camera?.name, loading: loading && !error },
+          { href: AdminRoute.metadata.lenses.index, label: "Lenses" },
+          { label: lens?.name, loading: loading && !error },
         ]}
       />
 
-      <HideIfError
-        errorTitle={`Could not get camera ${cameraId}`}
-        error={error}
-      >
-        {notFound && <NotFoundMessage title="Camera not found" />}
+      <HideIfError errorTitle={`Could not get lens ${lensId}`} error={error}>
+        {notFound && <NotFoundMessage title="lens not found" />}
 
-        <DialogStoreProvider
-          contexts={[EditCamera.Context, DeleteCamera.Context]}
-        >
+        <DialogStoreProvider contexts={[EditLens.Context, DeleteLens.Context]}>
           <header className="mb-6 flex justify-between gap-4">
             <div className="space-y-2">
               <Heading className="flex items-center">
-                {loading ? <SkeletonText className="w-40" /> : camera?.name}
+                {loading ? <SkeletonText className="w-40" /> : lens?.name}
               </Heading>
             </div>
             <DropdownMenu>
-              {camera && (
+              {lens && (
                 <DropdownMenuTrigger asChild>
                   <Button variant="outline" size="icon">
                     <EllipsisVerticalIcon />
@@ -64,18 +59,16 @@ export default function Page(props: { params: Promise<{ cameraId: string }> }) {
                 </DropdownMenuTrigger>
               )}
               <DropdownMenuContent className="mr-4 mt-1">
-                <EditCamera.Trigger />
-                <DeleteCamera.Trigger />
+                <EditLens.Trigger />
+                <DeleteLens.Trigger />
               </DropdownMenuContent>
             </DropdownMenu>
           </header>
-          {camera && <EditCamera.Dialog cameraId={cameraId} camera={camera} />}
-          {camera && (
-            <DeleteCamera.Dialog cameraId={cameraId} camera={camera} />
-          )}
+          {lens && <EditLens.Dialog lensId={lensId} lens={lens} />}
+          {lens && <DeleteLens.Dialog lensId={lensId} lens={lens} />}
         </DialogStoreProvider>
 
-        {camera && <CameraDetails cameraId={cameraId} camera={camera} />}
+        {lens && <LensDetails lensId={lensId} lens={lens} />}
       </HideIfError>
     </>
   );

@@ -4,7 +4,7 @@ import { useState } from "react";
 import { PlusIcon } from "lucide-react";
 import { toast } from "sonner";
 
-import { createCamera } from "~/core/camera";
+import { createLens } from "~/core/lens";
 
 import {
   Dialog,
@@ -15,29 +15,29 @@ import {
   DialogTrigger,
 } from "~/components/ui/dialog";
 import { Button } from "~/components/ui/button";
-import { CameraForm } from "~/components/admin/CameraForm";
+import { LensForm } from "~/components/admin/LensForm";
 
-export function AddCamera() {
+export function AddLens() {
   const [open, setOpen] = useState(false);
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button variant="outline" className="@min-lg:w-auto w-full">
           <PlusIcon />
-          Add camera
+          Add lens
         </Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Add a camera</DialogTitle>
+          <DialogTitle>Add a lens</DialogTitle>
           <DialogDescription></DialogDescription>
         </DialogHeader>
-        <CameraForm
-          onSave={(camera) =>
-            createCamera(camera)
+        <LensForm
+          onSave={(lens) =>
+            createLens(lens)
               .andTee((ref) =>
-                toast(`Created camera ${camera.name}`, {
-                  description: `Camera ID: ${ref.id}`,
+                toast(`Created lens ${lens.name}`, {
+                  description: `Lens ID: ${ref.id}`,
                   dismissible: true,
                 }),
               )
