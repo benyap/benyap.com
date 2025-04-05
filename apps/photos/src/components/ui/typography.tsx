@@ -2,7 +2,7 @@ import clsx from "clsx";
 
 export type TypographyProps = {
   className?: string;
-  as?: "h1" | "h2" | "h3" | "h4" | "p" | "span";
+  as?: "h1" | "h2" | "h3" | "h4" | "p" | "li" | "span";
   style?:
     | "display"
     | "title"

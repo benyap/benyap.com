@@ -3,6 +3,7 @@
 import * as React from "react";
 import * as LabelPrimitive from "@radix-ui/react-label";
 import { Slot } from "@radix-ui/react-slot";
+import { TriangleAlertIcon } from "lucide-react";
 import {
   Controller,
   FormProvider,
@@ -16,6 +17,9 @@ import {
 
 import { cn } from "~/lib/utils";
 import { Label } from "~/components/ui/label";
+
+import { Alert, AlertDescription, AlertTitle } from "./alert";
+import { Text } from "./typography";
 
 const Form = FormProvider;
 
@@ -159,24 +163,27 @@ function FormMessage({ className, ...props }: React.ComponentProps<"p">) {
 
 function FormRootErrorMessage({
   form,
-  className,
+  errorTitle,
   ...props
+}: React.ComponentProps<"div"> & {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-}: React.ComponentProps<"p"> & { form: UseFormReturn<any> }) {
-  const body = form.formState.errors.root?.message;
+  form: UseFormReturn<any>;
+  errorTitle?: React.ReactNode;
+}) {
+  const message = form.formState.errors.root?.message;
 
-  if (!body) {
-    return null;
-  }
+  if (!message) return null;
 
   return (
-    <p
-      id="root"
-      className={cn("text-destructive text-sm", className)}
-      {...props}
-    >
-      {body}
-    </p>
+    <Alert variant="destructive" {...props}>
+      <TriangleAlertIcon className="h-4 w-4" />
+      <AlertTitle>{errorTitle || message}</AlertTitle>
+      {errorTitle && (
+        <AlertDescription>
+          <Text className="whitespace-pre-wrap">{message}</Text>
+        </AlertDescription>
+      )}
+    </Alert>
   );
 }
 

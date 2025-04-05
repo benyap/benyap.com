@@ -60,14 +60,14 @@ export function CameraForm(props: {
       updatedAt: now,
     }).mapErr((error) => {
       console.error(error);
-      form.setError("root", { message: error.message });
+      form.setError("root", { message: String(error.cause) });
     });
   }
 
   return (
     <Form {...form}>
       <form className="space-y-6" onSubmit={form.handleSubmit(onSubmit)}>
-        <FormRootErrorMessage form={form} />
+        <FormRootErrorMessage form={form} errorTitle="Could not save camera" />
         <FormField
           control={form.control}
           name="name"

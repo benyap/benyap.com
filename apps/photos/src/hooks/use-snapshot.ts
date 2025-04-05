@@ -61,7 +61,7 @@ function useStableRef<
 /**
  * Subscribes to snapshots for the given document reference.
  *
- * @returns `[loading, snapshot, error]`
+ * @returns `[loading, snapshot, error, notFound]`
  */
 export function useSnapshot<AppModelType, DbModelType extends DocumentData>(
   doc: DocumentReference<AppModelType, DbModelType> | null,
@@ -69,12 +69,13 @@ export function useSnapshot<AppModelType, DbModelType extends DocumentData>(
   boolean,
   DocumentSnapshot<AppModelType, DbModelType> | undefined,
   FirestoreError | undefined,
+  boolean,
 ];
 
 /**
  * Subscribes to snapshots for the given collection reference.
  *
- * @returns `[loading, snapshot, error]`
+ * @returns `[loading, snapshot, error, notFound]`
  */
 export function useSnapshot<AppModelType, DbModelType extends DocumentData>(
   collection: CollectionReference<AppModelType, DbModelType> | null,
@@ -82,12 +83,13 @@ export function useSnapshot<AppModelType, DbModelType extends DocumentData>(
   boolean,
   QuerySnapshot<AppModelType, DbModelType> | undefined,
   FirestoreError | undefined,
+  boolean,
 ];
 
 /**
  * Subscribes to snapshots for the given query.
  *
- * @returns `[loading, snapshot, error]`
+ * @returns `[loading, snapshot, error, notFound]`
  */
 export function useSnapshot<AppModelType, DbModelType extends DocumentData>(
   query: Query<AppModelType, DbModelType> | null,
@@ -95,6 +97,7 @@ export function useSnapshot<AppModelType, DbModelType extends DocumentData>(
   boolean,
   QuerySnapshot<AppModelType, DbModelType> | undefined,
   FirestoreError | undefined,
+  boolean,
 ];
 
 // Implementation
@@ -106,7 +109,9 @@ export function useSnapshot<AppModelType, DbModelType extends DocumentData>(
     | null,
 ) {
   const [loading, setLoading] = useState(true);
+  const [deleted, setDeleted] = useState(false);
   const [error, setError] = useState<FirestoreError>();
+
   const [snapshot, setSnapshot] = useState<
     | DocumentSnapshot<AppModelType, DbModelType>
     | QuerySnapshot<AppModelType, DbModelType>
@@ -118,7 +123,15 @@ export function useSnapshot<AppModelType, DbModelType extends DocumentData>(
     (snapshot: DocumentSnapshot<AppModelType, DbModelType>) => {
       setLoading(false);
       setError(undefined);
-      setSnapshot(snapshot);
+      setSnapshot((prevSnapshot) => {
+        if (
+          !snapshot.exists() &&
+          prevSnapshot instanceof DocumentSnapshot &&
+          prevSnapshot.exists()
+        )
+          setDeleted(true);
+        return snapshot;
+      });
     },
     [],
   );
@@ -149,5 +162,11 @@ export function useSnapshot<AppModelType, DbModelType extends DocumentData>(
     };
   }, [ref, onNextDoc, onNextQuery, onError]);
 
-  return [loading, snapshot, error] as const;
+  const notFound =
+    snapshot instanceof DocumentSnapshot &&
+    !snapshot.data() &&
+    !loading &&
+    !deleted;
+
+  return [loading, snapshot, error, notFound] as const;
 }
