@@ -20,8 +20,6 @@ import { AdminRoute, PublicRoute } from "~/constants/routes";
 import { useFirebaseUser } from "~/components/firebase/FirebaseUserProvider";
 import {
   DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
   DropdownMenuTrigger,
 } from "~/components/ui/dropdown-menu";
 import {
@@ -37,9 +35,10 @@ import {
   SidebarMenuItem,
   SidebarRail,
 } from "~/components/ui/sidebar";
-import { Text } from "~/components/ui/typography";
+import { Text } from "~/components/ui/text";
 import { UserAvatar } from "~/components/core/UserAvatar";
 import { LogoIcon } from "~/components/icons";
+import { AdminAccountMenu } from "~/components/admin/AdminAccountMenu";
 
 const LINKS = [
   {
@@ -85,17 +84,19 @@ const LINKS = [
 ];
 
 export function AdminSidebar() {
-  const { user, signOut } = useFirebaseUser();
+  const { user } = useFirebaseUser();
 
   const pathname = usePathname();
-  const home = pathname === AdminRoute.index;
+  const homeActive = pathname === AdminRoute.index;
 
   return (
     <Sidebar variant="floating">
       <SidebarHeader className="flex flex-row items-center gap-1 p-4 md:py-2">
-        <LogoIcon className="size-5 fill-slate-800" />
-        <Text className="font-bold text-sky-600">Photos</Text>
-        <Text className="text-slate-600">admin</Text>
+        <LogoIcon className="size-5" />
+        <Text color="custom" className="text-theme-accent font-bold">
+          Photos
+        </Text>
+        <Text>admin</Text>
       </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
@@ -105,12 +106,14 @@ export function AdminSidebar() {
                 <SidebarMenuButton asChild>
                   <Link href={AdminRoute.index}>
                     <HomeIcon
-                      className={clsx(home ? "text-sky-600" : "text-slate-500")}
+                      className={clsx(
+                        homeActive
+                          ? "text-theme-accent"
+                          : "text-muted-foreground",
+                      )}
                     />
-                    <Text
-                      className={clsx("text-slate-800", home && "font-medium")}
-                    >
-                      Dashboard
+                    <Text className={clsx(homeActive && "font-medium")}>
+                      Admin Home
                     </Text>
                   </Link>
                 </SidebarMenuButton>
@@ -122,8 +125,8 @@ export function AdminSidebar() {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <ExternalLinkIcon className="text-slate-500" />
-                    <Text className="text-slate-800">Visit site</Text>
+                    <ExternalLinkIcon className="text-muted-foreground" />
+                    <Text>Visit site</Text>
                   </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
@@ -143,15 +146,12 @@ export function AdminSidebar() {
                         <Link href={href}>
                           <Icon
                             className={clsx(
-                              active ? "text-sky-600" : "text-slate-500",
+                              active
+                                ? "text-theme-accent"
+                                : "text-muted-foreground",
                             )}
                           />
-                          <Text
-                            className={clsx(
-                              "text-slate-800",
-                              active && "font-medium",
-                            )}
-                          >
+                          <Text className={clsx(active && "font-medium")}>
                             {label}
                           </Text>
                         </Link>
@@ -172,28 +172,11 @@ export function AdminSidebar() {
               <DropdownMenuTrigger asChild>
                 <SidebarMenuButton className="h-fit py-3">
                   <UserAvatar />
-                  <div>
-                    <Text style="small" className="mb-0.5">
-                      {user?.displayName}
-                    </Text>
-                    <Text
-                      className="max-w-48 truncate md:max-w-36"
-                      style="muted"
-                    >
-                      {user?.email}
-                    </Text>
-                  </div>
+                  <Text>{user?.displayName}</Text>
                   <ChevronUpIcon className="ml-auto" />
                 </SidebarMenuButton>
               </DropdownMenuTrigger>
-              <DropdownMenuContent
-                side="top"
-                className="w-[var(--radix-popper-anchor-width)]"
-              >
-                <DropdownMenuItem onClick={signOut}>
-                  <span>Sign out</span>
-                </DropdownMenuItem>
-              </DropdownMenuContent>
+              <AdminAccountMenu className="w-[var(--radix-popper-anchor-width)]" />
             </DropdownMenu>
           </SidebarMenuItem>
         </SidebarMenu>

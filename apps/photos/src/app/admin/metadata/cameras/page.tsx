@@ -2,8 +2,7 @@ import { Metadata } from "next";
 
 import { AdminRoute } from "~/constants/routes";
 
-import { Text } from "~/components/ui/typography";
-import { Heading } from "~/components/core/Heading";
+import { Heading } from "~/components/ui/heading";
 import { AdminBreadcrumbs } from "~/components/core/Breadcrumbs";
 
 import { AddCamera } from "./AddCamera";
@@ -19,12 +18,10 @@ export default function Page() {
       <AdminBreadcrumbs
         links={[{ href: AdminRoute.metadata.cameras.index, label: "Cameras" }]}
       />
-      <Heading collapseWhenNarrow>
-        <Text as="h1" style="heading">
-          Cameras
-        </Text>
+      <header className="@min-lg:flex-row mb-6 flex flex-col justify-between gap-4">
+        <Heading>Cameras</Heading>
         <AddCamera />
-      </Heading>
+      </header>
       <CameraList />
     </>
   );

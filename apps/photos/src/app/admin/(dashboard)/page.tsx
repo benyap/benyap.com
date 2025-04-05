@@ -1,3 +1,9 @@
+import { Heading } from "~/components/ui/heading";
+
 export default function Page() {
-  return <div>Hello World!</div>;
+  return (
+    <div>
+      <Heading>Photos Admin</Heading>
+    </div>
+  );
 }

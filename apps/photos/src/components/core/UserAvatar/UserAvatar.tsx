@@ -1,18 +1,19 @@
 "use client";
 
 import clsx from "clsx";
+
 import { useFirebaseUser } from "~/components/firebase/FirebaseUserProvider";
-import { Avatar, AvatarFallback } from "~/components/ui/avatar";
+import { Avatar } from "~/components/ui/avatar";
 
 export type UserAvatarProps = { className?: string };
 
-export function UserAvatar({ className }: UserAvatarProps) {
+export function UserAvatar(props: UserAvatarProps) {
+  const { className } = props;
   const user = useFirebaseUser((s) => s.user);
   return (
-    <Avatar>
-      <AvatarFallback className={clsx(className, "bg-slate-800 text-white")}>
-        {user?.displayName?.at(0)}
-      </AvatarFallback>
-    </Avatar>
+    <Avatar
+      className={clsx(className, "bg-primary text-primary-foreground size-7")}
+      initials={user?.displayName?.at(0)}
+    />
   );
 }

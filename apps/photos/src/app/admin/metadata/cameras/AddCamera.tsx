@@ -22,7 +22,7 @@ export function AddCamera() {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button variant="outline" className="@min-lg/heading:w-auto w-full">
+        <Button variant="outline" className="@min-lg:w-auto w-full">
           <PlusIcon />
           Add camera
         </Button>

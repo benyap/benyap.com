@@ -1,7 +1,7 @@
 import { TriangleAlertIcon } from "lucide-react";
 
 import { Alert, AlertDescription, AlertTitle } from "~/components/ui/alert";
-import { Text } from "~/components/ui/typography";
+import { Text } from "~/components/ui/text";
 
 export function HideIfError(
   props: React.PropsWithChildren<{ errorTitle?: string; error?: unknown }>,

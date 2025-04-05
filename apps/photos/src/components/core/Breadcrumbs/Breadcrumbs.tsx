@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ChevronRightIcon } from "lucide-react";
 
 import { SkeletonText } from "~/components/ui/skeleton";
-import { Text } from "~/components/ui/typography";
+import { Text } from "~/components/ui/text";
 
 export type BreadcrumbLink = {
   href?: string;
@@ -28,9 +28,7 @@ export function Breadcrumbs(props: {
               href={root.href ?? "/"}
               aria-current={root.current ? "page" : undefined}
             >
-              <Text style="muted" className="hover:text-inherit">
-                {root.label}
-              </Text>
+              <Text className="hover:text-inherit">{root.label}</Text>
             </Link>
             <ChevronRightIcon
               aria-hidden="true"
@@ -47,12 +45,10 @@ export function Breadcrumbs(props: {
               <div className="flex items-center">
                 {link.href ? (
                   <Link href={link.href}>
-                    <Text style="muted" className="hover:text-inherit">
-                      {label}
-                    </Text>
+                    <Text className="hover:text-inherit">{label}</Text>
                   </Link>
                 ) : (
-                  <Text style="muted">{label}</Text>
+                  <Text>{label}</Text>
                 )}
                 {index !== links.length - 1 && (
                   <ChevronRightIcon

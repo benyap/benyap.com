@@ -7,9 +7,10 @@ import { AdminRoute } from "~/constants/routes";
 import { Camera, getCameras } from "~/core/camera";
 
 import { useSnapshot } from "~/hooks/use-snapshot";
-import { Text } from "~/components/ui/typography";
-import { HideIfError } from "~/components/core/HideIfError";
+import { Text } from "~/components/ui/text";
 import { SkeletonText } from "~/components/ui/skeleton";
+import { Subheading } from "~/components/ui/heading";
+import { HideIfError } from "~/components/core/HideIfError";
 
 export function CameraList() {
   const [loading, snapshot, error] = useSnapshot(getCameras());
@@ -43,13 +44,11 @@ function CameraCard(props: { cameraId: string; camera: Camera }) {
   return (
     <Link
       href={AdminRoute.metadata.cameras.camera(cameraId)}
-      className="space-y-1 rounded-md border p-3 hover:bg-slate-50"
+      className="hover:bg-accent focus-visible:border-ring focus-visible:ring-ring/50 dark:hover:bg-input/50 dark:border-input space-y-1 rounded-md border p-3 outline-none transition-all focus-visible:ring-[3px]"
     >
-      <Text style="body" className="font-medium">
-        {camera.name}
-      </Text>
+      <Subheading className="font-medium">{camera.name}</Subheading>
       <div className="flex gap-4">
-        <Text style="muted" className="flex items-center gap-1">
+        <Text className="flex items-center gap-1">
           <ImageIcon className="size-4" /> (unknown)
         </Text>
       </div>
@@ -60,11 +59,11 @@ function CameraCard(props: { cameraId: string; camera: Camera }) {
 function CameraCardPlaceholder() {
   return (
     <div className="space-y-1 rounded-md border p-3">
-      <Text style="body" className="font-medium">
+      <Text className="font-medium">
         <SkeletonText className="w-40" />
       </Text>
       <div className="flex gap-4">
-        <Text style="muted" className="flex items-center gap-1">
+        <Text className="flex items-center gap-1">
           <ImageIcon className="size-4" /> <SkeletonText className="w-8" />
         </Text>
       </div>

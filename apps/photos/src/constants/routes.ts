@@ -7,6 +7,9 @@ export const PublicRoute = {
 export const AdminRoute = {
   url: `${APP_URL}/admin`,
   index: "/admin",
+  account: {
+    index: "/admin/account",
+  },
   photos: {
     index: "/admin/photos",
     photo: (id: string) => `/admin/photos/${id}`,

@@ -10,7 +10,7 @@ import { SidebarProvider } from "~/components/ui/sidebar";
 import { Toaster } from "~/components/ui/sonner";
 import { AdminHeader } from "~/components/admin/AdminHeader";
 import { AdminSidebar } from "~/components/admin/AdminSidebar";
-import { RequireSignIn } from "~/components/auth/RequireSignIn/RequireSignIn";
+import { RequireSignIn } from "~/components/admin/RequireSignIn";
 import { FirebaseUserProvider } from "~/components/firebase/FirebaseUserProvider";
 import { FirebaseProvider } from "~/components/firebase/FirebaseProvider";
 
@@ -44,7 +44,7 @@ export default function Layout(props: React.PropsWithChildren) {
               <AdminSidebar />
               <div className="w-full">
                 <AdminHeader />
-                <main className="m-4">{children}</main>
+                <main className="@container m-4">{children}</main>
                 <Toaster />
               </div>
             </SidebarProvider>

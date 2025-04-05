@@ -8,15 +8,20 @@ import { getCamera } from "~/core/camera";
 import { useSnapshot } from "~/hooks/use-snapshot";
 
 import { SkeletonText } from "~/components/ui/skeleton";
-import { Text } from "~/components/ui/typography";
+import { Code } from "~/components/ui/text";
 import { Button } from "~/components/ui/button";
+import { Heading } from "~/components/ui/heading";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from "~/components/ui/dropdown-menu";
+import {
+  DescriptionDetails,
+  DescriptionList,
+  DescriptionTerm,
+} from "~/components/ui/description-list";
 import { DialogStoreProvider } from "~/components/ui/dialog-store-provider";
-import { Heading } from "~/components/core/Heading";
 import { AdminBreadcrumbs } from "~/components/core/Breadcrumbs";
 import { HideIfError } from "~/components/core/HideIfError";
 import { NotFoundMessage } from "~/components/core/NotFoundMessage";
@@ -49,25 +54,11 @@ export default function Page(props: { params: Promise<{ cameraId: string }> }) {
         <DialogStoreProvider
           contexts={[EditCamera.Context, DeleteCamera.Context]}
         >
-          <Heading>
+          <header className="mb-6 flex justify-between gap-4">
             <div className="space-y-2">
-              <Text as="h1" style="heading" className="flex items-center">
+              <Heading className="flex items-center">
                 {loading ? <SkeletonText className="w-40" /> : camera?.name}
-              </Text>
-              {loading ? (
-                <Text style="body">
-                  <SkeletonText className="w-60" />
-                </Text>
-              ) : (
-                camera?.description && (
-                  <Text
-                    style="body"
-                    className="text-muted-foreground flex items-center whitespace-pre-wrap"
-                  >
-                    {camera?.description}
-                  </Text>
-                )
-              )}
+              </Heading>
             </div>
             <DropdownMenu>
               {camera && (
@@ -82,7 +73,7 @@ export default function Page(props: { params: Promise<{ cameraId: string }> }) {
                 <DeleteCamera.Trigger />
               </DropdownMenuContent>
             </DropdownMenu>
-          </Heading>
+          </header>
           {camera && <EditCamera.Dialog cameraId={cameraId} camera={camera} />}
           {camera && (
             <DeleteCamera.Dialog cameraId={cameraId} camera={camera} />
@@ -91,38 +82,29 @@ export default function Page(props: { params: Promise<{ cameraId: string }> }) {
 
         {camera && (
           <>
-            <div className="space-y-6">
-              <section className="space-y-2">
-                <Text as="h2" style="subheading">
-                  Exif tag matches
-                </Text>
-                <Text style="muted">
-                  These tags are used to match a photo&apos;s Exif{" "}
-                  <code>Camera</code> tag to this camera when importing photos.
-                </Text>
+            <DescriptionList>
+              <DescriptionTerm>Camera ID</DescriptionTerm>
+              <DescriptionDetails>
+                <code>{cameraId}</code>
+              </DescriptionDetails>
+
+              <DescriptionTerm>Description</DescriptionTerm>
+              <DescriptionDetails>{camera.description}</DescriptionDetails>
+
+              <DescriptionTerm>Exif tag matches</DescriptionTerm>
+              <DescriptionDetails>
                 <ul className="ml-6">
                   {camera.exifTagMatches.map((match) => (
-                    <Text
-                      as="li"
-                      style="body"
-                      key={match}
-                      className="list-disc"
-                    >
-                      <code>{match}</code>
-                    </Text>
+                    <li key={match} className="list-disc">
+                      <Code>{match}</Code>
+                    </li>
                   ))}
                 </ul>
-                {!loading && camera.exifTagMatches.length === 0 && (
-                  <Text style="muted">(no tags listed)</Text>
-                )}
-              </section>
-              <section className="space-y-2">
-                <Text as="h2" style="subheading">
-                  Photos taken by this camera
-                </Text>
-                <Text style="muted">WIP</Text>
-              </section>
-            </div>
+              </DescriptionDetails>
+
+              <DescriptionTerm>Photos taken by this camera</DescriptionTerm>
+              <DescriptionDetails>(TODO)</DescriptionDetails>
+            </DescriptionList>
           </>
         )}
       </HideIfError>

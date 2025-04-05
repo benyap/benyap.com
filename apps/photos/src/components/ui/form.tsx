@@ -17,9 +17,8 @@ import {
 
 import { cn } from "~/lib/utils";
 import { Label } from "~/components/ui/label";
-
-import { Alert, AlertDescription, AlertTitle } from "./alert";
-import { Text } from "./typography";
+import { Text } from "~/components/ui/text";
+import { Alert, AlertDescription, AlertTitle } from "~/components/ui/alert";
 
 const Form = FormProvider;
 
