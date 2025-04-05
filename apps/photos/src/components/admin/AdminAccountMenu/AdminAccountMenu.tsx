@@ -8,9 +8,9 @@ import {
   DropdownMenuItem,
 } from "~/components/ui/dropdown-menu";
 
-export type AccountMenuProps = { className?: string };
+export type AdminAccountMenuProps = { className?: string };
 
-export function AccountMenu(props: AccountMenuProps) {
+export function AdminAccountMenu(props: AdminAccountMenuProps) {
   const { className } = props;
   const { signOut } = useFirebaseUser();
   return (

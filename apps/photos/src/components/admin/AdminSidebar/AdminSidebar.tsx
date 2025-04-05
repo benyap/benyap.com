@@ -38,7 +38,7 @@ import {
   SidebarRail,
 } from "~/components/ui/sidebar";
 import { Text } from "~/components/ui/typography";
-import { UserAvatar } from "~/components/admin/UserAvatar";
+import { UserAvatar } from "~/components/core/UserAvatar";
 import { LogoIcon } from "~/components/icons";
 
 const LINKS = [
@@ -84,7 +84,7 @@ const LINKS = [
   },
 ];
 
-export function AppSidebar() {
+export function AdminSidebar() {
   const { user, signOut } = useFirebaseUser();
 
   const pathname = usePathname();

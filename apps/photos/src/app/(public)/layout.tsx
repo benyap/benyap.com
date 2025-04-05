@@ -3,7 +3,7 @@ import { Metadata } from "next";
 import { Newsreader, Outfit, Geist_Mono } from "next/font/google";
 
 import { SITE_NAME, DESCRIPTION } from "~/constants/metadata";
-import { APP_HOST } from "~/constants/app";
+import { APP_URL } from "~/constants/app";
 
 import { FirebaseProvider } from "~/components/firebase/FirebaseProvider";
 
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     title: SITE_NAME,
     siteName: SITE_NAME,
     description: DESCRIPTION,
-    url: `https://${APP_HOST}`,
+    url: APP_URL,
   },
 };
 

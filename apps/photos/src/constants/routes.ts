@@ -1,10 +1,11 @@
-import { APP_HOST, isProduction } from "./app";
+import { APP_URL } from "./app";
 
 export const PublicRoute = {
-  url: `${isProduction() ? "https:" : "http:"}//${APP_HOST}`,
+  url: APP_URL,
 };
 
 export const AdminRoute = {
+  url: `${APP_URL}/admin`,
   index: "/admin",
   photos: {
     index: "/admin/photos",

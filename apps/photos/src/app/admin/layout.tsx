@@ -4,12 +4,12 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Newsreader, Geist_Mono, Inter } from "next/font/google";
 
 import { DESCRIPTION_ADMIN, SITE_NAME_ADMIN } from "~/constants/metadata";
-import { APP_HOST } from "~/constants/app";
+import { APP_URL } from "~/constants/app";
 
 import { SidebarProvider } from "~/components/ui/sidebar";
 import { Toaster } from "~/components/ui/sonner";
-import { AppHeader } from "~/components/admin/AppHeader";
-import { AppSidebar } from "~/components/admin/AppSidebar";
+import { AdminHeader } from "~/components/admin/AdminHeader";
+import { AdminSidebar } from "~/components/admin/AdminSidebar";
 import { RequireSignIn } from "~/components/auth/RequireSignIn/RequireSignIn";
 import { FirebaseUserProvider } from "~/components/firebase/FirebaseUserProvider";
 import { FirebaseProvider } from "~/components/firebase/FirebaseProvider";
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     title: SITE_NAME_ADMIN,
     siteName: SITE_NAME_ADMIN,
     description: DESCRIPTION_ADMIN,
-    url: `https://${APP_HOST}`,
+    url: APP_URL,
   },
 };
 
@@ -41,9 +41,9 @@ export default function Layout(props: React.PropsWithChildren) {
         <FirebaseUserProvider>
           <RequireSignIn>
             <SidebarProvider>
-              <AppSidebar />
+              <AdminSidebar />
               <div className="w-full">
-                <AppHeader />
+                <AdminHeader />
                 <main className="m-4">{children}</main>
                 <Toaster />
               </div>
