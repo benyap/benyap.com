@@ -16,7 +16,7 @@ service cloud.firestore {
       allow write: if isPhotosAdmin();
     }
 
-    match /lenses/{cameraId} {
+    match /lenses/{lensId} {
       allow read: if true;
       allow write: if isPhotosAdmin();
     }

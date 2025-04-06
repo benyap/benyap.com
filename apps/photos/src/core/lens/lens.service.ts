@@ -6,6 +6,7 @@ import {
   doc,
   FirestoreDataConverter,
   getFirestore,
+  serverTimestamp,
   updateDoc,
 } from "firebase/firestore";
 
@@ -26,6 +27,8 @@ const converter: FirestoreDataConverter<Lens, Lens> = {
     }).parse(snapshot.data());
   },
   toFirestore(object) {
+    object.createdAt ||= serverTimestamp();
+    object.updatedAt = serverTimestamp();
     return object as Lens;
   },
 };

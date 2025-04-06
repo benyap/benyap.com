@@ -55,7 +55,6 @@ export function CameraForm(props: {
   });
 
   function onSubmit(data: z.infer<typeof CameraFormSchema>) {
-    const now = new Date();
     onSave?.({
       name: data.name,
       description: data.description,
@@ -64,8 +63,8 @@ export function CameraForm(props: {
           ?.split("\n")
           .map((m) => m.trim())
           .filter((m) => m.length > 0) ?? [],
-      createdAt: now,
-      updatedAt: now,
+      createdAt: camera?.createdAt ?? new Date(),
+      updatedAt: new Date(),
     }).mapErr((error) => {
       console.error(error);
       form.setError("root", { message: String(error.cause) });
