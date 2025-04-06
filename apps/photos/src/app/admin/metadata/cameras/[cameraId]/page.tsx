@@ -52,7 +52,7 @@ export default function Page(props: { params: Promise<{ cameraId: string }> }) {
         <DialogStoreProvider
           contexts={[EditCameraDialog.Context, DeleteCameraDialog.Context]}
         >
-          <header className="mb-6 flex justify-between gap-4">
+          <header className="mb-6 flex items-center justify-between gap-4">
             <div className="space-y-2">
               <Heading className="flex items-center gap-2">
                 <CameraIcon className="text-muted-foreground" />

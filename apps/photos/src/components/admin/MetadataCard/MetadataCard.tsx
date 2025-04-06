@@ -9,18 +9,19 @@ import {
 } from "~/components/ui/card";
 import { SkeletonText } from "~/components/ui/skeleton";
 
-export function MetadataCard(props: {
-  href: string;
-  title?: React.ReactNode;
-  photoCount?: React.ReactNode;
-}) {
-  const { href, title, photoCount = "(unknown)" } = props;
+export function MetadataCard(
+  props: React.PropsWithChildren<{
+    href: string;
+    title?: React.ReactNode;
+  }>,
+) {
+  const { href, title, children } = props;
   return (
     <LinkCard dense href={href}>
       <CardHeader>
         <CardTitle className="truncate">{title}</CardTitle>
-        <CardDescription className="flex items-center gap-1">
-          <ImageIcon className="size-5 sm:size-4" /> {photoCount}
+        <CardDescription className="flex items-center gap-1.5">
+          {children}
         </CardDescription>
       </CardHeader>
     </LinkCard>

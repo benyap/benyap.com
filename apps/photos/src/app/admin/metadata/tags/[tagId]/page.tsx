@@ -46,8 +46,8 @@ export default function Page(props: { params: Promise<{ tagId: string }> }) {
         <DialogStoreProvider
           contexts={[EditTagDialog.Context, DeleteTagDialog.Context]}
         >
-          <header className="mb-6 flex justify-between gap-4">
-            <div className="flex items-center gap-2">
+          <header className="mb-6 flex items-center justify-between gap-4">
+            <div className="gap-2">
               <TagIcon className="text-muted-foreground" />
               <Heading>
                 {loading ? <SkeletonText className="w-40" /> : tag?.name}

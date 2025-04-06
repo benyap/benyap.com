@@ -1,24 +1,24 @@
 "use client";
 
-import { ApertureIcon } from "lucide-react";
+import { MapPinIcon } from "lucide-react";
 
 import { AdminRoute } from "~/constants/routes";
-import { getLenses } from "~/core/lens";
+import { getLocations } from "~/core/location";
 
 import { useSnapshot } from "~/hooks/use-snapshot";
 import { Text } from "~/components/ui/text";
 import { HideIfError } from "~/components/core/HideIfError";
 import { MetadataCard } from "~/components/admin/MetadataCard";
 
-export function LensList() {
-  const [loading, snapshot, error] = useSnapshot(getLenses());
+export function LocationList() {
+  const [loading, snapshot, error] = useSnapshot(getLocations());
 
   return (
-    <HideIfError errorTitle="Could not list lenses" error={error}>
+    <HideIfError errorTitle="Could not list locations" error={error}>
       <div className="@container">
         {!loading && snapshot?.empty && (
           <Text color="secondary">
-            No lenses found. Create one to get started.
+            No locations found. Create one to get started.
           </Text>
         )}
         <div className="@min-lg:grid-cols-2 @min-4xl:grid-cols-3 @min-7xl:grid-cols-4 grid grid-cols-1 gap-2">
@@ -31,16 +31,16 @@ export function LensList() {
           )}
           {!loading &&
             snapshot?.docs.map((doc) => {
-              const lensId = doc.id;
-              const lens = doc.data();
+              const locationId = doc.id;
+              const location = doc.data();
               return (
                 <MetadataCard
-                  key={lensId}
-                  href={AdminRoute.metadata.lenses.lens(lensId)}
-                  title={lens.name}
+                  key={locationId}
+                  href={AdminRoute.metadata.locations.location(locationId)}
+                  title={location.name}
                 >
-                  <ApertureIcon className="size-5 sm:size-4" />
-                  <Text>Lens</Text>
+                  <MapPinIcon className="size-5 sm:size-4" />
+                  <Text className="capitalize">{location.type}</Text>
                 </MetadataCard>
               );
             })}

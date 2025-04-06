@@ -14,7 +14,7 @@ import { MenuTriggeredDialog } from "~/components/core/MenuTriggeredDialog";
 
 DeleteTagDialog.Context = createContext<DialogStoreApi | null>(null);
 
-DeleteTagDialog.Trigger = function DeleteCameraTrigger() {
+DeleteTagDialog.Trigger = function DeleteTagTrigger() {
   return (
     <MenuTriggeredDialog.Trigger context={DeleteTagDialog.Context}>
       Delete tag

@@ -1,5 +1,7 @@
 "use client";
 
+import { CameraIcon } from "lucide-react";
+
 import { AdminRoute } from "~/constants/routes";
 import { getCameras } from "~/core/camera";
 
@@ -14,6 +16,11 @@ export function CameraList() {
   return (
     <HideIfError errorTitle="Could not list cameras" error={error}>
       <div className="@container">
+        {!loading && snapshot?.empty && (
+          <Text color="secondary">
+            No cameras found. Create one to get started.
+          </Text>
+        )}
         <div className="@min-lg:grid-cols-2 @min-4xl:grid-cols-3 @min-7xl:grid-cols-4 grid grid-cols-1 gap-2">
           {loading && (
             <>
@@ -21,11 +28,6 @@ export function CameraList() {
               <MetadataCard.Placeholder />
               <MetadataCard.Placeholder />
             </>
-          )}
-          {!loading && snapshot?.empty && (
-            <Text color="secondary">
-              No cameras found. Create one to get started.
-            </Text>
           )}
           {snapshot?.docs.map((doc) => {
             const cameraId = doc.id;
@@ -35,7 +37,10 @@ export function CameraList() {
                 key={cameraId}
                 href={AdminRoute.metadata.cameras.camera(cameraId)}
                 title={camera.name}
-              />
+              >
+                <CameraIcon className="size-5 sm:size-4" />
+                <Text>Camera</Text>
+              </MetadataCard>
             );
           })}
         </div>

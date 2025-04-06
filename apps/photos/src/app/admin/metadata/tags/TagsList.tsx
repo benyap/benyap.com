@@ -1,5 +1,7 @@
 "use client";
 
+import { TagIcon } from "lucide-react";
+
 import { AdminRoute } from "~/constants/routes";
 import { getTags } from "~/core/tag";
 
@@ -14,6 +16,11 @@ export function TagsList() {
   return (
     <HideIfError errorTitle="Could not list tags" error={error}>
       <div className="@container">
+        {!loading && snapshot?.empty && (
+          <Text color="secondary">
+            No tags found. Create one to get started.
+          </Text>
+        )}
         <div className="@min-lg:grid-cols-2 @min-4xl:grid-cols-3 @min-7xl:grid-cols-4 grid grid-cols-1 gap-2">
           {loading && (
             <>
@@ -21,11 +28,6 @@ export function TagsList() {
               <MetadataCard.Placeholder />
               <MetadataCard.Placeholder />
             </>
-          )}
-          {!loading && snapshot?.empty && (
-            <Text color="secondary">
-              No tags found. Create one to get started.
-            </Text>
           )}
           {!loading &&
             snapshot?.docs.map((doc) => {
@@ -36,7 +38,10 @@ export function TagsList() {
                   key={tagId}
                   href={AdminRoute.metadata.tags.tag(tagId)}
                   title={tag.name}
-                />
+                >
+                  <TagIcon className="size-5 sm:size-4" />
+                  <Text>Tag</Text>
+                </MetadataCard>
               );
             })}
         </div>

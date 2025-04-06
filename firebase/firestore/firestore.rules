@@ -21,6 +21,11 @@ service cloud.firestore {
       allow write: if isPhotosAdmin();
     }
 
+    match /locations/{locationId} {
+      allow read: if true;
+      allow write: if isPhotosAdmin();
+    }
+
     match /tags/{tagId} {
       allow read: if true;
       allow write: if isPhotosAdmin();

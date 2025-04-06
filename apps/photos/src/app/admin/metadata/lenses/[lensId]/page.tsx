@@ -26,7 +26,7 @@ import { DeleteLensDialog } from "./DeleteLens";
 import { LensDetails } from "./LensDetails";
 
 export default function Page(props: { params: Promise<{ lensId: string }> }) {
-  const { lensId: lensId } = use(props.params);
+  const { lensId } = use(props.params);
 
   const [loading, snapshot, error, notFound] = useSnapshot(getLens(lensId));
 
@@ -44,12 +44,12 @@ export default function Page(props: { params: Promise<{ lensId: string }> }) {
       />
 
       <HideIfError errorTitle={`Could not get lens ${lensId}`} error={error}>
-        {notFound && <NotFoundMessage title="lens not found" />}
+        {notFound && <NotFoundMessage title="Lens not found" />}
 
         <DialogStoreProvider
           contexts={[EditLensDialog.Context, DeleteLensDialog.Context]}
         >
-          <header className="mb-6 flex justify-between gap-4">
+          <header className="mb-6 flex items-center justify-between gap-4">
             <div className="space-y-2">
               <Heading className="flex items-center gap-2">
                 <ApertureIcon className="text-muted-foreground" />
