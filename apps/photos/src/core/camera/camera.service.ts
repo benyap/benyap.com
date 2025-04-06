@@ -6,6 +6,8 @@ import {
   doc,
   FirestoreDataConverter,
   getFirestore,
+  orderBy,
+  query,
   serverTimestamp,
   updateDoc,
 } from "firebase/firestore";
@@ -38,7 +40,7 @@ function camerasCollection() {
 }
 
 export function getCameras() {
-  return camerasCollection();
+  return query(camerasCollection(), orderBy("name"));
 }
 
 export function getCamera(id: string) {

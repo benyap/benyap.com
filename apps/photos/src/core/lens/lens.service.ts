@@ -6,6 +6,8 @@ import {
   doc,
   FirestoreDataConverter,
   getFirestore,
+  orderBy,
+  query,
   serverTimestamp,
   updateDoc,
 } from "firebase/firestore";
@@ -38,7 +40,7 @@ function lensCollection() {
 }
 
 export function getLenses() {
-  return lensCollection();
+  return query(lensCollection(), orderBy("name"));
 }
 
 export function getLens(id: string) {
