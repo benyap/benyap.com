@@ -1,0 +1,76 @@
+name: Deploy Firebase
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "Environment to deploy to"
+        type: choice
+        options:
+          - dev
+          - prod
+        default: develop
+
+jobs:
+  deploy-firebase:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Map environment to branch
+        run: |
+          case "${{ inputs.environment }}" in
+            dev)  BRANCH="develop" ;;
+            prod) BRANCH="main" ;;
+            *)    echo "Unknown environment"; exit 1 ;;
+          esac
+          echo "BRANCH=$BRANCH" >> $GITHUB_ENV
+
+      - name: Checkout branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ env.BRANCH }}
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        id: pnpm-install
+        with:
+          run_install: false
+
+      - name: Get pnpm store directory
+        id: pnpm-cache
+        run: echo "pnpm_cache_dir=$(pnpm store path)" >> $GITHUB_OUTPUT
+
+      - name: Setup pnpm cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ steps.pnpm-cache.outputs.pnpm_cache_dir }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: ${{ runner.os }}-pnpm-store-
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build functions
+        run: pnpm build --filter=functions
+
+      - name: Map environment to secret
+        run: |
+          case "${{ inputs.environment }}" in
+            dev)  GCP_CREDENTIALS="${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_DEV }}" ;;
+            prod) GCP_CREDENTIALS="${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_PROD }}" ;;
+            *)    echo "Unknown environment"; exit 1 ;;
+          esac
+          echo "GCP_CREDENTIALS=$GCP_CREDENTIALS" >> $GITHUB_ENV
+
+      - name: Deploy to Firebase
+        uses: w9jds/firebase-action@master
+        with:
+          args: deploy -P ${{ inputs.environment }} --force
+        env:
+          GCP_SA_KEY: ${{ env.GCP_CREDENTIALS }}
