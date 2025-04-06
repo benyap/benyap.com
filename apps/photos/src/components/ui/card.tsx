@@ -59,7 +59,7 @@ function CardHeader({ className, ...props }: React.ComponentProps<"div">) {
       data-slot="card-header"
       className={cn(
         "@container/card-header has-data-[slot=card-action]:grid-cols-[1fr_auto] [.border-b]:pb-6 grid auto-rows-min grid-rows-[auto_auto] items-start",
-        !dense && "gap-1.5 px-6",
+        !dense && "gap-2 px-6 sm:gap-1.5",
         dense && "gap-1 px-4",
         className,
       )}
@@ -89,7 +89,7 @@ function CardDescription({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <Text
       data-slot="card-description"
-      className={cn("text-muted-foreground text-sm", className)}
+      className={cn("text-muted-foreground", className)}
       {...props}
       color="secondary"
     />
