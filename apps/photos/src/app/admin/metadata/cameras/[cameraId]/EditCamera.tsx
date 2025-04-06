@@ -6,56 +6,37 @@ import { toast } from "sonner";
 import { Camera, updateCamera } from "~/core/camera";
 import { DialogStoreApi } from "~/stores/dialog";
 
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-} from "~/components/ui/dialog";
 import { CameraForm } from "~/components/admin/CameraForm";
-import { DropdownMenuItem } from "~/components/ui/dropdown-menu";
 import { useDialogStore } from "~/components/ui/dialog-store-provider";
+import { MenuTriggeredDialog } from "~/components/core/MenuTriggeredDialog";
 
-export function EditCamera() {}
+EditCameraDialog.Context = createContext<DialogStoreApi | null>(null);
 
-EditCamera.Context = createContext<DialogStoreApi | null>(null);
-
-EditCamera.Trigger = function EditCameraTrigger() {
-  const { setOpen } = useDialogStore(EditCamera.Context);
+EditCameraDialog.Trigger = function EditCameraDialogTrigger() {
   return (
-    <DropdownMenuItem onClick={() => setOpen(true)}>
+    <MenuTriggeredDialog.Trigger context={EditCameraDialog.Context}>
       Edit camera
-    </DropdownMenuItem>
+    </MenuTriggeredDialog.Trigger>
   );
 };
 
-EditCamera.Dialog = function EditCameraDialog(props: {
-  cameraId: string;
-  camera: Camera;
-}) {
+export function EditCameraDialog(props: { cameraId: string; camera: Camera }) {
   const { cameraId, camera } = props;
 
-  const { open, setOpen } = useDialogStore(EditCamera.Context);
+  const { setOpen } = useDialogStore(EditCameraDialog.Context);
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
-      <DialogContent>
-        <DialogHeader>
-          <DialogTitle>Edit camera</DialogTitle>
-          <DialogDescription></DialogDescription>
-        </DialogHeader>
-        <CameraForm
-          camera={camera}
-          onSave={(camera) =>
-            updateCamera(cameraId, camera)
-              .andTee(() =>
-                toast(`Updated camera ${camera.name}`, { dismissible: true }),
-              )
-              .andTee(() => setOpen(false))
-          }
-        />
-      </DialogContent>
-    </Dialog>
+    <MenuTriggeredDialog title="Edit camera" context={EditCameraDialog.Context}>
+      <CameraForm
+        camera={camera}
+        onSave={(camera) =>
+          updateCamera(cameraId, camera)
+            .andTee(() =>
+              toast(`Updated camera ${camera.name}`, { dismissible: true }),
+            )
+            .andTee(() => setOpen(false))
+        }
+      />
+    </MenuTriggeredDialog>
   );
-};
+}

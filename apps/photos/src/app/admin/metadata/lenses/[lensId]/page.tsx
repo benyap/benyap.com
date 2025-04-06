@@ -20,8 +20,8 @@ import { AdminBreadcrumbs } from "~/components/core/Breadcrumbs";
 import { HideIfError } from "~/components/core/HideIfError";
 import { NotFoundMessage } from "~/components/core/NotFoundMessage";
 
-import { EditLens } from "./EditLens";
-import { DeleteLens } from "./DeleteLens";
+import { EditLensDialog } from "./EditLens";
+import { DeleteLensDialog } from "./DeleteLens";
 import { LensDetails } from "./LensDetails";
 
 export default function Page(props: { params: Promise<{ lensId: string }> }) {
@@ -43,7 +43,9 @@ export default function Page(props: { params: Promise<{ lensId: string }> }) {
       <HideIfError errorTitle={`Could not get lens ${lensId}`} error={error}>
         {notFound && <NotFoundMessage title="lens not found" />}
 
-        <DialogStoreProvider contexts={[EditLens.Context, DeleteLens.Context]}>
+        <DialogStoreProvider
+          contexts={[EditLensDialog.Context, DeleteLensDialog.Context]}
+        >
           <header className="mb-6 flex justify-between gap-4">
             <div className="space-y-2">
               <Heading className="flex items-center">
@@ -59,13 +61,13 @@ export default function Page(props: { params: Promise<{ lensId: string }> }) {
                 </DropdownMenuTrigger>
               )}
               <DropdownMenuContent className="mr-4 mt-1">
-                <EditLens.Trigger />
-                <DeleteLens.Trigger />
+                <EditLensDialog.Trigger />
+                <DeleteLensDialog.Trigger />
               </DropdownMenuContent>
             </DropdownMenu>
           </header>
-          {lens && <EditLens.Dialog lensId={lensId} lens={lens} />}
-          {lens && <DeleteLens.Dialog lensId={lensId} lens={lens} />}
+          {lens && <EditLensDialog lensId={lensId} lens={lens} />}
+          {lens && <DeleteLensDialog lensId={lensId} lens={lens} />}
         </DialogStoreProvider>
 
         {lens && <LensDetails lensId={lensId} lens={lens} />}

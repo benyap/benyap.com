@@ -10,7 +10,6 @@ import {
   Camera,
   CameraSchema,
   CameraCreateFailedException,
-  CameraDeleteFailedException,
   CameraUpdateFailedException,
 } from "~/core/camera";
 
@@ -120,38 +119,6 @@ export function CameraForm(props: {
           )}
         />
         <Button type="submit">Save</Button>
-      </form>
-    </Form>
-  );
-}
-
-export function DeleteCameraForm(props: {
-  onDelete?: () => ResultAsync<DocumentReference, CameraDeleteFailedException>;
-  onCancel?: () => void;
-}) {
-  const { onDelete, onCancel } = props;
-
-  const form = useForm();
-
-  function onSubmit() {
-    onDelete?.().mapErr((error) => {
-      console.error(error);
-      form.setError("root", { message: error.message });
-    });
-  }
-
-  return (
-    <Form {...form}>
-      <form className="space-y-6" onSubmit={form.handleSubmit(onSubmit)}>
-        <FormRootErrorMessage form={form} />
-        <div className="flex gap-2">
-          <Button type="submit" variant="destructive">
-            Delete
-          </Button>
-          <Button type="button" variant="ghost" onClick={onCancel}>
-            Cancel
-          </Button>
-        </div>
       </form>
     </Form>
   );

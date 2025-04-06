@@ -20,8 +20,8 @@ import { AdminBreadcrumbs } from "~/components/core/Breadcrumbs";
 import { HideIfError } from "~/components/core/HideIfError";
 import { NotFoundMessage } from "~/components/core/NotFoundMessage";
 
-import { EditCamera } from "./EditCamera";
-import { DeleteCamera } from "./DeleteCamera";
+import { EditCameraDialog } from "./EditCamera";
+import { DeleteCameraDialog } from "./DeleteCamera";
 import { CameraDetails } from "./CameraDetails";
 
 export default function Page(props: { params: Promise<{ cameraId: string }> }) {
@@ -47,7 +47,7 @@ export default function Page(props: { params: Promise<{ cameraId: string }> }) {
         {notFound && <NotFoundMessage title="Camera not found" />}
 
         <DialogStoreProvider
-          contexts={[EditCamera.Context, DeleteCamera.Context]}
+          contexts={[EditCameraDialog.Context, DeleteCameraDialog.Context]}
         >
           <header className="mb-6 flex justify-between gap-4">
             <div className="space-y-2">
@@ -64,15 +64,13 @@ export default function Page(props: { params: Promise<{ cameraId: string }> }) {
                 </DropdownMenuTrigger>
               )}
               <DropdownMenuContent className="mr-4 mt-1">
-                <EditCamera.Trigger />
-                <DeleteCamera.Trigger />
+                <EditCameraDialog.Trigger />
+                <DeleteCameraDialog.Trigger />
               </DropdownMenuContent>
             </DropdownMenu>
           </header>
-          {camera && <EditCamera.Dialog cameraId={cameraId} camera={camera} />}
-          {camera && (
-            <DeleteCamera.Dialog cameraId={cameraId} camera={camera} />
-          )}
+          {camera && <EditCameraDialog cameraId={cameraId} camera={camera} />}
+          {camera && <DeleteCameraDialog cameraId={cameraId} camera={camera} />}
         </DialogStoreProvider>
 
         {camera && <CameraDetails cameraId={cameraId} camera={camera} />}

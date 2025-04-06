@@ -6,54 +6,37 @@ import { toast } from "sonner";
 import { Lens, updateLens } from "~/core/lens";
 import { DialogStoreApi } from "~/stores/dialog";
 
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-} from "~/components/ui/dialog";
 import { LensForm } from "~/components/admin/LensForm";
-import { DropdownMenuItem } from "~/components/ui/dropdown-menu";
 import { useDialogStore } from "~/components/ui/dialog-store-provider";
+import { MenuTriggeredDialog } from "~/components/core/MenuTriggeredDialog";
 
-export function EditLens() {}
+EditLensDialog.Context = createContext<DialogStoreApi | null>(null);
 
-EditLens.Context = createContext<DialogStoreApi | null>(null);
-
-EditLens.Trigger = function EditLensTrigger() {
-  const { setOpen } = useDialogStore(EditLens.Context);
+EditLensDialog.Trigger = function EditLensDialogTrigger() {
   return (
-    <DropdownMenuItem onClick={() => setOpen(true)}>Edit lens</DropdownMenuItem>
+    <MenuTriggeredDialog.Trigger context={EditLensDialog.Context}>
+      Edit lens
+    </MenuTriggeredDialog.Trigger>
   );
 };
 
-EditLens.Dialog = function EditLensDialog(props: {
-  lensId: string;
-  lens: Lens;
-}) {
+export function EditLensDialog(props: { lensId: string; lens: Lens }) {
   const { lensId, lens } = props;
 
-  const { open, setOpen } = useDialogStore(EditLens.Context);
+  const { setOpen } = useDialogStore(EditLensDialog.Context);
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
-      <DialogContent>
-        <DialogHeader>
-          <DialogTitle>Edit lens</DialogTitle>
-          <DialogDescription></DialogDescription>
-        </DialogHeader>
-        <LensForm
-          lens={lens}
-          onSave={(lens) =>
-            updateLens(lensId, lens)
-              .andTee(() =>
-                toast(`Updated lens ${lens.name}`, { dismissible: true }),
-              )
-              .andTee(() => setOpen(false))
-          }
-        />
-      </DialogContent>
-    </Dialog>
+    <MenuTriggeredDialog title="Edit lens" context={EditLensDialog.Context}>
+      <LensForm
+        lens={lens}
+        onSave={(lens) =>
+          updateLens(lensId, lens)
+            .andTee(() =>
+              toast(`Updated lens ${lens.name}`, { dismissible: true }),
+            )
+            .andTee(() => setOpen(false))
+        }
+      />
+    </MenuTriggeredDialog>
   );
-};
+}
