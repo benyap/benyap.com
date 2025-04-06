@@ -14,6 +14,7 @@ import {
   MapPinIcon,
   TagIcon,
 } from "lucide-react";
+import { useEffect } from "react";
 
 import { AdminRoute, PublicRoute } from "~/constants/routes";
 
@@ -40,7 +41,6 @@ import { Text } from "~/components/ui/text";
 import { UserAvatar } from "~/components/core/UserAvatar";
 import { LogoIcon } from "~/components/icons";
 import { AdminAccountMenu } from "~/components/admin/AdminAccountMenu";
-import { useEffect } from "react";
 
 const LINKS = [
   {
@@ -101,7 +101,7 @@ export function AdminSidebar() {
     <Sidebar variant="floating">
       <SidebarHeader className="flex flex-row items-center gap-1 p-4 md:py-2">
         <LogoIcon className="size-5" />
-        <Text color="custom" className="text-theme-accent font-bold">
+        <Text color="custom" className="text-brand font-bold">
           Photos
         </Text>
         <Text>admin</Text>
@@ -115,9 +115,8 @@ export function AdminSidebar() {
                   <Link href={AdminRoute.index}>
                     <HomeIcon
                       className={clsx(
-                        homeActive
-                          ? "text-theme-accent"
-                          : "text-muted-foreground",
+                        "!size-5 sm:!size-4",
+                        homeActive ? "text-brand" : "text-muted-foreground",
                       )}
                     />
                     <Text className={clsx(homeActive && "font-medium")}>
@@ -133,7 +132,7 @@ export function AdminSidebar() {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <ExternalLinkIcon className="text-muted-foreground" />
+                    <ExternalLinkIcon className="text-muted-foreground !size-5 sm:!size-4" />
                     <Text>Visit site</Text>
                   </Link>
                 </SidebarMenuButton>
@@ -154,9 +153,8 @@ export function AdminSidebar() {
                         <Link href={href}>
                           <Icon
                             className={clsx(
-                              active
-                                ? "text-theme-accent"
-                                : "text-muted-foreground",
+                              "!size-5 sm:!size-4",
+                              active ? "text-brand" : "text-muted-foreground",
                             )}
                           />
                           <Text className={clsx(active && "font-medium")}>

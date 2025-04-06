@@ -37,8 +37,8 @@
   --sidebar-border: oklch(0.929 0.013 255.508);
   --sidebar-ring: oklch(0.704 0.04 256.788);
 
-  /* custom colours */
-  --theme-accent: var(--color-sky-600);
+  /* custom variables */
+  --brand: var(--color-sky-600);
 }
 
 .dark {
@@ -74,8 +74,8 @@
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.551 0.027 264.364);
 
-  /* custom colours */
-  --theme-accent: var(--color-sky-500);
+  /* custom variables */
+  --brand: var(--color-sky-500);
 }
 
 @theme inline {
@@ -115,9 +115,9 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
 
-  /* custom colours */
-  --color-theme-accent: var(--theme-accent);
-  --fill-theme-accent: var(--theme-accent);
+  /* custom variables */
+  --color-brand: var(--brand);
+  --fill-brand: var(--brand);
 }
 
 @layer base {

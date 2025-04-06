@@ -10,7 +10,7 @@ export function AdminBreadcrumbs(props: { links: BreadcrumbLink[] }) {
     <Breadcrumbs
       root={{
         href: AdminRoute.index,
-        label: <HomeIcon className="size-4" />,
+        label: <HomeIcon className="size-5 sm:size-4" />,
         current: links.length === 0,
       }}
       links={links}

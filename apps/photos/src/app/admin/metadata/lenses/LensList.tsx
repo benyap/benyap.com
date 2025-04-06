@@ -10,6 +10,7 @@ import { Text } from "~/components/ui/text";
 import { SkeletonText } from "~/components/ui/skeleton";
 import { HideIfError } from "~/components/core/HideIfError";
 import {
+  Card,
   CardDescription,
   CardHeader,
   CardTitle,
@@ -35,11 +36,12 @@ export function LensList() {
               No lenses found. Create one to get started.
             </Text>
           )}
-          {snapshot?.docs.map((doc) => {
-            const lensId = doc.id;
-            const lens = doc.data();
-            return <LensCard key={lensId} lensId={lensId} lens={lens} />;
-          })}
+          {!loading &&
+            snapshot?.docs.map((doc) => {
+              const lensId = doc.id;
+              const lens = doc.data();
+              return <LensCard key={lensId} lensId={lensId} lens={lens} />;
+            })}
         </div>
       </div>
     </HideIfError>
@@ -52,10 +54,8 @@ function LensCard(props: { lensId: string; lens: Lens }) {
     <LinkCard dense href={AdminRoute.metadata.lenses.lens(lensId)}>
       <CardHeader>
         <CardTitle className="truncate">{lens.name}</CardTitle>
-        <CardDescription>
-          <Text className="flex items-center gap-1">
-            <ImageIcon className="size-4" /> (unknown)
-          </Text>
+        <CardDescription className="flex items-center gap-1">
+          <ImageIcon className="size-5 sm:size-4" /> (unknown)
         </CardDescription>
       </CardHeader>
     </LinkCard>
@@ -64,15 +64,16 @@ function LensCard(props: { lensId: string; lens: Lens }) {
 
 function LensCardPlaceholder() {
   return (
-    <div className="space-y-1 rounded-md border p-3">
-      <Text className="font-medium">
-        <SkeletonText className="w-40" />
-      </Text>
-      <div className="flex gap-4">
-        <Text className="flex items-center gap-1">
-          <ImageIcon className="size-4" /> <SkeletonText className="w-8" />
-        </Text>
-      </div>
-    </div>
+    <Card dense>
+      <CardHeader>
+        <CardTitle>
+          <SkeletonText className="w-40" />
+        </CardTitle>
+        <CardDescription className="flex items-center gap-1">
+          <ImageIcon className="size-5 sm:size-4" />
+          <SkeletonText className="w-8" />
+        </CardDescription>
+      </CardHeader>
+    </Card>
   );
 }

@@ -31,7 +31,7 @@ export function Breadcrumbs(props: {
             </Link>
             <ChevronRightIcon
               aria-hidden="true"
-              className="size-4 shrink-0 text-slate-400"
+              className="size-5 shrink-0 text-slate-400 sm:size-4"
             />
           </div>
         </li>
@@ -52,7 +52,7 @@ export function Breadcrumbs(props: {
                 {index !== links.length - 1 && (
                   <ChevronRightIcon
                     aria-hidden="true"
-                    className="ml-2 size-4 shrink-0 text-slate-400"
+                    className="ml-2 size-5 shrink-0 text-slate-400 sm:size-4"
                   />
                 )}
               </div>
