@@ -39,7 +39,7 @@ export function CameraList() {
                 title={camera.name}
               >
                 <CameraIcon className="size-5 sm:size-4" />
-                <Text>Camera</Text>
+                Camera
               </MetadataCard>
             );
           })}

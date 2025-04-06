@@ -40,7 +40,7 @@ export function LensList() {
                   title={lens.name}
                 >
                   <ApertureIcon className="size-5 sm:size-4" />
-                  <Text>Lens</Text>
+                  Lens
                 </MetadataCard>
               );
             })}

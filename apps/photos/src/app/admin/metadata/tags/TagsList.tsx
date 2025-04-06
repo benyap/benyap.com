@@ -40,7 +40,7 @@ export function TagsList() {
                   title={tag.name}
                 >
                   <TagIcon className="size-5 sm:size-4" />
-                  <Text>Tag</Text>
+                  Tag
                 </MetadataCard>
               );
             })}

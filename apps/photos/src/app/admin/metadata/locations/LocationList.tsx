@@ -40,7 +40,7 @@ export function LocationList() {
                   title={location.name}
                 >
                   <MapPinIcon className="size-5 sm:size-4" />
-                  <Text className="capitalize">{location.type}</Text>
+                  <span className="capitalize">{location.type}</span>
                 </MetadataCard>
               );
             })}
