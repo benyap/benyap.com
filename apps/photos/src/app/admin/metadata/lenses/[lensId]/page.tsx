@@ -6,6 +6,7 @@ import { EllipsisVerticalIcon } from "lucide-react";
 import { AdminRoute } from "~/constants/routes";
 import { getLens } from "~/core/lens";
 import { useSnapshot } from "~/hooks/use-snapshot";
+import { useDocumentTitle } from "~/hooks/use-document-title";
 
 import { SkeletonText } from "~/components/ui/skeleton";
 import { Button } from "~/components/ui/button";
@@ -30,6 +31,8 @@ export default function Page(props: { params: Promise<{ lensId: string }> }) {
   const [loading, snapshot, error, notFound] = useSnapshot(getLens(lensId));
 
   const lens = snapshot?.data();
+
+  useDocumentTitle(lens?.name);
 
   return (
     <>

@@ -6,6 +6,7 @@ import { EllipsisVerticalIcon } from "lucide-react";
 import { AdminRoute } from "~/constants/routes";
 import { getCamera } from "~/core/camera";
 import { useSnapshot } from "~/hooks/use-snapshot";
+import { useDocumentTitle } from "~/hooks/use-document-title";
 
 import { SkeletonText } from "~/components/ui/skeleton";
 import { Button } from "~/components/ui/button";
@@ -30,6 +31,8 @@ export default function Page(props: { params: Promise<{ cameraId: string }> }) {
   const [loading, snapshot, error, notFound] = useSnapshot(getCamera(cameraId));
 
   const camera = snapshot?.data();
+
+  useDocumentTitle(camera?.name);
 
   return (
     <>

@@ -3,7 +3,11 @@ import { Metadata } from "next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Newsreader, Geist_Mono, Inter } from "next/font/google";
 
-import { DESCRIPTION_ADMIN, SITE_NAME_ADMIN } from "~/constants/metadata";
+import {
+  DESCRIPTION_ADMIN,
+  SITE_NAME_ADMIN,
+  SITE_NAME_ADMIN_TEMPLATE,
+} from "~/constants/metadata";
 import { APP_URL } from "~/constants/app";
 
 import { SidebarProvider } from "~/components/ui/sidebar";
@@ -21,7 +25,7 @@ const mono = Geist_Mono({ subsets: ["latin"], variable: "--font-mono" });
 export const metadata: Metadata = {
   title: {
     default: SITE_NAME_ADMIN,
-    template: `%s - ${SITE_NAME_ADMIN}`,
+    template: SITE_NAME_ADMIN_TEMPLATE,
   },
   description: DESCRIPTION_ADMIN,
   openGraph: {
