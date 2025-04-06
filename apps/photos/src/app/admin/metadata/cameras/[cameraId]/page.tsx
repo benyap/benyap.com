@@ -1,7 +1,7 @@
 "use client";
 
 import { use } from "react";
-import { EllipsisVerticalIcon } from "lucide-react";
+import { CameraIcon, EllipsisVerticalIcon } from "lucide-react";
 
 import { AdminRoute } from "~/constants/routes";
 import { getCamera } from "~/core/camera";
@@ -54,18 +54,17 @@ export default function Page(props: { params: Promise<{ cameraId: string }> }) {
         >
           <header className="mb-6 flex justify-between gap-4">
             <div className="space-y-2">
-              <Heading className="flex items-center">
+              <Heading className="flex items-center gap-2">
+                <CameraIcon className="text-muted-foreground" />
                 {loading ? <SkeletonText className="w-40" /> : camera?.name}
               </Heading>
             </div>
             <DropdownMenu>
-              {camera && (
-                <DropdownMenuTrigger asChild>
-                  <Button variant="outline" size="icon">
-                    <EllipsisVerticalIcon />
-                  </Button>
-                </DropdownMenuTrigger>
-              )}
+              <DropdownMenuTrigger asChild disabled={!camera}>
+                <Button variant="outline" size="icon">
+                  <EllipsisVerticalIcon />
+                </Button>
+              </DropdownMenuTrigger>
               <DropdownMenuContent className="mr-4 mt-1">
                 <EditCameraDialog.Trigger />
                 <DeleteCameraDialog.Trigger />

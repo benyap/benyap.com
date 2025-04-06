@@ -1,7 +1,7 @@
 "use client";
 
 import { use } from "react";
-import { EllipsisVerticalIcon } from "lucide-react";
+import { ApertureIcon, EllipsisVerticalIcon } from "lucide-react";
 
 import { AdminRoute } from "~/constants/routes";
 import { getLens } from "~/core/lens";
@@ -51,18 +51,17 @@ export default function Page(props: { params: Promise<{ lensId: string }> }) {
         >
           <header className="mb-6 flex justify-between gap-4">
             <div className="space-y-2">
-              <Heading className="flex items-center">
+              <Heading className="flex items-center gap-2">
+                <ApertureIcon className="text-muted-foreground" />
                 {loading ? <SkeletonText className="w-40" /> : lens?.name}
               </Heading>
             </div>
             <DropdownMenu>
-              {lens && (
-                <DropdownMenuTrigger asChild>
-                  <Button variant="outline" size="icon">
-                    <EllipsisVerticalIcon />
-                  </Button>
-                </DropdownMenuTrigger>
-              )}
+              <DropdownMenuTrigger asChild disabled={!lens}>
+                <Button variant="outline" size="icon">
+                  <EllipsisVerticalIcon />
+                </Button>
+              </DropdownMenuTrigger>
               <DropdownMenuContent className="mr-4 mt-1">
                 <EditLensDialog.Trigger />
                 <DeleteLensDialog.Trigger />
