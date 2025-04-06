@@ -1,5 +1,34 @@
 # Changelog
 
+## 2.3.0 (2025-04-06)
+
+* chore: add manual firebase deployment workflow ([2813eb6](https://github.com/benyap/benyap.com/commit/2813eb6))
+* chore: move root layouts into (public) folder ([61fd5cc](https://github.com/benyap/benyap.com/commit/61fd5cc))
+* chore: update dependencies ([bc0b875](https://github.com/benyap/benyap.com/commit/bc0b875))
+* chore(photos): abstract repeated card pattern ([650a540](https://github.com/benyap/benyap.com/commit/650a540))
+* chore(photos): abstract repeated dialog pattern ([6cc43ac](https://github.com/benyap/benyap.com/commit/6cc43ac))
+* chore(photos): add dynamic title to camera and lens pages ([f6c0efa](https://github.com/benyap/benyap.com/commit/f6c0efa))
+* chore(photos): add icons to camera and lens titles ([ce79d33](https://github.com/benyap/benyap.com/commit/ce79d33))
+* chore(photos): clean up, fix incorrect app URL ([54d9d9f](https://github.com/benyap/benyap.com/commit/54d9d9f))
+* chore(photos): improve error and not found handling ([eb42369](https://github.com/benyap/benyap.com/commit/eb42369))
+* chore(photos): improve ui consistency, rename css variable theme-accent to brand ([6c391ed](https://github.com/benyap/benyap.com/commit/6c391ed))
+* chore(photos): sort cameras and lenses by names ([a0b607b](https://github.com/benyap/benyap.com/commit/a0b607b))
+* chore(photos): update destructive color ([2f5e778](https://github.com/benyap/benyap.com/commit/2f5e778))
+* chore(photos): update font and site meta for photos admin ([9632f26](https://github.com/benyap/benyap.com/commit/9632f26))
+* feat(photos): add account page ([a6b334a](https://github.com/benyap/benyap.com/commit/a6b334a))
+* feat(photos): add admin sidebar links ([edb1091](https://github.com/benyap/benyap.com/commit/edb1091))
+* feat(photos): add basic camera management ([a4bf688](https://github.com/benyap/benyap.com/commit/a4bf688))
+* feat(photos): add basic lens management ([2508d05](https://github.com/benyap/benyap.com/commit/2508d05))
+* feat(photos): add basic location management ([382906f](https://github.com/benyap/benyap.com/commit/382906f))
+* feat(photos): add basic tag management ([673bb8b](https://github.com/benyap/benyap.com/commit/673bb8b))
+* feat(photos): add breadcrumbs ([8d65d3b](https://github.com/benyap/benyap.com/commit/8d65d3b))
+* feat(photos): add custom not found page ([f97771a](https://github.com/benyap/benyap.com/commit/f97771a))
+* feat(photos): add description field to camera ([1976e11](https://github.com/benyap/benyap.com/commit/1976e11))
+* feat(photos): add theme toggle, improve ui consistency ([0ea6115](https://github.com/benyap/benyap.com/commit/0ea6115))
+* feat(photos): improve cards and details components for cameras and lenses ([45a641c](https://github.com/benyap/benyap.com/commit/45a641c))
+* fix(photos): close mobile sidebar on link click ([19c236e](https://github.com/benyap/benyap.com/commit/19c236e))
+* fix(photos): createdAt and updatedAt fields not being set properly ([5b508f3](https://github.com/benyap/benyap.com/commit/5b508f3))
+
 ## <small>2.2.2 (2025-04-02)</small>
 
 * chore(photos): add fonts ([b20eec9](https://github.com/benyap/benyap.com/commit/b20eec9))

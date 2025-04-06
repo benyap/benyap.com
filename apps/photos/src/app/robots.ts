@@ -1,9 +1,9 @@
 import { MetadataRoute } from "next";
 
-import { isProduction } from "~/constants/vercel";
+import { APP_IS_PRODUCTION } from "~/constants/app";
 
 export default function robots(): MetadataRoute.Robots {
-  if (isProduction())
+  if (APP_IS_PRODUCTION)
     return {
       rules: {
         userAgent: "*",

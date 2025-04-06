@@ -48,6 +48,7 @@ export type FirebaseStore = {
   firestore: Firestore;
   storage: FirebaseStorage;
 };
+
 export const createFirebaseStore = () => {
   const config = getFirebaseConfig();
   const emulator = config.projectId?.startsWith("demo") ?? false;

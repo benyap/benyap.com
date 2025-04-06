@@ -1,46 +1,21 @@
-import clsx from "clsx";
-import { Metadata } from "next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import { Newsreader, Outfit, Geist_Mono } from "next/font/google";
 
-import { DESCRIPTION, SITE_NAME } from "~/constants/metadata";
-import { VERCEL_PROJECT_PRODUCTION_DOMAIN } from "~/constants/vercel";
+import { ThemeProvider } from "~/components/ui/theme-provider";
 
-import { FirebaseProvider } from "~/components/firebase/FirebaseProvider";
+import "~/app/globals.css";
 
-const sans = Outfit({ subsets: ["latin"], variable: "--font-sans" });
-const serif = Newsreader({ subsets: ["latin"], variable: "--font-serif" });
-const mono = Geist_Mono({ subsets: ["latin"], variable: "--font-mono" });
-
-import "./globals.css";
-
-export const metadata: Metadata = {
-  title: {
-    default: SITE_NAME,
-    template: `%s - ${SITE_NAME}`,
-  },
-  description: DESCRIPTION,
-  openGraph: {
-    type: "website",
-    title: SITE_NAME,
-    siteName: SITE_NAME,
-    description: DESCRIPTION,
-    url: `https://${VERCEL_PROJECT_PRODUCTION_DOMAIN}`,
-  },
-};
-
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <html
-      lang="en"
-      className={clsx(sans.variable, serif.variable, mono.variable)}
-    >
+    <html lang="en" suppressHydrationWarning>
       <body>
-        <FirebaseProvider>{children}</FirebaseProvider>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+        </ThemeProvider>
         <SpeedInsights />
       </body>
     </html>

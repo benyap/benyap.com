@@ -1,4 +1,4 @@
-name: Deploy Firebase
+name: Deploy Firebase to PROD
 
 on:
   push:
@@ -48,4 +48,4 @@ jobs:
         with:
           args: deploy -P prod --force
         env:
-          GCP_SA_KEY: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
+          GCP_SA_KEY: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_PROD }}

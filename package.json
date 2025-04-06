@@ -1,6 +1,6 @@
 {
   "name": "benyap.com",
-  "version": "2.2.2",
+  "version": "2.3.0",
   "private": true,
   "author": "Ben Yap <contact@benyap.com>",
   "repository": "https://github.com/benyap/benyap.com.git",
@@ -9,6 +9,12 @@
     "node": "22"
   },
   "packageManager": "pnpm@10.7.0",
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "@vercel/speed-insights",
+      "sharp"
+    ]
+  },
   "scripts": {
     "postinstall": "node ./scripts/setup.mjs",
     "emulator": "pnpm --filter emulator",
@@ -28,6 +34,6 @@
     "prettier": "3.5.3",
     "prettier-plugin-tailwindcss": "0.6.11",
     "release-it": "18.1.2",
-    "turbo": "2.4.4"
+    "turbo": "2.5.0"
   }
 }

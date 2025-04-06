@@ -10,4 +10,20 @@ function Skeleton({ className, ...props }: React.ComponentProps<"div">) {
   );
 }
 
-export { Skeleton };
+function SkeletonText({ className, ...props }: React.ComponentProps<"div">) {
+  return (
+    <>
+      <span
+        data-slot="skeleton"
+        className={cn(
+          "bg-accent inline-block h-[1em] animate-pulse rounded-md",
+          className,
+        )}
+        {...props}
+      />
+      &nbsp;
+    </>
+  );
+}
+
+export { Skeleton, SkeletonText };
