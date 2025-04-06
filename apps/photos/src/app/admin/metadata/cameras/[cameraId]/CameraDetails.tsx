@@ -5,7 +5,8 @@ import {
   DescriptionList,
   DescriptionTerm,
 } from "~/components/ui/description-list";
-import { Code } from "~/components/ui/text";
+import { Code, Text } from "~/components/ui/text";
+import { DateTimeDisplay } from "~/components/core/DateTimeDisplay";
 
 export type CameraDetailsProps = {
   cameraId: string;
@@ -13,21 +14,25 @@ export type CameraDetailsProps = {
 };
 
 export function CameraDetails(props: CameraDetailsProps) {
-  const { cameraId, camera } = props;
+  const { camera } = props;
+  const { createdAt, description, exifTagMatches } = camera;
   return (
     <DescriptionList>
-      <DescriptionTerm>Camera ID</DescriptionTerm>
+      <DescriptionTerm>Created</DescriptionTerm>
       <DescriptionDetails>
-        <code>{cameraId}</code>
+        <DateTimeDisplay>{createdAt}</DateTimeDisplay>
       </DescriptionDetails>
 
       <DescriptionTerm>Description</DescriptionTerm>
-      <DescriptionDetails>{camera.description}</DescriptionDetails>
+      <DescriptionDetails>
+        {description || <Text>(none)</Text>}
+      </DescriptionDetails>
 
       <DescriptionTerm>Exif tag matches</DescriptionTerm>
       <DescriptionDetails>
+        {exifTagMatches.length === 0 && <Text>(none)</Text>}
         <ul className="ml-6">
-          {camera.exifTagMatches.map((match) => (
+          {exifTagMatches.map((match) => (
             <li key={match} className="list-disc">
               <Code>{match}</Code>
             </li>
@@ -36,7 +41,9 @@ export function CameraDetails(props: CameraDetailsProps) {
       </DescriptionDetails>
 
       <DescriptionTerm>Photos taken by this camera</DescriptionTerm>
-      <DescriptionDetails>(TODO)</DescriptionDetails>
+      <DescriptionDetails>
+        <Text>(WIP)</Text>
+      </DescriptionDetails>
     </DescriptionList>
   );
 }

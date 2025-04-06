@@ -5,7 +5,8 @@ import {
   DescriptionList,
   DescriptionTerm,
 } from "~/components/ui/description-list";
-import { Code } from "~/components/ui/text";
+import { Code, Text } from "~/components/ui/text";
+import { DateTimeDisplay } from "~/components/core/DateTimeDisplay";
 
 export type LensDetailsProps = {
   lensId: string;
@@ -13,21 +14,25 @@ export type LensDetailsProps = {
 };
 
 export function LensDetails(props: LensDetailsProps) {
-  const { lensId, lens } = props;
+  const { lens } = props;
+  const { createdAt, description, exifTagMatches } = lens;
   return (
     <DescriptionList>
-      <DescriptionTerm>Lens ID</DescriptionTerm>
+      <DescriptionTerm>Created</DescriptionTerm>
       <DescriptionDetails>
-        <code>{lensId}</code>
+        <DateTimeDisplay>{createdAt}</DateTimeDisplay>
       </DescriptionDetails>
 
       <DescriptionTerm>Description</DescriptionTerm>
-      <DescriptionDetails>{lens.description}</DescriptionDetails>
+      <DescriptionDetails>
+        {description || <Text>(none)</Text>}
+      </DescriptionDetails>
 
       <DescriptionTerm>Exif tag matches</DescriptionTerm>
       <DescriptionDetails>
+        {exifTagMatches.length === 0 && <Text>(none)</Text>}
         <ul className="ml-6">
-          {lens.exifTagMatches.map((match) => (
+          {exifTagMatches.map((match) => (
             <li key={match} className="list-disc">
               <Code>{match}</Code>
             </li>
@@ -36,7 +41,9 @@ export function LensDetails(props: LensDetailsProps) {
       </DescriptionDetails>
 
       <DescriptionTerm>Photos taken by this lens</DescriptionTerm>
-      <DescriptionDetails>(TODO)</DescriptionDetails>
+      <DescriptionDetails>
+        <Text>(WIP)</Text>
+      </DescriptionDetails>
     </DescriptionList>
   );
 }
