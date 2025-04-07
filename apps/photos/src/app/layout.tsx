@@ -4,7 +4,7 @@ import { ThemeProvider } from "~/components/ui/theme-provider";
 
 import "~/app/globals.css";
 
-export default function Layout({ children }: { children: React.ReactNode }) {
+export default function Layout({ children }: React.PropsWithChildren) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body>

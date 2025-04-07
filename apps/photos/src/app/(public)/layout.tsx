@@ -30,7 +30,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default function Layout({ children }: { children: React.ReactNode }) {
+export default function Layout({ children }: React.PropsWithChildren) {
   return (
     <div className={clsx(sans.variable, serif.variable, mono.variable)}>
       <FirebaseProvider>{children}</FirebaseProvider>

@@ -11,7 +11,7 @@ import {
 
 const FirebaseStoreContext = createContext<FirebaseStoreApi | null>(null);
 
-export function FirebaseProvider(props: { children?: React.ReactNode }) {
+export function FirebaseProvider(props: React.PropsWithChildren) {
   const { children } = props;
 
   const ref = useRef<FirebaseStoreApi | null>(null);
