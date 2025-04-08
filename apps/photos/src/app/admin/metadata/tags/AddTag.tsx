@@ -15,7 +15,7 @@ import {
   DialogTrigger,
 } from "~/components/ui/dialog";
 import { Button } from "~/components/ui/button";
-import { TagForm } from "~/components/admin/TagForm";
+import { TagForm } from "~/components/metadata/TagForm";
 
 export function AddTag() {
   const [open, setOpen] = useState(false);

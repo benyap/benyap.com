@@ -6,7 +6,7 @@ import { toast } from "sonner";
 import { Lens, updateLens } from "~/core/lens";
 import { DialogStoreApi } from "~/stores/dialog";
 
-import { LensForm } from "~/components/admin/LensForm";
+import { LensForm } from "~/components/metadata/LensForm";
 import { useDialogStore } from "~/components/ui/dialog-store-provider";
 import { MenuTriggeredDialog } from "~/components/core/MenuTriggeredDialog";
 

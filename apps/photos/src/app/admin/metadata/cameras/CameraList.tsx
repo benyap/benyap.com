@@ -3,16 +3,15 @@
 import { CameraIcon } from "lucide-react";
 
 import { AdminRoute } from "~/constants/routes";
-import { getCameras } from "~/core/camera";
 
-import { useSnapshot } from "~/hooks/use-snapshot";
 import { Text } from "~/components/ui/text";
 import { HideIfError } from "~/components/core/HideIfError";
+import { useMetadata } from "~/components/metadata/MetadataProvider";
 import { MetadataCard } from "~/components/metadata/MetadataCard";
 import { MetadataCardList } from "~/components/metadata/MetadataCardList";
 
 export function CameraList() {
-  const [loading, snapshot, error] = useSnapshot(getCameras());
+  const [loading, snapshot, error] = useMetadata().cameras;
 
   return (
     <HideIfError errorTitle="Could not list cameras" error={error}>

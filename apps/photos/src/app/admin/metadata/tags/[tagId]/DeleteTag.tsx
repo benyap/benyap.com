@@ -9,7 +9,7 @@ import { Tag, deleteTag } from "~/core/tag";
 import { DialogStoreApi } from "~/stores/dialog";
 
 import { useDialogStore } from "~/components/ui/dialog-store-provider";
-import { DeleteMetadataForm } from "~/components/admin/DeleteMetadataForm";
+import { DeleteMetadataForm } from "~/components/metadata/DeleteMetadataForm";
 import { MenuTriggeredDialog } from "~/components/core/MenuTriggeredDialog";
 
 DeleteTagDialog.Context = createContext<DialogStoreApi | null>(null);

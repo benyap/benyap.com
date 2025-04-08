@@ -3,16 +3,15 @@
 import { MapPinIcon } from "lucide-react";
 
 import { AdminRoute } from "~/constants/routes";
-import { getLocations } from "~/core/location";
 
-import { useSnapshot } from "~/hooks/use-snapshot";
 import { Text } from "~/components/ui/text";
 import { HideIfError } from "~/components/core/HideIfError";
+import { useMetadata } from "~/components/metadata/MetadataProvider";
 import { MetadataCard } from "~/components/metadata/MetadataCard";
 import { MetadataCardList } from "~/components/metadata/MetadataCardList";
 
 export function LocationList() {
-  const [loading, snapshot, error] = useSnapshot(getLocations());
+  const [loading, snapshot, error] = useMetadata().locations;
 
   return (
     <HideIfError errorTitle="Could not list locations" error={error}>

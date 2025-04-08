@@ -9,7 +9,7 @@ import { deleteLocation, Location } from "~/core/location";
 import { DialogStoreApi } from "~/stores/dialog";
 
 import { useDialogStore } from "~/components/ui/dialog-store-provider";
-import { DeleteMetadataForm } from "~/components/admin/DeleteMetadataForm";
+import { DeleteMetadataForm } from "~/components/metadata/DeleteMetadataForm";
 import { MenuTriggeredDialog } from "~/components/core/MenuTriggeredDialog";
 
 DeleteLocationDialog.Context = createContext<DialogStoreApi | null>(null);

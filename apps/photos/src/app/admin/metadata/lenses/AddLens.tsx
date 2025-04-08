@@ -15,7 +15,7 @@ import {
   DialogTrigger,
 } from "~/components/ui/dialog";
 import { Button } from "~/components/ui/button";
-import { LensForm } from "~/components/admin/LensForm";
+import { LensForm } from "~/components/metadata/LensForm";
 
 export function AddLens() {
   const [open, setOpen] = useState(false);

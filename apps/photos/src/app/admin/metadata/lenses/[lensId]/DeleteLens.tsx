@@ -9,7 +9,7 @@ import { Lens, deleteLens } from "~/core/lens";
 import { DialogStoreApi } from "~/stores/dialog";
 
 import { useDialogStore } from "~/components/ui/dialog-store-provider";
-import { DeleteMetadataForm } from "~/components/admin/DeleteMetadataForm";
+import { DeleteMetadataForm } from "~/components/metadata/DeleteMetadataForm";
 import { MenuTriggeredDialog } from "~/components/core/MenuTriggeredDialog";
 
 DeleteLensDialog.Context = createContext<DialogStoreApi | null>(null);

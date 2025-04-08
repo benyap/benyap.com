@@ -6,7 +6,7 @@ import { toast } from "sonner";
 import { Location, updateLocation } from "~/core/location";
 import { DialogStoreApi } from "~/stores/dialog";
 
-import { LocationForm } from "~/components/admin/LocationForm";
+import { LocationForm } from "~/components/metadata/LocationForm";
 import { useDialogStore } from "~/components/ui/dialog-store-provider";
 import { MenuTriggeredDialog } from "~/components/core/MenuTriggeredDialog";
 

@@ -15,7 +15,7 @@ import {
   DialogTrigger,
 } from "~/components/ui/dialog";
 import { Button } from "~/components/ui/button";
-import { LocationForm } from "~/components/admin/LocationForm";
+import { LocationForm } from "~/components/metadata/LocationForm";
 
 export function AddLocation() {
   const [open, setOpen] = useState(false);

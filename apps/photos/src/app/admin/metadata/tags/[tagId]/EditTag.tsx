@@ -6,7 +6,7 @@ import { toast } from "sonner";
 import { Tag, updateTag } from "~/core/tag";
 import { DialogStoreApi } from "~/stores/dialog";
 
-import { TagForm } from "~/components/admin/TagForm";
+import { TagForm } from "~/components/metadata/TagForm";
 import { useDialogStore } from "~/components/ui/dialog-store-provider";
 import { MenuTriggeredDialog } from "~/components/core/MenuTriggeredDialog";
 

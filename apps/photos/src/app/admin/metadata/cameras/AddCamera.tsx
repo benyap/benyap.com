@@ -15,7 +15,7 @@ import {
   DialogTrigger,
 } from "~/components/ui/dialog";
 import { Button } from "~/components/ui/button";
-import { CameraForm } from "~/components/admin/CameraForm";
+import { CameraForm } from "~/components/metadata/CameraForm";
 
 export function AddCamera() {
   const [open, setOpen] = useState(false);

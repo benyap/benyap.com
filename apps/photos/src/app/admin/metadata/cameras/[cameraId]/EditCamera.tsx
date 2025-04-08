@@ -6,7 +6,7 @@ import { toast } from "sonner";
 import { Camera, updateCamera } from "~/core/camera";
 import { DialogStoreApi } from "~/stores/dialog";
 
-import { CameraForm } from "~/components/admin/CameraForm";
+import { CameraForm } from "~/components/metadata/CameraForm";
 import { useDialogStore } from "~/components/ui/dialog-store-provider";
 import { MenuTriggeredDialog } from "~/components/core/MenuTriggeredDialog";
 

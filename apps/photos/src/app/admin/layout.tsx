@@ -17,6 +17,7 @@ import { AdminSidebar } from "~/components/admin/AdminSidebar";
 import { RequireSignIn } from "~/components/admin/RequireSignIn";
 import { FirebaseUserProvider } from "~/components/firebase/FirebaseUserProvider";
 import { FirebaseProvider } from "~/components/firebase/FirebaseProvider";
+import { MetadataProvider } from "~/components/metadata/MetadataProvider";
 
 const sans = Inter({ subsets: ["latin"], variable: "--font-sans" });
 const serif = Newsreader({ subsets: ["latin"], variable: "--font-serif" });
@@ -48,7 +49,9 @@ export default function Layout(props: React.PropsWithChildren) {
               <AdminSidebar />
               <div className="w-full">
                 <AdminHeader />
-                <main className="@container m-4">{children}</main>
+                <MetadataProvider>
+                  <main className="@container m-4">{children}</main>
+                </MetadataProvider>
                 <Toaster />
               </div>
             </SidebarProvider>

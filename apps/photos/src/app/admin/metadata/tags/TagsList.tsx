@@ -3,16 +3,15 @@
 import { TagIcon } from "lucide-react";
 
 import { AdminRoute } from "~/constants/routes";
-import { getTags } from "~/core/tag";
 
-import { useSnapshot } from "~/hooks/use-snapshot";
 import { Text } from "~/components/ui/text";
 import { HideIfError } from "~/components/core/HideIfError";
+import { useMetadata } from "~/components/metadata/MetadataProvider";
 import { MetadataCard } from "~/components/metadata/MetadataCard";
 import { MetadataCardList } from "~/components/metadata/MetadataCardList";
 
 export function TagsList() {
-  const [loading, snapshot, error] = useSnapshot(getTags());
+  const [loading, snapshot, error] = useMetadata().tags;
 
   return (
     <HideIfError errorTitle="Could not list tags" error={error}>
