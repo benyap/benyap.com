@@ -20,6 +20,7 @@ import { DialogStoreProvider } from "~/components/ui/dialog-store-provider";
 import { AdminBreadcrumbs } from "~/components/core/Breadcrumbs";
 import { HideIfError } from "~/components/core/HideIfError";
 import { NotFoundMessage } from "~/components/core/NotFoundMessage";
+import { PageHeader } from "~/components/core/PageHeader";
 
 import { EditLocationDialog } from "./EditLocation";
 import { DeleteLocationDialog } from "./DeleteLocation";
@@ -56,13 +57,11 @@ export default function Page(props: {
         <DialogStoreProvider
           contexts={[EditLocationDialog.Context, DeleteLocationDialog.Context]}
         >
-          <header className="mb-6 flex items-center justify-between gap-4">
-            <div className="space-y-2">
-              <Heading className="flex items-center gap-2">
-                <MapPinIcon className="text-muted-foreground" />
-                {loading ? <SkeletonText className="w-40" /> : location?.name}
-              </Heading>
-            </div>
+          <PageHeader>
+            <Heading>
+              <MapPinIcon className="text-muted-foreground mb-1 mr-2 inline" />
+              {loading ? <SkeletonText className="w-40" /> : location?.name}
+            </Heading>
             <DropdownMenu>
               <DropdownMenuTrigger asChild disabled={!location}>
                 <Button variant="outline" size="icon">
@@ -74,7 +73,7 @@ export default function Page(props: {
                 <DeleteLocationDialog.Trigger />
               </DropdownMenuContent>
             </DropdownMenu>
-          </header>
+          </PageHeader>
           {location && (
             <EditLocationDialog locationId={locationId} location={location} />
           )}

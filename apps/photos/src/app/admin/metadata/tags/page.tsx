@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 
 import { Heading } from "~/components/ui/heading";
+import { PageHeader } from "~/components/core/PageHeader";
 import { AdminBreadcrumbs } from "~/components/core/Breadcrumbs";
 
 import { AddTag } from "./AddTag";
@@ -14,10 +15,10 @@ export default function Page() {
   return (
     <>
       <AdminBreadcrumbs links={[{ label: "Tags" }]} />
-      <header className="@min-lg:flex-row mb-6 flex flex-col justify-between gap-4">
+      <PageHeader className="@min-lg:flex-row flex-col">
         <Heading>Tags</Heading>
         <AddTag />
-      </header>
+      </PageHeader>
       <TagsList />
     </>
   );

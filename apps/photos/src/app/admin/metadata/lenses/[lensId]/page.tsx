@@ -20,6 +20,7 @@ import { DialogStoreProvider } from "~/components/ui/dialog-store-provider";
 import { AdminBreadcrumbs } from "~/components/core/Breadcrumbs";
 import { HideIfError } from "~/components/core/HideIfError";
 import { NotFoundMessage } from "~/components/core/NotFoundMessage";
+import { PageHeader } from "~/components/core/PageHeader";
 
 import { EditLensDialog } from "./EditLens";
 import { DeleteLensDialog } from "./DeleteLens";
@@ -49,13 +50,11 @@ export default function Page(props: { params: Promise<{ lensId: string }> }) {
         <DialogStoreProvider
           contexts={[EditLensDialog.Context, DeleteLensDialog.Context]}
         >
-          <header className="mb-6 flex items-center justify-between gap-4">
-            <div className="space-y-2">
-              <Heading className="flex items-center gap-2">
-                <ApertureIcon className="text-muted-foreground" />
-                {loading ? <SkeletonText className="w-40" /> : lens?.name}
-              </Heading>
-            </div>
+          <PageHeader>
+            <Heading>
+              <ApertureIcon className="text-muted-foreground mb-1 mr-2 inline" />
+              {loading ? <SkeletonText className="w-40" /> : lens?.name}
+            </Heading>
             <DropdownMenu>
               <DropdownMenuTrigger asChild disabled={!lens}>
                 <Button variant="outline" size="icon">
@@ -67,7 +66,7 @@ export default function Page(props: { params: Promise<{ lensId: string }> }) {
                 <DeleteLensDialog.Trigger />
               </DropdownMenuContent>
             </DropdownMenu>
-          </header>
+          </PageHeader>
           {lens && <EditLensDialog lensId={lensId} lens={lens} />}
           {lens && <DeleteLensDialog lensId={lensId} lens={lens} />}
         </DialogStoreProvider>

@@ -1,5 +1,3 @@
-import { ImageIcon } from "lucide-react";
-
 import {
   Card,
   CardDescription,
@@ -36,8 +34,7 @@ MetadataCard.Placeholder = function MetadataCardPlaceholder() {
           <SkeletonText className="w-40" />
         </CardTitle>
         <CardDescription className="flex items-center gap-1">
-          <ImageIcon className="size-5 sm:size-4" />
-          <SkeletonText className="w-8" />
+          <SkeletonText className="w-16" />
         </CardDescription>
       </CardHeader>
     </Card>

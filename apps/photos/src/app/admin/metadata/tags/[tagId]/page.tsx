@@ -19,6 +19,7 @@ import { DialogStoreProvider } from "~/components/ui/dialog-store-provider";
 import { AdminBreadcrumbs } from "~/components/core/Breadcrumbs";
 import { HideIfError } from "~/components/core/HideIfError";
 import { NotFoundMessage } from "~/components/core/NotFoundMessage";
+import { PageHeader } from "~/components/core/PageHeader";
 
 import { EditTagDialog } from "./EditTag";
 import { DeleteTagDialog } from "./DeleteTag";
@@ -46,13 +47,11 @@ export default function Page(props: { params: Promise<{ tagId: string }> }) {
         <DialogStoreProvider
           contexts={[EditTagDialog.Context, DeleteTagDialog.Context]}
         >
-          <header className="mb-6 flex items-center justify-between gap-4">
-            <div className="gap-2">
-              <TagIcon className="text-muted-foreground" />
-              <Heading>
-                {loading ? <SkeletonText className="w-40" /> : tag?.name}
-              </Heading>
-            </div>
+          <PageHeader>
+            <Heading>
+              <TagIcon className="text-muted-foreground mb-1 mr-2 inline" />
+              {loading ? <SkeletonText className="w-40" /> : tag?.name}
+            </Heading>
             <DropdownMenu>
               <DropdownMenuTrigger asChild disabled={!tag}>
                 <Button variant="outline" size="icon">
@@ -64,7 +63,7 @@ export default function Page(props: { params: Promise<{ tagId: string }> }) {
                 <DeleteTagDialog.Trigger />
               </DropdownMenuContent>
             </DropdownMenu>
-          </header>
+          </PageHeader>
           {tag && <EditTagDialog tagId={tagId} tag={tag} />}
           {tag && <DeleteTagDialog tagId={tagId} tag={tag} />}
         </DialogStoreProvider>

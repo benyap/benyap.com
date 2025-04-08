@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 
 import { Heading } from "~/components/ui/heading";
+import { PageHeader } from "~/components/core/PageHeader";
 import { AdminBreadcrumbs } from "~/components/core/Breadcrumbs";
 
 import { AddLens } from "./AddLens";
@@ -14,10 +15,10 @@ export default function Page() {
   return (
     <>
       <AdminBreadcrumbs links={[{ label: "Lenses" }]} />
-      <header className="@min-lg:flex-row mb-6 flex flex-col justify-between gap-4">
+      <PageHeader className="@min-lg:flex-row flex-col">
         <Heading>Lenses</Heading>
         <AddLens />
-      </header>
+      </PageHeader>
       <LensList />
     </>
   );

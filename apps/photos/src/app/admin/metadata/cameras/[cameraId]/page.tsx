@@ -1,5 +1,4 @@
 "use client";
-
 import { use } from "react";
 import { CameraIcon, EllipsisVerticalIcon } from "lucide-react";
 
@@ -20,6 +19,7 @@ import { DialogStoreProvider } from "~/components/ui/dialog-store-provider";
 import { AdminBreadcrumbs } from "~/components/core/Breadcrumbs";
 import { HideIfError } from "~/components/core/HideIfError";
 import { NotFoundMessage } from "~/components/core/NotFoundMessage";
+import { PageHeader } from "~/components/core/PageHeader";
 
 import { EditCameraDialog } from "./EditCamera";
 import { DeleteCameraDialog } from "./DeleteCamera";
@@ -52,13 +52,11 @@ export default function Page(props: { params: Promise<{ cameraId: string }> }) {
         <DialogStoreProvider
           contexts={[EditCameraDialog.Context, DeleteCameraDialog.Context]}
         >
-          <header className="mb-6 flex items-center justify-between gap-4">
-            <div className="space-y-2">
-              <Heading className="flex items-center gap-2">
-                <CameraIcon className="text-muted-foreground" />
-                {loading ? <SkeletonText className="w-40" /> : camera?.name}
-              </Heading>
-            </div>
+          <PageHeader>
+            <Heading className="flex items-center gap-2">
+              <CameraIcon className="text-muted-foreground mb-1 mr-2 inline" />
+              {loading ? <SkeletonText className="w-40" /> : camera?.name}
+            </Heading>
             <DropdownMenu>
               <DropdownMenuTrigger asChild disabled={!camera}>
                 <Button variant="outline" size="icon">
@@ -70,7 +68,7 @@ export default function Page(props: { params: Promise<{ cameraId: string }> }) {
                 <DeleteCameraDialog.Trigger />
               </DropdownMenuContent>
             </DropdownMenu>
-          </header>
+          </PageHeader>
           {camera && <EditCameraDialog cameraId={cameraId} camera={camera} />}
           {camera && <DeleteCameraDialog cameraId={cameraId} camera={camera} />}
         </DialogStoreProvider>
