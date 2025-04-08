@@ -1,8 +1,12 @@
-import type { ExifTags as ExifReaderExifTags, Tags } from "exifreader";
+import type {
+  ExifTags as ExifReaderExifTags,
+  Tags as ExifReaderTags,
+} from "exifreader";
 import type { ExifDir } from "sharp";
+import { DateTime } from "luxon";
 
 import {
-  ExifTags,
+  ProcessedExifTags,
   IntegerSchema,
   IntegerTagSchema,
   RationalTagSchema,
@@ -24,19 +28,20 @@ function parseIntegerTag(value: unknown) {
   return parsed.success ? parsed.data : {};
 }
 
-function getNonExifTag(key: string, tags: Tags) {
-  return key in tags ? tags[key] : null;
+function parseDateTimeOriginalTag(tags: ExifReaderTags) {
+  const dateTimeOriginalTag = tags.DateTimeOriginal?.description ?? "";
+  const date = DateTime.fromFormat(dateTimeOriginalTag, "yyyy:MM:dd HH:mm:ss");
+  if (date.isValid) return date;
+  return null;
 }
 
 /**
- * Collect the necessary EXIF data and return in a format
- * ready for saving to the database.
+ * Process the useful EXIF tags parsed by the `exifreader` library
  *
- * @param tags The EXIF tags extracted from a photo.
+ * @param tags The EXIF tags extracted by `exifreader`.
  */
-export function getExifForModel(tags: Tags): ExifTags {
-  const dateCreatedTag = getNonExifTag("DateCreated", tags);
-  const originalDate = new Date(String(dateCreatedTag?.value));
+export function getProcessedExifTags(tags: ExifReaderTags): ProcessedExifTags {
+  const originalDate = parseDateTimeOriginalTag(tags) ?? undefined;
   return {
     camera: {
       make: tags.Make?.description,
@@ -47,11 +52,11 @@ export function getExifForModel(tags: Tags): ExifTags {
       model: tags.LensModel?.description,
       maxApertureValue: parseRationalTag(tags.MaxApertureValue),
     },
-    originalDate: isNaN(originalDate.getTime()) ? undefined : originalDate,
+    originalDate: originalDate?.toObject(),
     focalLength: parseRationalTag(tags.FocalLength),
     focalLengthIn35mmFilm: parseInteger(tags.FocalLengthIn35mmFilm?.value),
     iso: parseInteger(tags.ISOSpeedRatings?.value),
-    fNumber: parseRationalTag(tags.ExposureTime),
+    fNumber: parseRationalTag(tags.FNumber),
     exposureTime: parseRationalTag(tags.ExposureTime),
     exposureBias: parseRationalTag(tags.ExposureBiasValue),
     exposureMode: parseIntegerTag(tags.ExposureMode),

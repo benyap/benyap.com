@@ -17,6 +17,7 @@ import { AdminSidebar } from "~/components/admin/AdminSidebar";
 import { RequireSignIn } from "~/components/admin/RequireSignIn";
 import { FirebaseUserProvider } from "~/components/firebase/FirebaseUserProvider";
 import { FirebaseProvider } from "~/components/firebase/FirebaseProvider";
+import { PhotoUploadProvider } from "~/components/metadata/PhotoUploadProvider";
 import { MetadataProvider } from "~/components/metadata/MetadataProvider";
 
 const sans = Inter({ subsets: ["latin"], variable: "--font-sans" });
@@ -46,14 +47,16 @@ export default function Layout(props: React.PropsWithChildren) {
         <FirebaseUserProvider>
           <RequireSignIn>
             <SidebarProvider>
-              <AdminSidebar />
-              <div className="w-full">
-                <AdminHeader />
-                <MetadataProvider>
-                  <main className="@container m-4">{children}</main>
-                </MetadataProvider>
-                <Toaster />
-              </div>
+              <PhotoUploadProvider>
+                <AdminSidebar />
+                <div className="w-full">
+                  <AdminHeader />
+                  <MetadataProvider>
+                    <main className="@container m-4">{children}</main>
+                  </MetadataProvider>
+                  <Toaster />
+                </div>
+              </PhotoUploadProvider>
             </SidebarProvider>
           </RequireSignIn>
         </FirebaseUserProvider>

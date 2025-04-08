@@ -19,7 +19,17 @@ export const IntegerTagSchema = z.object({
   description: z.string().optional(),
 });
 
-export const ExifTagsSchema = z.object({
+export const DateTimeObjectSchema = z.object({
+  year: z.number(),
+  month: z.number(),
+  day: z.number(),
+  hour: z.number(),
+  minute: z.number(),
+  second: z.number(),
+  millisecond: z.number(),
+});
+
+export const ProcessedExifTagsSchema = z.object({
   camera: z.object({
     make: z.string().optional(),
     model: z.string().optional(),
@@ -29,7 +39,7 @@ export const ExifTagsSchema = z.object({
     model: z.string().optional(),
     maxApertureValue: RationalTagSchema,
   }),
-  originalDate: z.date().optional(),
+  originalDate: DateTimeObjectSchema.optional(),
   focalLength: RationalTagSchema,
   focalLengthIn35mmFilm: IntegerSchema.optional(),
   iso: IntegerSchema.optional(),
@@ -42,4 +52,4 @@ export const ExifTagsSchema = z.object({
   whiteBalance: IntegerTagSchema,
 });
 
-export type ExifTags = z.infer<typeof ExifTagsSchema>;
+export type ProcessedExifTags = z.infer<typeof ProcessedExifTagsSchema>;

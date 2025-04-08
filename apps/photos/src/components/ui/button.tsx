@@ -1,4 +1,5 @@
 import * as React from "react";
+import { XIcon } from "lucide-react";
 import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
 
@@ -56,4 +57,19 @@ function Button({
   );
 }
 
-export { Button, buttonVariants };
+function CloseButton({ className, ...props }: React.ComponentProps<"button">) {
+  return (
+    <button
+      data-slot="button"
+      className={cn(
+        className,
+        "ring-offset-background focus:ring-ring rounded-xs focus:outline-hidden opacity-70 transition-opacity hover:opacity-100 focus:ring-2 focus:ring-offset-2 disabled:pointer-events-none",
+      )}
+      {...props}
+    >
+      <XIcon className="size-4" />
+    </button>
+  );
+}
+
+export { Button, CloseButton, buttonVariants };

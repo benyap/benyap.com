@@ -2,7 +2,7 @@ import { DateTime } from "luxon";
 
 export function DateTimeDisplay(props: {
   className?: string;
-  format?: "date_med" | "date_full" | "relative";
+  format?: "date_med" | "date_full" | "datetime" | "relative";
   children?: Date | null;
 }) {
   const { className, format = "date_med", children: date } = props;
@@ -12,6 +12,7 @@ export function DateTimeDisplay(props: {
     <time className={className} dateTime={date.toISOString()}>
       {format === "date_med" && datetime.toLocaleString(DateTime.DATE_MED)}
       {format === "date_full" && datetime.toLocaleString(DateTime.DATE_FULL)}
+      {format === "datetime" && datetime.toFormat("d LLL yyyy h:mm a")}
       {format === "relative" && datetime.toRelative()}
     </time>
   );
