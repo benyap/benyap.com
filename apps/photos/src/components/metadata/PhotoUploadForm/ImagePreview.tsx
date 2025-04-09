@@ -8,7 +8,7 @@ import { mimeTypeToFormat } from "~/core/photo/file";
 import { cn } from "~/lib/utils";
 
 import { Text } from "~/components/ui/text";
-import { useImagePreview } from "~/hooks/use-image-preview";
+import { useImagePreview } from "~/components/core/ImagePreviewProvider";
 
 export function ImagePreview(props: {
   className?: string;
@@ -18,11 +18,10 @@ export function ImagePreview(props: {
 
   const [loaded, setLoaded] = useState(false);
 
-  const [previewAvailable, imageUrl, release] = useImagePreview(file);
-
+  const preview = useImagePreview(file);
   const format = mimeTypeToFormat(file?.type);
 
-  if (!previewAvailable)
+  if (!preview)
     return (
       <div
         className={cn(
@@ -41,12 +40,12 @@ export function ImagePreview(props: {
       </div>
     );
 
-  if (file && imageUrl)
+  if (file && preview)
     return (
       <div className={cn(className, "bg-accent absolute inset-0")}>
         <Image
           fill
-          src={imageUrl}
+          src={preview.url}
           alt={file.name}
           className={cn(
             "fade-in object-cover transition-opacity duration-500",
@@ -54,7 +53,6 @@ export function ImagePreview(props: {
           )}
           onLoad={() => {
             setLoaded(true);
-            release();
           }}
         />
       </div>

@@ -3,6 +3,7 @@ import { Metadata } from "next";
 import { Heading } from "~/components/ui/heading";
 import { PageHeader } from "~/components/core/PageHeader";
 import { AdminBreadcrumbs } from "~/components/core/Breadcrumbs";
+import { ImagePreviewProvider } from "~/components/core/ImagePreviewProvider";
 
 import { AddPhotos } from "./AddPhotos";
 
@@ -16,7 +17,9 @@ export default function Page() {
       <AdminBreadcrumbs links={[{ label: "Photos" }]} />
       <PageHeader className="@min-lg:flex-row flex-col">
         <Heading>Photos</Heading>
-        <AddPhotos />
+        <ImagePreviewProvider>
+          <AddPhotos />
+        </ImagePreviewProvider>
       </PageHeader>
     </>
   );

@@ -77,7 +77,7 @@ export function AddPhotos() {
   }));
 
   // TODO: remove this
-  console.log(photos, errors);
+  console.log({ photos, errors });
 
   return (
     <>
@@ -88,7 +88,7 @@ export function AddPhotos() {
             Add photos
           </Button>
         </DialogTrigger>
-        <DialogContent className="w-5xl max-h-[calc(100vh-64px)] overflow-y-scroll sm:max-w-[calc(100vw-64px)]">
+        <DialogContent className="w-5xl max-h-[calc(100dvh-64px)] overflow-y-scroll sm:max-w-[calc(100vw-64px)]">
           <DialogHeader>
             <DialogTitle>{INFO[step].title}</DialogTitle>
             <DialogDescription>{INFO[step].description}</DialogDescription>
