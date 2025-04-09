@@ -9,7 +9,7 @@ export class ObjectURLImagePreview {
   revoke() {
     URL.revokeObjectURL(this.url);
     this.revoked = true;
-    console.debug("Revoked preview preview for", this.filename);
+    console.debug("Revoked preview image for", this.filename);
   }
 
   isRevoked() {

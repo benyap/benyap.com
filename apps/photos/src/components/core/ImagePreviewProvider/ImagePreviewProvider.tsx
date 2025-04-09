@@ -32,13 +32,9 @@ export function ImagePreviewProvider(props: React.PropsWithChildren) {
     function createNextImagePreview() {
       if (!ref.current) return;
 
-      const entry = ref.current
-        .getState()
-        .pending.entries()
-        .take(1)
-        .next().value;
-
+      const entry = ref.current.getState().pending.entries().next().value;
       if (!entry) return;
+
       const [file, options] = entry;
 
       const pending = new Map(ref.current.getState().pending);

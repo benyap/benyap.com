@@ -3,9 +3,9 @@ export class Exception<TCode extends string> extends Error {
     /** A code to identify the error that occurred. */
     readonly code: TCode,
     message?: string,
-    cause?: unknown,
+    readonly cause?: unknown,
   ) {
-    super(message, { cause });
+    super(message);
   }
 
   static create<TCode extends string>(code: TCode) {
@@ -32,8 +32,6 @@ export class Exception<TCode extends string> extends Error {
       // Implementation
       constructor(message?: string, cause?: unknown) {
         super(code, message, cause);
-
-        if (cause) this.cause = cause;
 
         // Provides compatibility with instanceof
         Object.setPrototypeOf(this, new.target.prototype);
