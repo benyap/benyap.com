@@ -1,7 +1,5 @@
 "use client";
 
-import { DialogStoreApi } from "~/stores/dialog";
-
 import {
   Dialog,
   DialogContent,
@@ -10,7 +8,10 @@ import {
   DialogTitle,
 } from "~/components/ui/dialog";
 import { DropdownMenuItem } from "~/components/ui/dropdown-menu";
-import { useDialogStore } from "~/components/ui/dialog-store-provider";
+import {
+  useDialogStore,
+  DialogStoreApi,
+} from "~/components/core/DialogStoreProvider";
 
 export function MenuTriggeredDialog(
   props: React.PropsWithChildren<{

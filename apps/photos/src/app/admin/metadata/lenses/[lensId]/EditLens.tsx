@@ -4,10 +4,12 @@ import { createContext } from "react";
 import { toast } from "sonner";
 
 import { Lens, updateLens } from "~/core/lens";
-import { DialogStoreApi } from "~/stores/dialog";
 
+import {
+  useDialogStore,
+  DialogStoreApi,
+} from "~/components/core/DialogStoreProvider";
 import { LensForm } from "~/components/metadata/LensForm";
-import { useDialogStore } from "~/components/ui/dialog-store-provider";
 import { MenuTriggeredDialog } from "~/components/core/MenuTriggeredDialog";
 
 EditLensDialog.Context = createContext<DialogStoreApi | null>(null);

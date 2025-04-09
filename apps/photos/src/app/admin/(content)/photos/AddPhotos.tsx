@@ -4,7 +4,6 @@ import { useState } from "react";
 import { PlusIcon } from "lucide-react";
 
 import { preparePhotoFilesForUpload } from "~/core/photo/file";
-import { PhotoUploadStep } from "~/stores/photo-upload";
 import { wait } from "~/lib/wait";
 
 import {
@@ -17,7 +16,10 @@ import {
   DialogTrigger,
 } from "~/components/ui/dialog";
 import { Button } from "~/components/ui/button";
-import { usePhotoUpload } from "~/components/metadata/PhotoUploadProvider";
+import {
+  usePhotoUpload,
+  PhotoUploadStep,
+} from "~/components/metadata/PhotoUploadProvider";
 import {
   PhotoUploadManageMetadataForm,
   PhotoUploadSelectFilesForm,

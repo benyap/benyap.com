@@ -7,7 +7,7 @@ import {
   createFirebaseStore,
   FirebaseStore,
   FirebaseStoreApi,
-} from "~/stores/firebase";
+} from "./firebase.store";
 
 const FirebaseStoreContext = createContext<FirebaseStoreApi | null>(null);
 

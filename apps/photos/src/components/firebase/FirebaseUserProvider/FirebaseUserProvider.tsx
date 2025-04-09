@@ -10,13 +10,13 @@ import {
   signInWithRedirect,
 } from "firebase/auth";
 
+import { useFirebase } from "~/components/firebase/FirebaseProvider";
+
 import {
   createFirebaseUserStore,
   FirebaseUserStore,
   FirebaseUserStoreApi,
-} from "~/stores/firebase-user";
-
-import { useFirebase } from "~/components/firebase/FirebaseProvider";
+} from "./firebase-user.store";
 
 function signIn(auth: Auth) {
   const provider = new GoogleAuthProvider();

@@ -4,10 +4,12 @@ import { createContext } from "react";
 import { toast } from "sonner";
 
 import { Tag, updateTag } from "~/core/tag";
-import { DialogStoreApi } from "~/stores/dialog";
 
+import {
+  useDialogStore,
+  DialogStoreApi,
+} from "~/components/core/DialogStoreProvider";
 import { TagForm } from "~/components/metadata/TagForm";
-import { useDialogStore } from "~/components/ui/dialog-store-provider";
 import { MenuTriggeredDialog } from "~/components/core/MenuTriggeredDialog";
 
 EditTagDialog.Context = createContext<DialogStoreApi | null>(null);

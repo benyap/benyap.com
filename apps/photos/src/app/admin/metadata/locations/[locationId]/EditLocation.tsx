@@ -4,10 +4,12 @@ import { createContext } from "react";
 import { toast } from "sonner";
 
 import { Location, updateLocation } from "~/core/location";
-import { DialogStoreApi } from "~/stores/dialog";
 
+import {
+  useDialogStore,
+  DialogStoreApi,
+} from "~/components/core/DialogStoreProvider";
 import { LocationForm } from "~/components/metadata/LocationForm";
-import { useDialogStore } from "~/components/ui/dialog-store-provider";
 import { MenuTriggeredDialog } from "~/components/core/MenuTriggeredDialog";
 
 EditLocationDialog.Context = createContext<DialogStoreApi | null>(null);

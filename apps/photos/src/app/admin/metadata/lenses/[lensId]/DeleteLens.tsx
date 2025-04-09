@@ -6,9 +6,11 @@ import { toast } from "sonner";
 
 import { AdminRoute } from "~/constants/routes";
 import { Lens, deleteLens } from "~/core/lens";
-import { DialogStoreApi } from "~/stores/dialog";
 
-import { useDialogStore } from "~/components/ui/dialog-store-provider";
+import {
+  useDialogStore,
+  DialogStoreApi,
+} from "~/components/core/DialogStoreProvider";
 import { DeleteMetadataForm } from "~/components/metadata/DeleteMetadataForm";
 import { MenuTriggeredDialog } from "~/components/core/MenuTriggeredDialog";
 

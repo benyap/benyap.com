@@ -7,7 +7,7 @@ import {
   createPhotoUploadStore,
   PhotoUploadStore,
   PhotoUploadStoreApi,
-} from "~/stores/photo-upload";
+} from "./photo-upload.store";
 
 const PhotoUploadStoreContext = createContext<PhotoUploadStoreApi | null>(null);
 

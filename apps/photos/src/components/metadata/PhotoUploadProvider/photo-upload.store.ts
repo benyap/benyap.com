@@ -1,6 +1,6 @@
 import { createStore } from "zustand/vanilla";
-import { Photo } from "~/core/photo";
 
+import { Photo } from "~/core/photo";
 import { PhotoUploadException } from "~/core/photo/file";
 
 export type PhotoUploadStep = "select-files" | "manage-metadata" | "upload";

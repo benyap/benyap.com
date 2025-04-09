@@ -3,7 +3,7 @@
 import { useContext, useRef } from "react";
 import { useStore } from "zustand";
 
-import { createDialogStore, DialogStoreApi } from "~/stores/dialog";
+import { createDialogStore, DialogStoreApi } from "./dialog.store";
 
 export function DialogStoreProvider(
   props: React.PropsWithChildren<{

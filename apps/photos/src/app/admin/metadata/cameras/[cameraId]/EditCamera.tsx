@@ -4,10 +4,12 @@ import { createContext } from "react";
 import { toast } from "sonner";
 
 import { Camera, updateCamera } from "~/core/camera";
-import { DialogStoreApi } from "~/stores/dialog";
 
+import {
+  useDialogStore,
+  DialogStoreApi,
+} from "~/components/core/DialogStoreProvider";
 import { CameraForm } from "~/components/metadata/CameraForm";
-import { useDialogStore } from "~/components/ui/dialog-store-provider";
 import { MenuTriggeredDialog } from "~/components/core/MenuTriggeredDialog";
 
 EditCameraDialog.Context = createContext<DialogStoreApi | null>(null);
